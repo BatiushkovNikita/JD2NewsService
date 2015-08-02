@@ -9,5 +9,6 @@ public class App {
 		GenericDAO<User, Integer> userDAO = UserDAOImpl.getInstance();
 		User user = userDAO.getByPK(3);
 		System.out.println(user);
+		System.out.println(user);
 	}
 }
