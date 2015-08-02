@@ -1,5 +1,7 @@
 package by.news.service.dao.database;
 
+import java.io.IOException;
+
 import by.news.service.dao.database.impl.UserDAOImpl;
 import by.news.service.dao.database.interf.GenericDAO;
 import by.news.service.entity.User;
@@ -11,5 +13,10 @@ public class App {
 		User user = new User("email@", "dsds", "sdsd", "dsdsds");
 		int s = userDAO.create(user);
 		System.out.println(s);
+		try {
+			System.in.read();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
