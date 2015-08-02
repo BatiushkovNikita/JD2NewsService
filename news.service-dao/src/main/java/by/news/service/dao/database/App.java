@@ -1,7 +1,5 @@
 package by.news.service.dao.database;
 
-import java.io.IOException;
-
 import by.news.service.dao.database.impl.UserDAOImpl;
 import by.news.service.dao.database.interf.GenericDAO;
 import by.news.service.entity.User;
