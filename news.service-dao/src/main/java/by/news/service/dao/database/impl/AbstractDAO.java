@@ -14,24 +14,47 @@ import by.news.service.dao.utils.ResourceManager;
 
 public abstract class AbstractDAO<T, PK> implements GenericDAO<T, PK> {
 
-	public abstract String getSQLQuery();
+	public abstract String getInsertQuery();
 
-	public abstract void setEntityParam();
+	public abstract String getSelectQuery();
+
+	public abstract String getUpdateQuery();
+
+	public abstract String getDeleteQuery();
+
+	public abstract void pStatementForInsert(PreparedStatement pStatement, T object);
 
 	public abstract List<T> parseResultSet(ResultSet resultSet);
 
+	public abstract PK parseResultSetKey(ResultSet resultSet);
+
+	public abstract void setEntityParam();
+
 	public abstract T readRole();
 
-	public abstract PK getSQLKey();
-
 	public PK create(T object) {
-		// TODO Auto-generated method stub
-		return null;
+		PK key = null;
+		String quary = getInsertQuery();
+		Connection connection = null;
+		PreparedStatement pStatement = null;
+		ResultSet resultSet = null;
+		try {
+			connection = ConnectionPool.getInstance().getConnection();
+			pStatement = connection.prepareStatement(quary);
+			pStatementForInsert(pStatement, object);
+			resultSet = pStatement.executeQuery(Queries.getSelectLastInsertIdQuery());
+			key = parseResultSetKey(resultSet);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ResourceManager.closeResources(connection, pStatement, resultSet);
+		}
+		return key;
 	}
 
 	public T getByPK(PK key) {
-		List<T> list = new ArrayList<T>();
-		String query = getSQLQuery() + " " + Queries.getWhereId();
+		List<T> entities = new ArrayList<T>();
+		String query = getSelectQuery() + " " + Queries.getWhereId();
 		Connection connection = null;
 		PreparedStatement pStatement = null;
 		ResultSet resultSet = null;
@@ -40,16 +63,16 @@ public abstract class AbstractDAO<T, PK> implements GenericDAO<T, PK> {
 			pStatement = connection.prepareStatement(query);
 			pStatement.setObject(1, key);
 			resultSet = pStatement.executeQuery();
-			list = parseResultSet(resultSet);
+			entities = parseResultSet(resultSet);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			ResourceManager.closeResources(connection, pStatement, resultSet);
 		}
-		if (list == null || list.size() == 0) {
+		if (entities == null || entities.size() == 0) {
 			return null;
 		}
-		return list.iterator().next();
+		return entities.iterator().next();
 	}
 
 	public void update(T object) {

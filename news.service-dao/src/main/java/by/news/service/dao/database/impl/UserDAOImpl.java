@@ -1,5 +1,6 @@
 package by.news.service.dao.database.impl;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -24,25 +25,36 @@ public class UserDAOImpl extends AbstractDAO<User, Integer>implements UserDAO {
 	}
 
 	@Override
-	public Integer getSQLKey() {
-
-		return null;
+	public String getInsertQuery() {
+		return Queries.getInsertQueryUser();
 	}
 
 	@Override
-	public String getSQLQuery() {
-		return Queries.getSelectFromUsers();
+	public String getSelectQuery() {
+		return Queries.getSelectQueryUser();
 	}
 
 	@Override
-	public void setEntityParam() {
-
+	public String getUpdateQuery() {
+		return Queries.getUpdateQueryUser();
 	}
 
 	@Override
-	public User readRole() {
-		// TODO Auto-generated method stub
-		return null;
+	public String getDeleteQuery() {
+		return Queries.getDeleteQueryUser();
+	}
+
+	@Override
+	public void pStatementForInsert(PreparedStatement pStatement, User user) {
+		try {
+			pStatement.setString(1, user.getEmail());
+			pStatement.setString(2, user.getPassword());
+			pStatement.setString(3, user.getFirstName());
+			pStatement.setString(4, user.getLastName());
+			pStatement.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public List<User> parseResultSet(ResultSet resultSet) {
@@ -58,5 +70,29 @@ public class UserDAOImpl extends AbstractDAO<User, Integer>implements UserDAO {
 			e.printStackTrace();
 		}
 		return users;
+	}
+
+	@Override
+	public Integer parseResultSetKey(ResultSet resultSet) {
+		int key = 0;
+		try {
+			while (resultSet.next()) {
+				key = resultSet.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return key;
+	}
+
+	@Override
+	public void setEntityParam() {
+
+	}
+
+	@Override
+	public User readRole() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
