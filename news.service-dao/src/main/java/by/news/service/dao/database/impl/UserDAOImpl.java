@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import by.news.service.dao.database.interf.UserDAO;
-import by.news.service.dao.utils.Queries;
+import static by.news.service.dao.utils.Queries.*;
 import by.news.service.entity.User;
 
 public class UserDAOImpl extends AbstractDAO<User, Integer>implements UserDAO {
-	private static UserDAOImpl instance = new UserDAOImpl();
+	private static UserDAOImpl instance;
 
 	private UserDAOImpl() {
 
@@ -26,45 +26,43 @@ public class UserDAOImpl extends AbstractDAO<User, Integer>implements UserDAO {
 
 	@Override
 	public String getInsertQuery() {
-		return Queries.getInsertQueryUser();
+		return INSERT_QUERY_USER;
 	}
 
 	@Override
 	public String getSelectQuery() {
-		return Queries.getSelectQueryUser();
+		return SELECT_QUERY_USER;
 	}
 
 	@Override
 	public String getUpdateQuery() {
-		return Queries.getUpdateQueryUser();
+		return UPDATE_QUERY_USER;
 	}
 
 	@Override
 	public String getDeleteQuery() {
-		return Queries.getDeleteQueryUser();
+		return DELETE_QUERY_USER;
 	}
 
 	@Override
 	public void pStatementForInsert(PreparedStatement pStatement, User user) {
+		pStatementSetFields(pStatement, user);
+	}
+
+	@Override
+	public void pStatementForUpdate(PreparedStatement pStatement, User user) {
 		try {
-			pStatement.setString(1, user.getEmail());
-			pStatement.setInt(2, user.getPassword());
-			pStatement.setString(3, user.getFirstName());
-			pStatement.setString(4, user.getLastName());
-			pStatement.executeUpdate();
+			pStatementSetFields(pStatement, user);
+			pStatement.setInt(5, user.getUserID());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
 	@Override
-	public void pStatementForUpdate(PreparedStatement pStatement, User user) {
+	public void pStatementForDelete(PreparedStatement pStatement, User user) {
 		try {
-			pStatement.setString(1, user.getEmail());
-			pStatement.setInt(2, user.getPassword());
-			pStatement.setString(3, user.getFirstName());
-			pStatement.setString(4, user.getLastName());
-			pStatement.setInt(5, user.getUserID());
+			pStatement.setInt(1, user.getUserID());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -74,8 +72,12 @@ public class UserDAOImpl extends AbstractDAO<User, Integer>implements UserDAO {
 		List<User> users = new ArrayList<User>();
 		try {
 			while (resultSet.next()) {
-				User user = new User(resultSet.getInt("id"), resultSet.getString("email"), resultSet.getInt("password"),
-						resultSet.getString("first_name"), resultSet.getString("last_name"));
+				User user = new User(
+						resultSet.getInt("id"), 
+						resultSet.getString("email"),
+						resultSet.getInt("password"),
+						resultSet.getString("first_name"), 
+						resultSet.getString("last_name"));
 				users.add(user);
 			}
 		} catch (SQLException e) {
@@ -97,14 +99,14 @@ public class UserDAOImpl extends AbstractDAO<User, Integer>implements UserDAO {
 		return key;
 	}
 
-	@Override
-	public void setEntityParam() {
-
-	}
-
-	@Override
-	public User readRole() {
-		// TODO Auto-generated method stub
-		return null;
+	private void pStatementSetFields(PreparedStatement pStatement, User user) {
+		try {
+			pStatement.setString(1, user.getEmail());
+			pStatement.setInt(2, user.getPassword());
+			pStatement.setString(3, user.getFirstName());
+			pStatement.setString(4, user.getLastName());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }

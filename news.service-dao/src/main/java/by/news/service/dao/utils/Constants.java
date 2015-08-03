@@ -1,6 +1,7 @@
 package by.news.service.dao.utils;
 
 public final class Constants {
+	//CONFIG
 	public static final String DB_CONFIG_PATH = "dbConfig";
 	public static final String QUERIES_PATH = "queries";
 	

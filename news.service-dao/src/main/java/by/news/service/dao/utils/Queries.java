@@ -4,42 +4,32 @@ import java.util.ResourceBundle;
 
 public final class Queries {
 
-	public static String queriesPath = Constants.QUERIES_PATH;
+	public static ResourceBundle bundle = ResourceBundle.getBundle(Constants.QUERIES_PATH);
+
+	// AbstractDAO
+	public static final String WHERE_ID_QUERY = bundle.getString("where.column.name");
+	public static final String SELECT_LAST_INSERT_ID_QUERY = bundle.getString("select.last.insert.id.query");
+
+	// UserDAOImpl
+	public static final String INSERT_QUERY_USER = bundle.getString("insert.query.user");
+	public static final String SELECT_QUERY_USER = bundle.getString("select.query.user");
+	public static final String UPDATE_QUERY_USER = bundle.getString("update.query.user");
+	public static final String DELETE_QUERY_USER = bundle.getString("delete.query.user");
+
+	// NewsDAOImpl
+	public static final String INSERT_QUERY_NEWS = bundle.getString("insert.query.news");
+	public static final String SELECT_QUERY_NEWS = bundle.getString("select.query.news");
+	public static final String UPDATE_QUERY_NEWS = bundle.getString("update.query.news");
+	public static final String DELETE_QUERY_NEWS = bundle.getString("delete.query.news");
+
+	// RoleDAOImpl
+	public static final String INSERT_QUERY_ROLE = bundle.getString("insert.query.role");
+	public static final String SELECT_QUERY_ROLE = bundle.getString("select.query.role");
+	public static final String UPDATE_QUERY_ROLE = bundle.getString("update.query.role");
+	public static final String DELETE_QUERY_ROLE = bundle.getString("delete.query.role");
+
 
 	private Queries() {
 
-	}
-	
-	// AbstractDAO
-	public static String getWhereId() {
-		return ResourceBundle.getBundle(queriesPath).getString("where.column.name");
-	}
-	
-	public static String getSelectLastInsertIdQuery() {
-		return ResourceBundle.getBundle(queriesPath).getString("select.last.insert.id.query");
-	}
-	
-	//UserDAOImpl
-	public static String getInsertQueryUser() {
-		return ResourceBundle.getBundle(queriesPath).getString("insert.query.user");
-	}
-	
-	public static String getSelectQueryUser() {
-		return ResourceBundle.getBundle(queriesPath).getString("select.query.user");
-	}
-	
-	public static String getUpdateQueryUser() {
-		return ResourceBundle.getBundle(queriesPath).getString("update.query.user");
-	}
-	
-	public static String getDeleteQueryUser() {
-		return ResourceBundle.getBundle(queriesPath).getString("delete.query.user");
-	}
-
-	
-	
-
-	public static String getUserByEmail() {
-		return ResourceBundle.getBundle(queriesPath).getString("userByEmail");
 	}
 }
