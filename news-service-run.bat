@@ -8,4 +8,4 @@ cd /d d:\opt\JD2NewsService\
 call mvn clean install
 
 cd news.service-dao\target\
-java -jar news-service-dao-0.0.1-SNAPSHOT.jar
+call java -jar news-service-dao-0.0.1-SNAPSHOT.jar

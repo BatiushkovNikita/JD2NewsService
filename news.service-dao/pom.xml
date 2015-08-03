@@ -15,23 +15,44 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
-  
     <build>
-	<plugins>
-		<plugin>
-			<groupId>org.apache.maven.plugins</groupId>
-			<artifactId>maven-jar-plugin</artifactId>
-			<version>2.4</version>
-			<configuration>
-				<archive>
-					 <manifest>
-						<mainClass>by.news.service.dao.database.App</mainClass>
-					 </manifest>
-				</archive>
-			</configuration>
-		</plugin>
-	</plugins>
-  </build>
+    <plugins>
+    
+     <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+         <version>2.6</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
+                            <mainClass>by.news.service.dao.database.App</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+        <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+            <version>2.10</version>
+                <executions>
+                    <execution>
+                        <id>copy</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>
+                              ${project.build.directory}/lib
+                            </outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+    </plugins>
+</build>
   
   <dependencies>
     <dependency>
@@ -46,7 +67,7 @@
     	<artifactId>news-service-entity</artifactId>
     	<version>0.0.1-SNAPSHOT</version>
     </dependency>
-    
+ 
 	<dependency>
 		<groupId>org.apache.commons</groupId>
 		<artifactId>commons-dbcp2</artifactId>
