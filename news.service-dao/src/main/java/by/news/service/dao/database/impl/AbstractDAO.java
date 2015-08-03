@@ -23,6 +23,8 @@ public abstract class AbstractDAO<T, PK> implements GenericDAO<T, PK> {
 	public abstract String getDeleteQuery();
 
 	public abstract void pStatementForInsert(PreparedStatement pStatement, T object);
+	
+	public abstract void pStatementForUpdate(PreparedStatement pStatement, T object);
 
 	public abstract List<T> parseResultSet(ResultSet resultSet);
 
@@ -74,10 +76,21 @@ public abstract class AbstractDAO<T, PK> implements GenericDAO<T, PK> {
 		}
 		return entities.iterator().next();
 	}
-
+	
+	// UPDATE users SET email=?, password=?, first_name=?, last_name=? WHERE id = ?;
 	public void update(T object) {
-		// TODO Auto-generated method stub
-
+		String query = getUpdateQuery() + " " + Queries.getWhereId();
+		Connection connection = null;
+		PreparedStatement pStatement = null;
+		try {
+			connection = ConnectionPool.getInstance().getConnection();
+			pStatement = connection.prepareStatement(query);
+			pStatementForUpdate(pStatement, object);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ResourceManager.closeResources(connection, pStatement);
+		}
 	}
 
 	public void delete(T object) {

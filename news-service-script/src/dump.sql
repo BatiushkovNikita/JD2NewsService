@@ -1,8 +1,8 @@
 -- --------------------------------------------------------
--- Host:                         127.0.0.1
--- Server version:               5.6.25-log - MySQL Community Server (GPL)
--- Server OS:                    Win64
--- HeidiSQL Version:             8.3.0.4694
+-- Хост:                         127.0.0.1
+-- Версия сервера:               5.6.25-log - MySQL Community Server (GPL)
+-- ОС Сервера:                   Win64
+-- HeidiSQL Версия:              8.3.0.4694
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -10,12 +10,12 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
--- Dumping database structure for news_service
+-- Дамп структуры базы данных news_service
 CREATE DATABASE IF NOT EXISTS `news_service` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `news_service`;
 
 
--- Dumping structure for table news_service.news
+-- Дамп структуры для таблица news_service.news
 CREATE TABLE IF NOT EXISTS `news` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `topic` varchar(255) DEFAULT NULL,
@@ -25,20 +25,20 @@ CREATE TABLE IF NOT EXISTS `news` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
--- Dumping data for table news_service.news: ~0 rows (approximately)
+-- Дамп данных таблицы news_service.news: ~0 rows (приблизительно)
 DELETE FROM `news`;
 /*!40000 ALTER TABLE `news` DISABLE KEYS */;
 /*!40000 ALTER TABLE `news` ENABLE KEYS */;
 
 
--- Dumping structure for table news_service.roles
+-- Дамп структуры для таблица news_service.roles
 CREATE TABLE IF NOT EXISTS `roles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `role` varchar(255) DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
--- Dumping data for table news_service.roles: ~3 rows (approximately)
+-- Дамп данных таблицы news_service.roles: ~3 rows (приблизительно)
 DELETE FROM `roles`;
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
 INSERT INTO `roles` (`id`, `role`) VALUES
@@ -48,34 +48,36 @@ INSERT INTO `roles` (`id`, `role`) VALUES
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 
 
--- Dumping structure for table news_service.users
+-- Дамп структуры для таблица news_service.users
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(255) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL,
+  `password` int(11) DEFAULT NULL,
   `first_name` varchar(255) DEFAULT NULL,
   `last_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
--- Dumping data for table news_service.users: ~4 rows (approximately)
+-- Дамп данных таблицы news_service.users: ~6 rows (приблизительно)
 DELETE FROM `users`;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`id`, `email`, `password`, `first_name`, `last_name`) VALUES
-	(1, 'aleshka@tut.by', '123456', 'Aleshka', 'Popovich'),
-	(2, 'petrov@gmail.com', 'admin123', 'Oleg', 'Petrov'),
-	(3, 'qwerty@mail.com', 'qwerty', 'Sergey', 'Zybov'),
-	(4, 'troll@gmail.by', 'troll', 'Troll', 'Sverdlov');
+	(1, 'aleshka@tut.by', 123456, 'Aleshka', 'Popovich'),
+	(2, 'petrov@gmail.com', 12212, 'Oleg', 'Petrov'),
+	(3, 'oi@oi.oi', 123, 'Nikita', 'Opit'),
+	(4, 'troll@gmail.by', 656576, 'Troll', 'Sverdlov'),
+	(5, 'email@', 75756, 'sdsd', 'dsdsds'),
+	(6, 'oi@oi.oi', 123, 'Nikita', 'Opit');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 
--- Dumping structure for table news_service.users_roles
+-- Дамп структуры для таблица news_service.users_roles
 CREATE TABLE IF NOT EXISTS `users_roles` (
   `role_id` int(11) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table news_service.users_roles: ~4 rows (approximately)
+-- Дамп данных таблицы news_service.users_roles: ~4 rows (приблизительно)
 DELETE FROM `users_roles`;
 /*!40000 ALTER TABLE `users_roles` DISABLE KEYS */;
 INSERT INTO `users_roles` (`role_id`, `user_id`) VALUES

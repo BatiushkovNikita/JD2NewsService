@@ -48,11 +48,24 @@ public class UserDAOImpl extends AbstractDAO<User, Integer>implements UserDAO {
 	public void pStatementForInsert(PreparedStatement pStatement, User user) {
 		try {
 			pStatement.setString(1, user.getEmail());
-			pStatement.setString(2, user.getPassword());
+			pStatement.setInt(2, user.getPassword());
 			pStatement.setString(3, user.getFirstName());
 			pStatement.setString(4, user.getLastName());
 			pStatement.executeUpdate();
-		} catch (Exception e) {
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void pStatementForUpdate(PreparedStatement pStatement, User user) {
+		try {
+			pStatement.setString(1, user.getEmail());
+			pStatement.setInt(2, user.getPassword());
+			pStatement.setString(3, user.getFirstName());
+			pStatement.setString(4, user.getLastName());
+			pStatement.setInt(5, user.getUserID());
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
@@ -61,9 +74,8 @@ public class UserDAOImpl extends AbstractDAO<User, Integer>implements UserDAO {
 		List<User> users = new ArrayList<User>();
 		try {
 			while (resultSet.next()) {
-				User user = new User(resultSet.getInt("id"), resultSet.getString("email"),
-						resultSet.getString("password"), resultSet.getString("first_name"),
-						resultSet.getString("last_name"));
+				User user = new User(resultSet.getInt("id"), resultSet.getString("email"), resultSet.getInt("password"),
+						resultSet.getString("first_name"), resultSet.getString("last_name"));
 				users.add(user);
 			}
 		} catch (SQLException e) {
