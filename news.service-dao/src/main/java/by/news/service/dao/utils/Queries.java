@@ -7,7 +7,7 @@ public final class Queries {
 	public static ResourceBundle bundle = ResourceBundle.getBundle(Constants.QUERIES_PATH);
 
 	// AbstractDAO
-	public static final String WHERE_ID_QUERY = bundle.getString("where.column.name");
+	//public static final String WHERE_ID_QUERY = bundle.getString("where.column.name");
 	public static final String SELECT_LAST_INSERT_ID_QUERY = bundle.getString("select.last.insert.id.query");
 
 	// UserDAOImpl

@@ -12,18 +12,10 @@ import by.news.service.entity.User;
 public class App {
 	public static void main(String[] args) {
 		GenericDAO<User, Integer> userDAO = UserDAOImpl.getInstance();
-/*		User user = new User("email@", 12345, "sdsd", "dsdsds");
+		User user = new User("ZZZZZZZZZZZZ", 12345, "sdsd", "dsdsds");
 		int s = userDAO.create(user);
-		System.out.println(s);*/
-		
-	/*	userDAO.delete(new User(13, "email@", 12345, "sdsd", "dsdsds"));*/
+		System.out.println("User was added: " + s);
 
-		
-		
-
-		
-		
-		
 		try {
 			System.in.read();
 		} catch (IOException e) {

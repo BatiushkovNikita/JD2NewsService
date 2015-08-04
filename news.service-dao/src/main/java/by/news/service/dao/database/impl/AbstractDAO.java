@@ -62,7 +62,7 @@ public abstract class AbstractDAO<T, PK> implements GenericDAO<T, PK> {
 
 	public T getByPK(PK key) {
 		List<T> entities = new ArrayList<T>();
-		String query = getSelectQuery() + " " + WHERE_ID_QUERY;
+		String query = getSelectQuery();
 		Connection connection = null;
 		PreparedStatement pStatement = null;
 		ResultSet resultSet = null;
@@ -84,7 +84,7 @@ public abstract class AbstractDAO<T, PK> implements GenericDAO<T, PK> {
 	}
 
 	public void update(T object) {
-		String query = getUpdateQuery() + " " + WHERE_ID_QUERY;
+		String query = getUpdateQuery();
 		Connection connection = null;
 		PreparedStatement pStatement = null;
 		try {
@@ -100,7 +100,7 @@ public abstract class AbstractDAO<T, PK> implements GenericDAO<T, PK> {
 	}
 
 	public void delete(T object) {
-		String query = getDeleteQuery() + " " + WHERE_ID_QUERY;
+		String query = getDeleteQuery();
 		Connection connection = null;
 		PreparedStatement pStatement = null;
 		try {

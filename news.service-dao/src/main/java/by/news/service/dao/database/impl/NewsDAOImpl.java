@@ -74,11 +74,8 @@ public class NewsDAOImpl extends AbstractDAO<News, Integer>implements NewsDAO {
 		List<News> newsList = new ArrayList<News>();
 		try {
 			while (resultSet.next()) {
-				News news = new News(
-						resultSet.getInt("id"), 
-						resultSet.getString("topic"),
-						resultSet.getDate("publication_date").toString(), 
-						resultSet.getString("news_text"),
+				News news = new News(resultSet.getInt("id"), resultSet.getString("topic"),
+						resultSet.getDate("publication_date").toString(), resultSet.getString("news_text"),
 						resultSet.getInt("user_id"));
 				newsList.add(news);
 			}

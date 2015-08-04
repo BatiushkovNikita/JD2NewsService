@@ -1,42 +1,49 @@
 <?xml version="1.0"?>
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <modelVersion>4.0.0</modelVersion>
-  
-  <parent>
-    <groupId>by.news.service</groupId>
-    <artifactId>news-service</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-  </parent>
-  
-  <groupId>by.news.service</groupId>
-  <artifactId>news-service-web</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>war</packaging>
-  <name>news-service-web Maven Webapp</name>
-  <url>http://maven.apache.org</url>
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
-	
-    <dependency>
-      <groupId>by.news.service</groupId>
-      <artifactId>news-service-service</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
-    </dependency>
-	
-    <dependency>
-      <groupId>by.news.service</groupId>
-      <artifactId>news-service-entity</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
-    </dependency>	
-	
-  </dependencies>
-  <build>
-    <finalName>news-service-web</finalName>
-  </build>
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>by.news.service</groupId>
+		<artifactId>news-service</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<groupId>by.news.service</groupId>
+	<artifactId>news-service-web</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<name>news-service-web Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>by.news.service</groupId>
+			<artifactId>news-service-service</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>by.news.service</groupId>
+			<artifactId>news-service-entity</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>	
+	</dependencies>
+
+	<build>
+		<finalName>news-service-web</finalName> 
+		<plugins>
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.0</version>
+				<configuration>
+					<server>apache-tomcat-7.0.55</server>
+					<url>http://localhost:8081/manager/html</url>
+					<path>/${project.artifactId}</path>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build> 
 </project>
