@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import org.apache.commons.dbcp2.BasicDataSource;
 
 public class ConnectionPool {
-	private static ConnectionPool instance = new ConnectionPool();
+	private static volatile ConnectionPool instance;
 	private BasicDataSource basicDataSource;
 
 	private ConnectionPool() {

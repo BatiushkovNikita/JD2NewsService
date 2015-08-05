@@ -6,12 +6,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import by.news.service.dao.database.interf.NewsDAO;
-import static by.news.service.dao.utils.Queries.*;
+import static by.news.service.dao.utils.Constants.*;
 import by.news.service.entity.News;
 
-public class NewsDAOImpl extends AbstractDAO<News, Integer>implements NewsDAO {
-	private static NewsDAOImpl instance;
+public class NewsDAOImpl extends AbstractDAO<News, Integer> {
+	private static volatile NewsDAOImpl instance;
 
 	private NewsDAOImpl() {
 
@@ -26,22 +25,22 @@ public class NewsDAOImpl extends AbstractDAO<News, Integer>implements NewsDAO {
 
 	@Override
 	public String getInsertQuery() {
-		return INSERT_QUERY_NEWS;
+		return QUERIES.getString("insert.query.news");
 	}
 
 	@Override
 	public String getSelectQuery() {
-		return SELECT_QUERY_NEWS;
+		return QUERIES.getString("select.query.news");
 	}
 
 	@Override
 	public String getUpdateQuery() {
-		return UPDATE_QUERY_NEWS;
+		return QUERIES.getString("update.query.news");
 	}
 
 	@Override
 	public String getDeleteQuery() {
-		return DELETE_QUERY_NEWS;
+		return QUERIES.getString("delete.query.news");
 	}
 
 	@Override

@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import by.news.service.dao.database.interf.UserDAO;
-import static by.news.service.dao.utils.Queries.*;
+import static by.news.service.dao.utils.Constants.*;
 import by.news.service.entity.User;
 
 public class UserDAOImpl extends AbstractDAO<User, Integer>implements UserDAO {
-	private static UserDAOImpl instance;
+	private static volatile UserDAOImpl instance;
 
 	private UserDAOImpl() {
 
@@ -26,22 +26,22 @@ public class UserDAOImpl extends AbstractDAO<User, Integer>implements UserDAO {
 
 	@Override
 	public String getInsertQuery() {
-		return INSERT_QUERY_USER;
+		return QUERIES.getString("insert.query.user");
 	}
 
 	@Override
 	public String getSelectQuery() {
-		return SELECT_QUERY_USER;
+		return QUERIES.getString("select.query.user");
 	}
 
 	@Override
 	public String getUpdateQuery() {
-		return UPDATE_QUERY_USER;
+		return QUERIES.getString("update.query.user");
 	}
 
 	@Override
 	public String getDeleteQuery() {
-		return DELETE_QUERY_USER;
+		return QUERIES.getString("delete.query.user");
 	}
 
 	@Override
@@ -72,12 +72,8 @@ public class UserDAOImpl extends AbstractDAO<User, Integer>implements UserDAO {
 		List<User> users = new ArrayList<User>();
 		try {
 			while (resultSet.next()) {
-				User user = new User(
-						resultSet.getInt("id"), 
-						resultSet.getString("email"),
-						resultSet.getInt("password"),
-						resultSet.getString("first_name"), 
-						resultSet.getString("last_name"));
+				User user = new User(resultSet.getInt("id"), resultSet.getString("email"), resultSet.getInt("password"),
+						resultSet.getString("first_name"), resultSet.getString("last_name"));
 				users.add(user);
 			}
 		} catch (SQLException e) {
@@ -108,5 +104,10 @@ public class UserDAOImpl extends AbstractDAO<User, Integer>implements UserDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public User getUserByEmail(String email) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

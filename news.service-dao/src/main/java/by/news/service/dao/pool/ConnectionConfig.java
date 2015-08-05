@@ -2,11 +2,9 @@ package by.news.service.dao.pool;
 
 import java.util.ResourceBundle;
 
-import by.news.service.dao.utils.Constants;
-
 public final class ConnectionConfig {
 
-	public static String dbConfigPath = Constants.DB_CONFIG_PATH;
+	public static String dbConfigPath = "dbConfig";
 
 	public static String getDriver() {
 		return ResourceBundle.getBundle(dbConfigPath).getString("driver");
