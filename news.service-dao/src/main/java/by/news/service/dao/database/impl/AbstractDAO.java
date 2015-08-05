@@ -10,11 +10,10 @@ import java.util.List;
 
 import by.news.service.dao.database.interf.GenericDAO;
 import by.news.service.dao.pool.ConnectionPool;
-import static by.news.service.dao.utils.Queries.*;
+import static by.news.service.dao.utils.Constants.*;
 import by.news.service.dao.utils.ResourceManager;
 
 public abstract class AbstractDAO<T, PK> implements GenericDAO<T, PK> {
-
 	public abstract String getInsertQuery();
 
 	public abstract String getSelectQuery();
@@ -50,7 +49,7 @@ public abstract class AbstractDAO<T, PK> implements GenericDAO<T, PK> {
 			pStatement = connection.prepareStatement(query);
 			pStatementForInsert(pStatement, object);
 			pStatement.executeUpdate();
-			resultSet = pStatement.executeQuery(SELECT_LAST_INSERT_ID_QUERY);
+			resultSet = pStatement.executeQuery(QUERIES.getString("select.last.insert.id.query"));
 			key = parseResultSetKey(resultSet);
 		} catch (SQLException e) {
 			e.printStackTrace();

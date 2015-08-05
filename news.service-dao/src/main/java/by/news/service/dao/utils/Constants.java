@@ -1,11 +1,9 @@
 package by.news.service.dao.utils;
 
-public final class Constants {
-	//CONFIG
-	public static final String DB_CONFIG_PATH = "dbConfig";
-	public static final String QUERIES_PATH = "queries";
+import java.util.ResourceBundle;
+
+public class Constants {
+
+	public static final ResourceBundle QUERIES = ResourceBundle.getBundle("queries");
 	
-	private Constants() {
-		
-	}
 }

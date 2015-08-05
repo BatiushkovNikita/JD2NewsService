@@ -6,12 +6,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import by.news.service.dao.database.interf.RoleDAO;
-import static by.news.service.dao.utils.Queries.*;
+import static by.news.service.dao.utils.Constants.*;
 import by.news.service.entity.Role;
 
-public class RoleDAOImpl extends AbstractDAO<Role, Integer>implements RoleDAO {
-	private static RoleDAOImpl instance;
+public class RoleDAOImpl extends AbstractDAO<Role, Integer> {
+	private static volatile RoleDAOImpl instance;
 
 	private RoleDAOImpl() {
 
@@ -26,22 +25,22 @@ public class RoleDAOImpl extends AbstractDAO<Role, Integer>implements RoleDAO {
 
 	@Override
 	public String getInsertQuery() {
-		return INSERT_QUERY_ROLE;
+		return QUERIES.getString("insert.query.role");
 	}
 
 	@Override
 	public String getSelectQuery() {
-		return SELECT_QUERY_ROLE;
+		return QUERIES.getString("select.query.role");
 	}
 
 	@Override
 	public String getUpdateQuery() {
-		return UPDATE_QUERY_ROLE;
+		return QUERIES.getString("update.query.role");
 	}
 
 	@Override
 	public String getDeleteQuery() {
-		return DELETE_QUERY_ROLE;
+		return QUERIES.getString("delete.query.role");
 	}
 
 	@Override

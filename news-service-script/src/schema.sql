@@ -21,9 +21,11 @@ CREATE TABLE IF NOT EXISTS `news` (
   `topic` varchar(255) DEFAULT NULL,
   `publication_date` datetime DEFAULT NULL,
   `news_text` text,
-  `user_id` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+  `user_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `news_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Dumping data for table news_service.news: ~0 rows (approximately)
 DELETE FROM `news`;
@@ -34,54 +36,45 @@ DELETE FROM `news`;
 -- Dumping structure for table news_service.roles
 CREATE TABLE IF NOT EXISTS `roles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `role` varchar(255) DEFAULT '0',
+  `role_name` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table news_service.roles: ~3 rows (approximately)
+-- Dumping data for table news_service.roles: ~0 rows (approximately)
 DELETE FROM `roles`;
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
-INSERT INTO `roles` (`id`, `role`) VALUES
-	(1, 'admin'),
-	(2, 'moderator'),
-	(3, 'user');
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 
 
 -- Dumping structure for table news_service.users
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `email` varchar(255) DEFAULT NULL,
-  `password` int(11) DEFAULT NULL,
-  `first_name` varchar(255) DEFAULT NULL,
-  `last_name` varchar(255) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `password` varchar(50) DEFAULT NULL,
+  `first_name` varchar(50) DEFAULT NULL,
+  `last_name` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table news_service.users: ~3 rows (approximately)
+-- Dumping data for table news_service.users: ~0 rows (approximately)
 DELETE FROM `users`;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` (`id`, `email`, `password`, `first_name`, `last_name`) VALUES
-	(14, 'ds', 111, 'dsds', 'dsds'),
-	(15, '434343', 1222, 'AAAA', 'BBB'),
-	(16, 'DDD', 111, 'QQQ', 'WW');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 
 -- Dumping structure for table news_service.users_roles
 CREATE TABLE IF NOT EXISTS `users_roles` (
+  `user_id` int(11) DEFAULT NULL,
   `role_id` int(11) DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL
+  KEY `user_id` (`user_id`),
+  KEY `role_id` (`role_id`),
+  CONSTRAINT `users_roles_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  CONSTRAINT `users_roles_ibfk_2` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table news_service.users_roles: ~4 rows (approximately)
+-- Dumping data for table news_service.users_roles: ~0 rows (approximately)
 DELETE FROM `users_roles`;
 /*!40000 ALTER TABLE `users_roles` DISABLE KEYS */;
-INSERT INTO `users_roles` (`role_id`, `user_id`) VALUES
-	(1, 3),
-	(2, 1),
-	(2, 2),
-	(3, 4);
 /*!40000 ALTER TABLE `users_roles` ENABLE KEYS */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
