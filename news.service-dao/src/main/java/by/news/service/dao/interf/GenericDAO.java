@@ -1,4 +1,4 @@
-package by.news.service.dao.database.interf;
+package by.news.service.dao.interf;
 
 import java.util.List;
 

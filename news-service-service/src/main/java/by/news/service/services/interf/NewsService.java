@@ -1,4 +1,4 @@
-package by.news.service.service.interf;
+package by.news.service.services.interf;
 
 import java.util.List;
 

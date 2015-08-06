@@ -1,11 +1,11 @@
-package by.news.service.service.impl;
+package by.news.service.services.impl;
 
 import java.util.List;
 
-import by.news.service.dao.database.impl.NewsDAOImpl;
-import by.news.service.dao.database.interf.GenericDAO;
+import by.news.service.dao.impl.NewsDAOImpl;
+import by.news.service.dao.interf.GenericDAO;
 import by.news.service.entity.News;
-import by.news.service.service.interf.NewsService;
+import by.news.service.services.interf.NewsService;
 
 public class NewsServiceImpl implements NewsService {
 	private static volatile NewsServiceImpl instance;

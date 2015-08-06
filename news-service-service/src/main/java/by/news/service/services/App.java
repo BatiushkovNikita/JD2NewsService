@@ -1,4 +1,4 @@
-package by.news.service.service;
+package by.news.service.services;
 
 /**
  * Hello world!

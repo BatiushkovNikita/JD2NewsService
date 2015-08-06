@@ -1,4 +1,4 @@
-package by.news.service.dao.database.impl;
+package by.news.service.dao.impl;
 
 import static by.news.service.dao.utills.Constants.*;
 
@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import by.news.service.dao.database.interf.UserDAO;
+import by.news.service.dao.interf.UserDAO;
 import by.news.service.entity.User;
 
 public class UserDAOImpl extends AbstractDAO<User, Integer>implements UserDAO {
@@ -64,7 +64,7 @@ public class UserDAOImpl extends AbstractDAO<User, Integer>implements UserDAO {
 		List<User> users = new ArrayList<User>();
 		try {
 			while (resultSet.next()) {
-				User user = new User(resultSet.getInt("id"), resultSet.getString("email"), resultSet.getInt("password"),
+				User user = new User(resultSet.getInt("id"), resultSet.getString("email"), resultSet.getString("password"),
 						resultSet.getString("first_name"), resultSet.getString("last_name"));
 				users.add(user);
 			}
@@ -90,7 +90,7 @@ public class UserDAOImpl extends AbstractDAO<User, Integer>implements UserDAO {
 	private void pStatementSetFields(PreparedStatement pStatement, User user) {
 		try {
 			pStatement.setString(1, user.getEmail());
-			pStatement.setInt(2, user.getPassword());
+			pStatement.setString(2, user.getPassword());
 			pStatement.setString(3, user.getFirstName());
 			pStatement.setString(4, user.getLastName());
 		} catch (SQLException e) {

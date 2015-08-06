@@ -1,4 +1,4 @@
-package by.news.service.dao.database.interf;
+package by.news.service.dao.interf;
 
 import by.news.service.entity.User;
 

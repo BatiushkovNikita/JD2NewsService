@@ -1,4 +1,4 @@
-package by.news.service.dao.database.impl;
+package by.news.service.dao.impl;
 
 import static by.news.service.dao.utills.Constants.*;
 
@@ -10,7 +10,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import by.news.service.dao.database.interf.GenericDAO;
+import by.news.service.dao.interf.GenericDAO;
 import by.news.service.dao.pool.ConnectionPool;
 import by.news.service.dao.utills.ResourceManager;
 

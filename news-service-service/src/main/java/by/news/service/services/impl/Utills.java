@@ -1,4 +1,4 @@
-package by.news.service.service.impl;
+package by.news.service.services.impl;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

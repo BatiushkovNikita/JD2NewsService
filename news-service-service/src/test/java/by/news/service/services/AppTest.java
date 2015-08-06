@@ -1,4 +1,4 @@
-package by.news.service.service;
+package by.news.service.services;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

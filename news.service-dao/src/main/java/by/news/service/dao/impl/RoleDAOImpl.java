@@ -1,4 +1,4 @@
-package by.news.service.dao.database.impl;
+package by.news.service.dao.impl;
 
 import static by.news.service.dao.utills.Constants.*;
 

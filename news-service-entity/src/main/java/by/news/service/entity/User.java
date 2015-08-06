@@ -3,11 +3,11 @@ package by.news.service.entity;
 public class User {
 	private int userID;
 	private String email;
-	private int password;
+	private String password;
 	private String firstName;
 	private String lastName;
 
-	public User(int userID, String email, int password, String firstName, String lastName) {
+	public User(int userID, String email, String password, String firstName, String lastName) {
 		super();
 		this.userID = userID;
 		this.email = email;
@@ -16,7 +16,7 @@ public class User {
 		this.lastName = lastName;
 	}
 
-	public User(String email, int password, String firstName, String lastName) {
+	public User(String email, String password, String firstName, String lastName) {
 		super();
 		this.email = email;
 		this.password = password;
@@ -40,11 +40,11 @@ public class User {
 		this.email = email;
 	}
 
-	public int getPassword() {
+	public String getPassword() {
 		return password;
 	}
 
-	public void setPassword(int password) {
+	public void setPassword(String password) {
 		this.password = password;
 	}
 
@@ -71,7 +71,7 @@ public class User {
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
-		result = prime * result + password;
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + userID;
 		return result;
 	}
@@ -100,7 +100,10 @@ public class User {
 				return false;
 		} else if (!lastName.equals(other.lastName))
 			return false;
-		if (password != other.password)
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
 			return false;
 		if (userID != other.userID)
 			return false;
