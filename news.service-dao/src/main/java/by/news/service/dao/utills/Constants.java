@@ -1,4 +1,4 @@
-package by.news.service.dao.utils;
+package by.news.service.dao.utills;
 
 import java.util.ResourceBundle;
 

@@ -1,12 +1,13 @@
 package by.news.service.dao.database.impl;
 
+import static by.news.service.dao.utills.Constants.*;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static by.news.service.dao.utils.Constants.*;
 import by.news.service.entity.Role;
 
 public class RoleDAOImpl extends AbstractDAO<Role, Integer> {
@@ -57,15 +58,6 @@ public class RoleDAOImpl extends AbstractDAO<Role, Integer> {
 		try {
 			pStatement.setString(1, role.getRole());
 			pStatement.setInt(2, role.getRoleID());
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	@Override
-	public void pStatementForDelete(PreparedStatement pStatement, Role role) {
-		try {
-			pStatement.setInt(1, role.getRoleID());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

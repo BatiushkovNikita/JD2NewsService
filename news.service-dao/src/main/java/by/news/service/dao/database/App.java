@@ -6,7 +6,7 @@ import java.util.ResourceBundle;
 
 import by.news.service.dao.database.impl.UserDAOImpl;
 import by.news.service.dao.database.interf.GenericDAO;
-import by.news.service.dao.utils.Constants;
+import by.news.service.dao.utills.Constants;
 import by.news.service.entity.User;
 
 public class App {

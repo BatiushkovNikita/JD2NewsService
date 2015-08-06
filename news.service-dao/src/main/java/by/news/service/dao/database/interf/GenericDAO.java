@@ -10,7 +10,7 @@ public interface GenericDAO<T, PK> {
 
 	void update(T object);
 
-	void delete(T object);
+	void delete(PK key);
 
 	List<T> getAll();
 }

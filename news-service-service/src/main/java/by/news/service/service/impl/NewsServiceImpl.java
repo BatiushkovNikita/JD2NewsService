@@ -12,7 +12,7 @@ public class NewsServiceImpl implements NewsService {
 	private GenericDAO<News, Integer> newsDao = NewsDAOImpl.getInstance();
 
 	private NewsServiceImpl() {
-	
+
 	}
 
 	public static synchronized NewsServiceImpl getInstance() {
@@ -22,28 +22,26 @@ public class NewsServiceImpl implements NewsService {
 		return instance;
 	}
 
-	public int addNews(News news) {
-		return newsDao.create(news);
+	public int addNews(String topic, String newsText, int userID) {
+		String publicationDate = Utills.getCurrentDate();
+		return newsDao.create(new News(topic, publicationDate, newsText, userID));
 	}
 
 	public void deleteNews(int id) {
-		// TODO Auto-generated method stub
-
+		newsDao.delete(id);
 	}
 
 	public void updateNews(News news) {
-		// TODO Auto-generated method stub
-
+		String publicationDate = Utills.getCurrentDate();
+		news.setPublicationDate(publicationDate);
+		newsDao.update(news);
 	}
 
 	public List<News> getAllNews() {
-		// TODO Auto-generated method stub
-		return null;
+		return newsDao.getAll();
 	}
 
 	public News getNews(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return newsDao.getByPK(id);
 	}
-
 }

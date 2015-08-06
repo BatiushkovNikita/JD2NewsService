@@ -1,12 +1,13 @@
 package by.news.service.dao.database.impl;
 
+import static by.news.service.dao.utills.Constants.*;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static by.news.service.dao.utils.Constants.*;
 import by.news.service.entity.News;
 
 public class NewsDAOImpl extends AbstractDAO<News, Integer> {
@@ -56,16 +57,6 @@ public class NewsDAOImpl extends AbstractDAO<News, Integer> {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}
-
-	@Override
-	public void pStatementForDelete(PreparedStatement pStatement, News news) {
-		try {
-			pStatement.setInt(1, news.getNewsID());
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
 	}
 
 	@Override

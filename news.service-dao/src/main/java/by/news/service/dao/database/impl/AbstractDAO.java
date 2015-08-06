@@ -1,5 +1,7 @@
 package by.news.service.dao.database.impl;
 
+import static by.news.service.dao.utills.Constants.*;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,8 +12,7 @@ import java.util.List;
 
 import by.news.service.dao.database.interf.GenericDAO;
 import by.news.service.dao.pool.ConnectionPool;
-import static by.news.service.dao.utils.Constants.*;
-import by.news.service.dao.utils.ResourceManager;
+import by.news.service.dao.utills.ResourceManager;
 
 public abstract class AbstractDAO<T, PK> implements GenericDAO<T, PK> {
 	public abstract String getInsertQuery();
@@ -25,8 +26,6 @@ public abstract class AbstractDAO<T, PK> implements GenericDAO<T, PK> {
 	public abstract void pStatementForInsert(PreparedStatement pStatement, T object);
 
 	public abstract void pStatementForUpdate(PreparedStatement pStatement, T object);
-
-	public abstract void pStatementForDelete(PreparedStatement pStatement, T object);
 
 	public abstract List<T> parseResultSet(ResultSet resultSet);
 
@@ -98,14 +97,14 @@ public abstract class AbstractDAO<T, PK> implements GenericDAO<T, PK> {
 		}
 	}
 
-	public void delete(T object) {
+	public void delete(PK key) {
 		String query = getDeleteQuery();
 		Connection connection = null;
 		PreparedStatement pStatement = null;
 		try {
 			connection = ConnectionPool.getInstance().getConnection();
 			pStatement = connection.prepareStatement(query);
-			pStatementForDelete(pStatement, object);
+			pStatement.setObject(1, key);
 			pStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

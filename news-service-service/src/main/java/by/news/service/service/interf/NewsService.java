@@ -5,15 +5,13 @@ import java.util.List;
 import by.news.service.entity.News;
 
 public interface NewsService {
-	int addNews(News news); // CRUD
+	int addNews(String topic, String newsText, int userID);
 
-	void deleteNews(int id); // CRUD remake by PK
+	void deleteNews(int id);
 
-	void updateNews(News news); // CRUD
+	void updateNews(News news);
 
-	List<News> getAllNews(); // CRUD
+	List<News> getAllNews();
 
-	News getNews(int id); // CRUD
-
-	/*String getCurrentDate();*/ // must be in addNews
+	News getNews(int id);
 }

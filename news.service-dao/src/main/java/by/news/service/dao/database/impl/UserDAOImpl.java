@@ -1,5 +1,7 @@
 package by.news.service.dao.database.impl;
 
+import static by.news.service.dao.utills.Constants.*;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -7,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import by.news.service.dao.database.interf.UserDAO;
-import static by.news.service.dao.utils.Constants.*;
 import by.news.service.entity.User;
 
 public class UserDAOImpl extends AbstractDAO<User, Integer>implements UserDAO {
@@ -54,15 +55,6 @@ public class UserDAOImpl extends AbstractDAO<User, Integer>implements UserDAO {
 		try {
 			pStatementSetFields(pStatement, user);
 			pStatement.setInt(5, user.getUserID());
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	@Override
-	public void pStatementForDelete(PreparedStatement pStatement, User user) {
-		try {
-			pStatement.setInt(1, user.getUserID());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
