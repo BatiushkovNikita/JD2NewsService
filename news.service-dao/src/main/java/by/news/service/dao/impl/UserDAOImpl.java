@@ -2,13 +2,17 @@ package by.news.service.dao.impl;
 
 import static by.news.service.dao.utills.Constants.*;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import by.news.service.dao.exception.DAOException;
 import by.news.service.dao.interf.UserDAO;
+import by.news.service.dao.pool.ConnectionPool;
+import by.news.service.dao.utills.ResourceManager;
 import by.news.service.entity.User;
 
 public class UserDAOImpl extends AbstractDAO<User, Integer>implements UserDAO {
@@ -64,8 +68,9 @@ public class UserDAOImpl extends AbstractDAO<User, Integer>implements UserDAO {
 		List<User> users = new ArrayList<User>();
 		try {
 			while (resultSet.next()) {
-				User user = new User(resultSet.getInt("id"), resultSet.getString("email"), resultSet.getString("password"),
-						resultSet.getString("first_name"), resultSet.getString("last_name"));
+				User user = new User(resultSet.getInt("id"), resultSet.getString("email"),
+						resultSet.getString("password"), resultSet.getString("first_name"),
+						resultSet.getString("last_name"));
 				users.add(user);
 			}
 		} catch (SQLException e) {
@@ -97,9 +102,25 @@ public class UserDAOImpl extends AbstractDAO<User, Integer>implements UserDAO {
 			e.printStackTrace();
 		}
 	}
-
+	
 	public User getUserByEmail(String email) {
-		// TODO Auto-generated method stub
-		return null;
+		User user = null;
+		String query = QUERIES.getString("get.user.by.email");
+		Connection connection = null;
+		PreparedStatement pStatement = null;
+		ResultSet resultSet = null;
+		try {
+			connection = ConnectionPool.getInstance().getConnection();
+			pStatement = connection.prepareStatement(query);
+			pStatement.setString(1, email);
+			resultSet = pStatement.executeQuery();
+			user = parseResultSet(resultSet).get(0);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			//throw new DAOException("");
+		} finally {
+			ResourceManager.closeResources(connection, pStatement, resultSet);
+		}
+		return user;
 	}
 }

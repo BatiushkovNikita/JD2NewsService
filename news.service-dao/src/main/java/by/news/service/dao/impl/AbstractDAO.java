@@ -10,11 +10,20 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import by.news.service.dao.exception.DAOException;
 import by.news.service.dao.interf.GenericDAO;
 import by.news.service.dao.pool.ConnectionPool;
 import by.news.service.dao.utills.ResourceManager;
 
 public abstract class AbstractDAO<T, PK> implements GenericDAO<T, PK> {
+	/*private Connection connection;
+	
+	
+	public AbstractDAO(Connection connection) {
+		super();
+		this.connection = ConnectionPool.getInstance().getConnection();
+	}*/
+
 	public abstract String getInsertQuery();
 
 	public abstract String getSelectQuery();
