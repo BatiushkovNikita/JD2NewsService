@@ -2,54 +2,69 @@ package by.news.service.services.impl;
 
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import by.news.service.dao.exception.DAOException;
+import by.news.service.dao.impl.AbstractDAO;
 import by.news.service.dao.impl.UserDAOImpl;
 import by.news.service.dao.interf.GenericDAO;
-import by.news.service.dao.interf.UserDAO;
 import by.news.service.entity.Role;
 import by.news.service.entity.User;
+import by.news.service.services.exception.ServiceException;
 import by.news.service.services.interf.UserService;
 
 public class UserServiceImpl implements UserService {
-	private static volatile UserServiceImpl instance;
-	private GenericDAO<User, Integer> userDAO = UserDAOImpl.getInstance();
+	private GenericDAO<User, Integer> userDAO;
+	public static Logger Log = LogManager.getLogger(AbstractDAO.class.getName());
 
-	private UserServiceImpl() {
-
+	public UserServiceImpl(GenericDAO<User, Integer> userDAO) {
+		super();
+		this.userDAO = userDAO;
 	}
 
-	public static synchronized UserServiceImpl getInstance() {
-		if (instance == null) {
-			instance = new UserServiceImpl();
+	public int registerUser(User user) throws ServiceException {
+		Log.info("Registering user");
+		int id = 0;
+		try {
+			id = userDAO.create(user);
+		} catch (DAOException e) {
+			Log.error("Cannot register user", e);
+			throw new ServiceException("Cannot register user", e);
 		}
-		return instance;
+		Log.info("User was registered with id: " + id);
+		return id;
 	}
 
-	public int registerUser(User user) throws DAOException {
-		return userDAO.create(user);
+	public void updateUser(User user) throws ServiceException {
+		Log.info("Updating user profile");
+		try {
+			userDAO.update(user);
+		} catch (DAOException e) {
+			Log.error("Cannot update user profile", e);
+			throw new ServiceException("Cannot update user profile", e);
+		}
+		Log.info("User profile was updated");
 	}
 
-	public void updateUser(User user) {
-		//userDAO.update(user);
+	public List<User> getAllUsers() throws ServiceException {
+		Log.info("Getting all users");
+		List<User> users;
+		try {
+			users = userDAO.getAll();
+		} catch (DAOException e) {
+			Log.error("Cannot get all users", e);
+			throw new ServiceException("Cannot get all users", e);
+		}
+		Log.info("Returning all users");
+		return users;
 	}
 
-	public boolean isValidUser(String email, String password) {
-		//not yet impl
-		boolean validUser = false;
-		/*UserDAO userDAO = UserDAOImpl.getInstance();
-		User user = userDAO.getUserByEmail(email);
-		if (user != null) {
-			validUser = user.getPassword().equals(password);
-		}*/
-		return validUser;
-	}
-
-	public List<User> getAllUsers() {
+	public List<Role> getUserRoles(int user_id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public List<Role> getUserRoles(int user_id) {
+	public User authorizationUser(String email, String Password) throws ServiceException {
 		// TODO Auto-generated method stub
 		return null;
 	}

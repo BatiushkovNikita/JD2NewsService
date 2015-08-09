@@ -1,7 +1,5 @@
 package by.news.service.dao.impl;
 
-import static by.news.service.dao.utills.Constants.*;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

@@ -5,16 +5,16 @@ import java.util.List;
 import by.news.service.dao.exception.DAOException;
 import by.news.service.entity.Role;
 import by.news.service.entity.User;
+import by.news.service.services.exception.ServiceException;
 
 public interface UserService {
-	int registerUser(User user) throws DAOException; // CRUD create
+	int registerUser(User user) throws ServiceException;
+	
+	User authorizationUser(String email, String Password) throws ServiceException;
 
-	void updateUser(User user); // key in session UserDAO
+	void updateUser(User user) throws ServiceException;
 
-	boolean isValidUser(String email, String Password);
+	List<User> getAllUsers() throws ServiceException;
 
-	List<User> getAllUsers(); // CRUD
-
-	List<Role> getUserRoles(int user_id);
-
+	List<Role> getUserRoles(int user_id) throws ServiceException;
 }

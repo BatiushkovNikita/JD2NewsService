@@ -10,6 +10,7 @@ import java.util.List;
 import by.news.service.dao.exception.DAOException;
 import by.news.service.dao.interf.UserDAO;
 import by.news.service.dao.pool.ConnectionPool;
+import by.news.service.entity.Role;
 import by.news.service.entity.User;
 
 public class UserDAOImpl extends AbstractDAO<User, Integer>implements UserDAO {
@@ -129,5 +130,13 @@ public class UserDAOImpl extends AbstractDAO<User, Integer>implements UserDAO {
 		}
 		Log.info("Returning User: " + user);
 		return user;
+	}
+
+	@Override
+	public List<Role> getUserRoles(int user_id) throws DAOException {
+		/*Log.info("Getting User roles");
+		List<Role> roles = null;
+		String query = QUERIES.getString("get.user.by.email");*/
+		return null;
 	}
 }

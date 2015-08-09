@@ -14,25 +14,16 @@ import by.news.service.services.exception.ServiceException;
 import by.news.service.services.interf.NewsService;
 
 public class NewsServiceImpl implements NewsService {
-	private static volatile NewsServiceImpl instance;
-	private GenericDAO<News, Integer> newsDao = NewsDAOImpl.getInstance();
+	private GenericDAO<News, Integer> newsDao;
 	public static Logger Log = LogManager.getLogger(AbstractDAO.class.getName());
-
-	private NewsServiceImpl() {
-
+	
+	public NewsServiceImpl(GenericDAO<News, Integer> newsDao) {
+		super();
+		this.newsDao = newsDao;
 	}
 
-	public static synchronized NewsServiceImpl getInstance() {
-		if (instance == null) {
-			instance = new NewsServiceImpl();
-		}
-		return instance;
-	}
-
-	public int addNews(String topic, String newsText, int userID) throws ServiceException {
+	public int addNews(News news) throws ServiceException {
 		Log.info("Adding News to news feed");
-		String publicationDate = Utills.getCurrentDate();
-		News news = new News(topic, publicationDate, newsText, userID);
 		int key = 0;
 		try {
 			key = newsDao.create(news);
@@ -68,7 +59,7 @@ public class NewsServiceImpl implements NewsService {
 		Log.info("News with id " + news.getNewsID() + " was updated");
 	}
 
-	public List<News> getAllNews() throws ServiceException {
+	public List<News> getNewsFeed() throws ServiceException {
 		Log.info("Getting news feed");
 		List<News> newsFeed;
 		try {
