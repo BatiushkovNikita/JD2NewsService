@@ -2,6 +2,7 @@ package by.news.service.services.impl;
 
 import java.util.List;
 
+import by.news.service.dao.exception.DAOException;
 import by.news.service.dao.impl.UserDAOImpl;
 import by.news.service.dao.interf.GenericDAO;
 import by.news.service.dao.interf.UserDAO;
@@ -24,22 +25,22 @@ public class UserServiceImpl implements UserService {
 		return instance;
 	}
 
-	public int registerUser(User user) {
+	public int registerUser(User user) throws DAOException {
 		return userDAO.create(user);
 	}
 
 	public void updateUser(User user) {
-		userDAO.update(user);
+		//userDAO.update(user);
 	}
 
 	public boolean isValidUser(String email, String password) {
 		//not yet impl
 		boolean validUser = false;
-		UserDAO userDAO = UserDAOImpl.getInstance();
+		/*UserDAO userDAO = UserDAOImpl.getInstance();
 		User user = userDAO.getUserByEmail(email);
 		if (user != null) {
 			validUser = user.getPassword().equals(password);
-		}
+		}*/
 		return validUser;
 	}
 

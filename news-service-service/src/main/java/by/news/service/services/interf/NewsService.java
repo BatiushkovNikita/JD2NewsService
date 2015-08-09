@@ -2,16 +2,18 @@ package by.news.service.services.interf;
 
 import java.util.List;
 
+import by.news.service.dao.exception.DAOException;
 import by.news.service.entity.News;
+import by.news.service.services.exception.ServiceException;
 
 public interface NewsService {
-	int addNews(String topic, String newsText, int userID);
+	int addNews(String topic, String newsText, int userID) throws ServiceException;
 
-	void deleteNews(int id);
+	void deleteNews(int id) throws ServiceException;
 
-	void updateNews(News news);
+	void updateNews(News news) throws ServiceException;
 
-	List<News> getAllNews();
+	List<News> getAllNews() throws ServiceException;
 
-	News getNews(int id);
+	News getNews(int id) throws ServiceException;
 }

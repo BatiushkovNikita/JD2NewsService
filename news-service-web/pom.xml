@@ -49,11 +49,11 @@
 			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat7-maven-plugin</artifactId>
-				<version>2.0</version>
+				<version>2.2</version>
 				<configuration>
-					<server>apache-tomcat-7.0.55</server>
-					<url>http://localhost:8081/manager/text</url> 
-					<!-- <url>d:\env\apache-tomcat-7.0.55\webapps</url>-->
+					<url>http://localhost:8085/manager/text</url>
+					<!-- <server>apache-tomcat-7.0.55</server> -->
+					<server>tomcat7-maven-plugin</server>
 					<path>/${project.artifactId}</path>
 				</configuration>
 			</plugin>

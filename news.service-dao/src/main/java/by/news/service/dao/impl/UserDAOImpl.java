@@ -1,7 +1,5 @@
 package by.news.service.dao.impl;
 
-import static by.news.service.dao.utills.Constants.*;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,7 +10,6 @@ import java.util.List;
 import by.news.service.dao.exception.DAOException;
 import by.news.service.dao.interf.UserDAO;
 import by.news.service.dao.pool.ConnectionPool;
-import by.news.service.dao.utills.ResourceManager;
 import by.news.service.entity.User;
 
 public class UserDAOImpl extends AbstractDAO<User, Integer>implements UserDAO {
@@ -50,21 +47,35 @@ public class UserDAOImpl extends AbstractDAO<User, Integer>implements UserDAO {
 	}
 
 	@Override
-	public void pStatementForInsert(PreparedStatement pStatement, User user) {
-		pStatementSetFields(pStatement, user);
-	}
-
-	@Override
-	public void pStatementForUpdate(PreparedStatement pStatement, User user) {
+	public void pStatementForInsert(PreparedStatement pStatement, User user) throws DAOException {
+		Log.trace("Creating prepared statement for User insert");
 		try {
-			pStatementSetFields(pStatement, user);
-			pStatement.setInt(5, user.getUserID());
+			pStatement.setString(1, user.getEmail());
+			pStatement.setString(2, user.getPassword());
+			pStatement.setString(3, user.getFirstName());
+			pStatement.setString(4, user.getLastName());
 		} catch (SQLException e) {
-			e.printStackTrace();
+			Log.error("Cannot create prepared statement for User insert", e);
+			throw new DAOException("Cannot create prepared statement for User insert", e);
 		}
 	}
 
-	public List<User> parseResultSet(ResultSet resultSet) {
+	@Override
+	public void pStatementForUpdate(PreparedStatement pStatement, User user) throws DAOException {
+		Log.trace("Creating prepared statement for User update");
+		try {
+			pStatement.setString(1, user.getEmail());
+			pStatement.setString(2, user.getPassword());
+			pStatement.setString(3, user.getFirstName());
+			pStatement.setString(4, user.getLastName());
+			pStatement.setInt(5, user.getUserID());
+		} catch (SQLException e) {
+			Log.error("Cannot create prepared statement for User update", e);
+			throw new DAOException("Cannot create prepared statement for User update", e);
+		}
+	}
+
+	public List<User> parseResultSet(ResultSet resultSet) throws DAOException {
 		List<User> users = new ArrayList<User>();
 		try {
 			while (resultSet.next()) {
@@ -74,53 +85,49 @@ public class UserDAOImpl extends AbstractDAO<User, Integer>implements UserDAO {
 				users.add(user);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			Log.error("Cannot parse result set for User", e);
+			throw new DAOException("Cannot parse result set for User", e);
 		}
 		return users;
 	}
 
 	@Override
-	public Integer parseResultSetKey(ResultSet resultSet) {
+	public Integer parseResultSetKey(ResultSet resultSet) throws DAOException {
 		int key = 0;
 		try {
 			while (resultSet.next()) {
 				key = resultSet.getInt(1);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			Log.error("Cannot parse result set for User", e);
+			throw new DAOException("Cannot parse result set for User", e);
 		}
 		return key;
 	}
 
-	private void pStatementSetFields(PreparedStatement pStatement, User user) {
-		try {
-			pStatement.setString(1, user.getEmail());
-			pStatement.setString(2, user.getPassword());
-			pStatement.setString(3, user.getFirstName());
-			pStatement.setString(4, user.getLastName());
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public User getUserByEmail(String email) {
+	public User getUserByEmail(String email) throws DAOException {
+		Log.info("Getting User by email: " + email);
 		User user = null;
 		String query = QUERIES.getString("get.user.by.email");
 		Connection connection = null;
 		PreparedStatement pStatement = null;
 		ResultSet resultSet = null;
 		try {
+			Log.trace("Open connection");
 			connection = ConnectionPool.getInstance().getConnection();
+			Log.trace("Create prepared statement");
 			pStatement = connection.prepareStatement(query);
 			pStatement.setString(1, email);
+			Log.trace("Getting result set");
 			resultSet = pStatement.executeQuery();
 			user = parseResultSet(resultSet).get(0);
 		} catch (SQLException e) {
-			e.printStackTrace();
-			//throw new DAOException("");
+			Log.error("Cannot get User by email: " + email, e);
+			throw new DAOException("Cannot get User by email: " + email, e);
 		} finally {
-			ResourceManager.closeResources(connection, pStatement, resultSet);
+			closeResources(connection, pStatement, resultSet);
 		}
+		Log.info("Returning User: " + user);
 		return user;
 	}
 }

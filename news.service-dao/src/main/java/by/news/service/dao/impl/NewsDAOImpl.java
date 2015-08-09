@@ -1,12 +1,13 @@
 package by.news.service.dao.impl;
 
-import static by.news.service.dao.utills.Constants.*;
-
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.log4j.Logger;
 
 import by.news.service.entity.News;
 
@@ -14,7 +15,7 @@ public class NewsDAOImpl extends AbstractDAO<News, Integer> {
 	private static volatile NewsDAOImpl instance;
 
 	private NewsDAOImpl() {
-
+		
 	}
 
 	public static synchronized NewsDAOImpl getInstance() {
@@ -61,11 +62,15 @@ public class NewsDAOImpl extends AbstractDAO<News, Integer> {
 
 	@Override
 	public List<News> parseResultSet(ResultSet resultSet) {
+		Log.trace("Create news for insert");
 		List<News> newsList = new ArrayList<News>();
 		try {
 			while (resultSet.next()) {
-				News news = new News(resultSet.getInt("id"), resultSet.getString("topic"),
-						resultSet.getDate("publication_date").toString(), resultSet.getString("news_text"),
+				News news = new News(
+						resultSet.getInt("id"), 
+						resultSet.getString("topic"),
+						resultSet.getDate("publication_date").toString(), 
+						resultSet.getString("news_text"),
 						resultSet.getInt("user_id"));
 				newsList.add(news);
 			}

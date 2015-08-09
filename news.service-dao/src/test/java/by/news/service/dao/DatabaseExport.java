@@ -19,12 +19,11 @@ import org.dbunit.dataset.xml.FlatXmlDataSet;
 public class DatabaseExport {
 	public static void main(String[] args)
 			throws DatabaseUnitException, SQLException, ClassNotFoundException, FileNotFoundException, IOException {
-		// database connection
-		Class driverClass = Class.forName("com.mysql.jdbc.Driver");
+		/*Class driverClass = Class.forName("com.mysql.jdbc.Driver");
 		Connection jdbcConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/news_service", "root",
 				"admin123");
 		IDatabaseConnection connection = new DatabaseConnection(jdbcConnection);
-
+*/
 		// write DTD file
 		//FlatDtdDataSet.write(connection.createDataSet(), new FileOutputStream("test.dtd"));
 	}
