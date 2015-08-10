@@ -6,7 +6,6 @@ import java.util.List;
 import org.jmock.Expectations;
 import org.jmock.integration.junit4.JUnitRuleMockery;
 import org.jmock.lib.legacy.ClassImposteriser;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -14,6 +13,8 @@ import org.junit.Test;
 import by.news.service.dao.exception.DAOException;
 import by.news.service.dao.impl.UserDAOImpl;
 import by.news.service.dao.interf.GenericDAO;
+import by.news.service.dao.interf.UserDAO;
+import by.news.service.entity.Role;
 import by.news.service.entity.User;
 import by.news.service.services.exception.ServiceException;
 import by.news.service.services.interf.UserService;
@@ -26,13 +27,16 @@ public class UserServiceImplTest {
 		}
 	};
 
-	private GenericDAO<User, Integer> userDao;
-	private UserService userService;
+	private GenericDAO<User, Integer> userGenericDAO;
+	private UserDAO userDAO;
+	private UserService userService = UserServiceImpl.getInstance();
 
 	@Before
 	public void setUp() throws Exception {
-		userDao = context.mock(UserDAOImpl.class);
-		userService = new UserServiceImpl(userDao);
+		userGenericDAO = context.mock(UserDAOImpl.class);
+		userDAO = context.mock(UserDAO.class);
+		userService.setUserGenericDAO(userGenericDAO);
+		userService.setUserDAO(userDAO);
 	}
 
 	final int userID = 12345;
@@ -41,12 +45,22 @@ public class UserServiceImplTest {
 	final String firstName = "Andrey";
 	final String lastName = "Ivanov";
 	final User user = new User(userID, email, password, firstName, lastName);
+	final List<User> users = new ArrayList<User>();
+	final List<Role> roles = new ArrayList<Role>();
+	{
+	roles.add(new Role(1, "admin"));
+	roles.add(new Role(2, "user"));
+	roles.add(new Role(3, "moderator"));
+	users.add(user);
+	users.add(user);
+	users.add(user);
+	}
 
 	@Test
-	public void registerUserTest() throws ServiceException, DAOException {
+	public void testUserRegistration() throws ServiceException, DAOException {
 		context.checking(new Expectations() {
 			{
-				oneOf(userDao).create(user);
+				oneOf(userGenericDAO).create(user);
 				will(returnValue(userID));
 			}
 		});
@@ -54,27 +68,59 @@ public class UserServiceImplTest {
 	}
 	
 	@Test
-	public void updateUserTest() throws ServiceException, DAOException {
+	public void testUpdateUser() throws ServiceException, DAOException {
 		context.checking(new Expectations() {
 			{
-				oneOf(userDao).update(user);
+				oneOf(userGenericDAO).update(user);
 			}
 		});
 		userService.updateUser(user);
 	}
 	
 	@Test
-	public void getAllUsersTest() throws ServiceException, DAOException {
-		final List<User> users = new ArrayList<User>();
-		users.add(user);
-		users.add(user);
-		users.add(user);
+	public void testGetAllUsers() throws ServiceException, DAOException {
 		context.checking(new Expectations() {
 			{
-				oneOf(userDao).getAll();
+				oneOf(userGenericDAO).getAll();
 				will(returnValue(users));
 			}
 		});
 		userService.getAllUsers();
 	}
+	
+	@Test
+	public void testGetUserRoles() throws ServiceException, DAOException {
+		context.checking(new Expectations() {
+			{
+				oneOf(userDAO).getUserRoles(userID);
+				will(returnValue(roles));
+			}
+		});
+		userService.getUserRoles(userID);
+	}
+	
+	@Test
+	public void testAuthorizationUser() throws ServiceException, DAOException {
+		context.checking(new Expectations() {
+			{
+				oneOf(userDAO).getUserByEmail(email);
+				will(returnValue(user));
+			}
+		});
+		userService.authorizationUser(user);
+	} 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

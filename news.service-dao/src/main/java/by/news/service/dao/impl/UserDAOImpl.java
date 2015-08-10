@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.spi.ThrowableRendererSupport;
+
 import by.news.service.dao.exception.DAOException;
 import by.news.service.dao.interf.UserDAO;
 import by.news.service.dao.pool.ConnectionPool;
@@ -132,11 +134,32 @@ public class UserDAOImpl extends AbstractDAO<User, Integer>implements UserDAO {
 		return user;
 	}
 
-	@Override
 	public List<Role> getUserRoles(int user_id) throws DAOException {
-		/*Log.info("Getting User roles");
-		List<Role> roles = null;
-		String query = QUERIES.getString("get.user.by.email");*/
+		Log.info("Getting user roles");
+		List<Role> roles = new ArrayList<Role>();
+		String query = "SELECT roles.id, role FROM users JOIN users_roles ON users.id = users_roles.user_id JOIN roles ON roles.id = role_id WHERE users.id = ?";
+		Connection connection = null;
+		PreparedStatement pStatement = null;
+		ResultSet resultSet = null;
+		try {
+			Log.trace("Open connection");
+			connection = ConnectionPool.getInstance().getConnection();
+			Log.trace("Create prepared statement");
+			pStatement = connection.prepareStatement(query);
+			pStatement.setInt(1, user_id);
+			Log.trace("Getting result set");
+			resultSet = pStatement.executeQuery();
+			while (resultSet.next()) {
+				Role role = new Role(resultSet.getInt(1), resultSet.getString(2));
+				roles.add(role);
+			}
+		} catch (SQLException e) {
+			Log.error("Cannot get roles user with id: " + user_id, e);
+			throw new DAOException("Cannot get roles user with id: " + user_id, e);
+		} finally {
+			closeResources(connection, pStatement, resultSet);
+		}
+		Log.info("Returning roles user with id: " + user_id);
 		return null;
 	}
 }

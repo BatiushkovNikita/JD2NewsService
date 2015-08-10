@@ -9,9 +9,7 @@
 		<artifactId>news-service</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<groupId>by.news.service</groupId>
 	<artifactId>news-service-dao</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<name>news-service-dao</name>
 	<url>http://maven.apache.org</url>
 	<properties>

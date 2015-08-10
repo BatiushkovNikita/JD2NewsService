@@ -1,7 +1,5 @@
 package by.news.service.services.impl;
 
-import java.sql.Date;
-
 import org.jmock.Expectations;
 import org.jmock.integration.junit4.JUnitRuleMockery;
 import org.jmock.lib.legacy.ClassImposteriser;
@@ -15,7 +13,6 @@ import by.news.service.dao.interf.GenericDAO;
 import by.news.service.entity.News;
 import by.news.service.services.exception.ServiceException;
 import by.news.service.services.interf.NewsService;
-import by.news.service.services.interf.UserService;
 
 public class NewsServiceImplTest {
 	@Rule
@@ -25,13 +22,13 @@ public class NewsServiceImplTest {
 		}
 	};
 
-	private GenericDAO<News, Integer> newsDao;
-	private NewsService newsService;
+	private GenericDAO<News, Integer> newsDAO;
+	private NewsService newsService = NewsServiceImpl.getInstance();
 
 	@Before
 	public void setUp() throws Exception {
-		newsDao = context.mock(NewsDAOImpl.class);
-		newsService = new NewsServiceImpl(newsDao);
+		newsDAO = context.mock(NewsDAOImpl.class);
+		newsService.setNewsDAO(newsDAO);
 	}
 
 	final int newsID = 12345;
@@ -45,7 +42,7 @@ public class NewsServiceImplTest {
 	public void addNewsTest() throws ServiceException, DAOException {
 		context.checking(new Expectations() {
 			{
-				oneOf(newsDao).create(news);
+				oneOf(newsDAO).create(news);
 				will(returnValue(newsID));
 			}
 		});
