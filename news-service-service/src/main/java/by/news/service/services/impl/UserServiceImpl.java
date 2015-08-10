@@ -1,7 +1,11 @@
 package by.news.service.services.impl;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
+import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.codec.digest.Md5Crypt;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -81,18 +85,20 @@ public class UserServiceImpl implements UserService {
 		return roles;
 	}
 
-	public User authorizationUser(User pretender) throws ServiceException {
-		String email = pretender.getEmail();
+	public User authorizeUser(User user) throws ServiceException {
+		Log.info("Authorizing user");
+		User authorizedUser;
 		try {
-			User user = getUserDAO().getUserByEmail(email);
-			if ((user != null) && (user.getPassword() == pretender.getPassword())) {
-			}
-			// in progress...
+			String email = user.getEmail();
+			String password = user.getPassword();
+			String passwordMD5 = DigestUtils.md5Hex(password);
+			authorizedUser = getUserDAO().getUserByEmailAndPassword(email, passwordMD5);
 		} catch (DAOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Log.error("Cannot authorize user", e);
+			throw new ServiceException("Cannot authorize user", e);
 		}
-		return null;
+		Log.info("Returning user");
+		return authorizedUser;
 	}
 
 	public GenericDAO<User, Integer> getUserGenericDAO() throws ServiceException {

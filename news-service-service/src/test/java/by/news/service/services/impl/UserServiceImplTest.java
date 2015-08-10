@@ -9,6 +9,7 @@ import org.jmock.lib.legacy.ClassImposteriser;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.omg.CORBA.PRIVATE_MEMBER;
 
 import by.news.service.dao.exception.DAOException;
 import by.news.service.dao.impl.UserDAOImpl;
@@ -41,7 +42,8 @@ public class UserServiceImplTest {
 
 	final int userID = 12345;
 	final String email = "qwerty@mail.com";
-	final String password = "d8578edf8458ce06fbc5bb76a58c5ca4";
+	final String passwordMD5 = "d8578edf8458ce06fbc5bb76a58c5ca4";
+	final String password = "qwerty";
 	final String firstName = "Andrey";
 	final String lastName = "Ivanov";
 	final User user = new User(userID, email, password, firstName, lastName);
@@ -51,11 +53,11 @@ public class UserServiceImplTest {
 	roles.add(new Role(1, "admin"));
 	roles.add(new Role(2, "user"));
 	roles.add(new Role(3, "moderator"));
-	users.add(user);
-	users.add(user);
-	users.add(user);
+	users.add(new User(1234, "qwq", "d8sdsdus8dus8ud", "Petya", "Ivanov"));
+	users.add(new User(38929, "AAA", "fdfsfsfsfs", "Sergey", "Petrov"));
+	users.add(new User(15, "BBB", "21212ddsds", "Tanya", "Sergeeva"));
 	}
-
+	
 	@Test
 	public void testUserRegistration() throws ServiceException, DAOException {
 		context.checking(new Expectations() {
@@ -102,12 +104,12 @@ public class UserServiceImplTest {
 	@Test
 	public void testAuthorizationUser() throws ServiceException, DAOException {
 		context.checking(new Expectations() {
-			{
-				oneOf(userDAO).getUserByEmail(email);
+			{	
+				oneOf(userDAO).getUserByEmailAndPassword(email, passwordMD5);
 				will(returnValue(user));
 			}
 		});
-		userService.authorizationUser(user);
+		userService.authorizeUser(user);
 	} 
 }
 

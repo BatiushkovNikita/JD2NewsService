@@ -32,7 +32,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>news-service-web</finalName> 
+		<finalName>news-service-web</finalName>
 		<plugins> 
 			<plugin>
 				<artifactId>maven-war-plugin</artifactId>
@@ -52,7 +52,6 @@
 				<version>2.2</version>
 				<configuration>
 					<url>http://localhost:8085/manager/text</url>
-					<!-- <server>apache-tomcat-7.0.55</server> -->
 					<server>tomcat7-maven-plugin</server>
 					<path>/${project.artifactId}</path>
 				</configuration>

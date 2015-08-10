@@ -7,7 +7,7 @@ import by.news.service.entity.Role;
 import by.news.service.entity.User;
 
 public interface UserDAO {
-	User getUserByEmail(String email) throws DAOException;
+	User getUserByEmailAndPassword(String email, String password) throws DAOException;
 	
 	List<Role> getUserRoles(int user_id) throws DAOException;
 }

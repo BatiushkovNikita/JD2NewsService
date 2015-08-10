@@ -12,7 +12,7 @@ import by.news.service.services.exception.ServiceException;
 public interface UserService {
 	int registerUser(User user) throws ServiceException;
 	
-	User authorizationUser(User user) throws ServiceException;
+	User authorizeUser(User user) throws ServiceException;
 
 	void updateUser(User user) throws ServiceException;
 

@@ -108,10 +108,11 @@ public class UserDAOImpl extends AbstractDAO<User, Integer>implements UserDAO {
 		return key;
 	}
 
-	public User getUserByEmail(String email) throws DAOException {
-		Log.info("Getting User by email: " + email);
+	public User getUserByEmailAndPassword(String email, String password) throws DAOException {
+		Log.info("Getting User with email: " + email);
 		User user = null;
-		String query = QUERIES.getString("get.user.by.email");
+		//String query = QUERIES.getString("get.user.by.email.and.password");
+		String query = "SELECT id, email, password, first_name, last_name FROM users WHERE email = ? AND password = ?";
 		Connection connection = null;
 		PreparedStatement pStatement = null;
 		ResultSet resultSet = null;
@@ -121,12 +122,13 @@ public class UserDAOImpl extends AbstractDAO<User, Integer>implements UserDAO {
 			Log.trace("Create prepared statement");
 			pStatement = connection.prepareStatement(query);
 			pStatement.setString(1, email);
+			pStatement.setString(2, password);
 			Log.trace("Getting result set");
 			resultSet = pStatement.executeQuery();
 			user = parseResultSet(resultSet).get(0);
 		} catch (SQLException e) {
-			Log.error("Cannot get User by email: " + email, e);
-			throw new DAOException("Cannot get User by email: " + email, e);
+			Log.error("Cannot get User with email: " + email, e);
+			throw new DAOException("Cannot get User with email: " + email, e);
 		} finally {
 			closeResources(connection, pStatement, resultSet);
 		}
@@ -137,7 +139,7 @@ public class UserDAOImpl extends AbstractDAO<User, Integer>implements UserDAO {
 	public List<Role> getUserRoles(int user_id) throws DAOException {
 		Log.info("Getting user roles");
 		List<Role> roles = new ArrayList<Role>();
-		String query = "SELECT roles.id, role FROM users JOIN users_roles ON users.id = users_roles.user_id JOIN roles ON roles.id = role_id WHERE users.id = ?";
+		String query = QUERIES.getString("get.user.roles");
 		Connection connection = null;
 		PreparedStatement pStatement = null;
 		ResultSet resultSet = null;
