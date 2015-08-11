@@ -20,6 +20,8 @@ public abstract class AbstractDAO<T, PK> implements GenericDAO<T, PK> {
 	public static final ResourceBundle QUERIES = ResourceBundle.getBundle("queries");
 
 	public static Logger Log = LogManager.getLogger(AbstractDAO.class.getName());
+	
+	private Connection connection;
 
 	public abstract String getInsertQuery();
 
@@ -45,10 +47,10 @@ public abstract class AbstractDAO<T, PK> implements GenericDAO<T, PK> {
 		PreparedStatement pStatement = null;
 		ResultSet resultSet = null;
 		try {
-			Log.trace("Open connection");
-			connection = ConnectionPool.getInstance().getConnection();
+			//Log.trace("Open connection");
+			//connection = ConnectionPool.getInstance().getConnection();
 			Log.trace("Create prepared statement");
-			pStatement = connection.prepareStatement(query);
+			pStatement = getConnection().prepareStatement(query);
 			pStatementForInsert(pStatement, object);
 			pStatement.executeUpdate();
 			Log.trace("Getting result set");
@@ -68,12 +70,12 @@ public abstract class AbstractDAO<T, PK> implements GenericDAO<T, PK> {
 		Log.info("Getting object by key: " + key);
 		List<T> entities = new ArrayList<T>();
 		String query = getSelectQuery();
-		Connection connection = null;
+		//Connection connection = null;
 		PreparedStatement pStatement = null;
 		ResultSet resultSet = null;
 		try {
 			Log.trace("Open connection");
-			connection = ConnectionPool.getInstance().getConnection();
+			//connection = ConnectionPool.getInstance().getConnection();
 			Log.trace("Create prepared statement");
 			pStatement = connection.prepareStatement(query);
 			pStatement.setObject(1, key);
@@ -97,11 +99,11 @@ public abstract class AbstractDAO<T, PK> implements GenericDAO<T, PK> {
 	public void update(T object) throws DAOException {
 		Log.info("Updating " + object);
 		String query = getUpdateQuery();
-		Connection connection = null;
+		//Connection connection = null;
 		PreparedStatement pStatement = null;
 		try {
 			Log.trace("Open connection");
-			connection = ConnectionPool.getInstance().getConnection();
+			//connection = ConnectionPool.getInstance().getConnection();
 			Log.trace("Create prepared statement");
 			pStatement = connection.prepareStatement(query);
 			pStatementForUpdate(pStatement, object);
@@ -124,13 +126,13 @@ public abstract class AbstractDAO<T, PK> implements GenericDAO<T, PK> {
 	public void delete(PK key) throws DAOException {
 		Log.info("Deleting object by key: " + key);
 		String query = getDeleteQuery();
-		Connection connection = null;
+		//Connection connection = null;
 		PreparedStatement pStatement = null;
 		try {
-			Log.trace("Open connection");
-			connection = ConnectionPool.getInstance().getConnection();
+			//Log.trace("Open connection");
+			//connection = ConnectionPool.getInstance().getConnection();
 			Log.trace("Create prepared statement");
-			pStatement = connection.prepareStatement(query);
+			pStatement = getConnection().prepareStatement(query);
 			pStatement.setObject(1, key);
 			int count = pStatement.executeUpdate();
 			if (count == 1) {
@@ -152,12 +154,12 @@ public abstract class AbstractDAO<T, PK> implements GenericDAO<T, PK> {
 		Log.info("Getting list of objects");
 		List<T> entities = new ArrayList<T>();
 		String query = getSelectQuery();
-		Connection connection = null;
+		//Connection connection = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
 		try {
 			Log.trace("Open connection");
-			connection = ConnectionPool.getInstance().getConnection();
+			//connection = ConnectionPool.getInstance().getConnection();
 			Log.trace("Create statement");
 			statement = connection.createStatement();
 			Log.trace("Getting result set");
@@ -175,6 +177,14 @@ public abstract class AbstractDAO<T, PK> implements GenericDAO<T, PK> {
 			closeResources(connection, statement, resultSet);
 		}
 		return entities;
+	}
+	
+	public Connection getConnection() {
+		return connection;
+	}
+
+	public void setConnection(Connection connection) {
+		this.connection = connection;
 	}
 
 	public void closeResources(Connection connection, Statement statement, ResultSet resultSet) {

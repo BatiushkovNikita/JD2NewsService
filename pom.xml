@@ -9,6 +9,7 @@
 		<module>news.service-dao</module>
 		<module>news-service-entity</module>
 		<module>news-service-web</module>
+		<module>news-service-service</module>
 		<module>news-service-script</module>
 	</modules>
 
@@ -54,11 +55,15 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-api</artifactId>
-				<version>1.7.12</version>
+				<groupId>org.unitils</groupId>
+				<artifactId>unitils-core</artifactId>
+				<version>3.4.2</version>
 			</dependency>
-
+			<dependency>
+				<groupId>org.unitils</groupId>
+				<artifactId>unitils-dbunit</artifactId>
+				<version>3.4.2</version>
+			</dependency>
 			<dependency>
 				<groupId>commons-codec</groupId>
 				<artifactId>commons-codec</artifactId>

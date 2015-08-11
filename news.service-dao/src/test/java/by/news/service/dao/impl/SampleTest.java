@@ -12,7 +12,7 @@ import org.dbunit.operation.DatabaseOperation;
 
 import junit.framework.TestCase;
 
-public class SampleTest extends TestCase {
+/*public class SampleTest extends TestCase {
 
 	public SampleTest(String name) {
 		super(name);
@@ -52,7 +52,7 @@ public class SampleTest extends TestCase {
         // Assert actual database table match expected table
         Assertion.assertEquals(expectedTable, actualTable);
 	}
-	}
+	}*/
 
 	
 	
@@ -66,4 +66,4 @@ public class SampleTest extends TestCase {
 	
 	
 	
-}
+
