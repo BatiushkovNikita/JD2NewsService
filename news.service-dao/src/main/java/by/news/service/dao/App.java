@@ -20,13 +20,11 @@ public class App {
 	public static void main(String[] args) throws DAOException {
 
 
-/*		GenericDAO<User, Integer> userDAO = UserDAOImpl.getInstance();
+		GenericDAO<User, Integer> userDAO = UserDAOImpl.getInstance();
 		User user = new User("ZZZZZZZZZZZZ", "dsds", "sdsd", "dsdsds");
 		int s = userDAO.create(user);
-		System.out.println("User was added: " + s);*/
-		
-		GenericDAO<User, Integer> userDAO = UserDAOImpl.getInstance();
-		userDAO.update(new User("asas", "dsds", "sdsd", "dsdsds"));
+		System.out.println("User was added: " + s);
+	
 
 /*		try {
 			System.in.read();

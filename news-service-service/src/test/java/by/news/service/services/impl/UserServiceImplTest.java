@@ -9,7 +9,6 @@ import org.jmock.lib.legacy.ClassImposteriser;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.omg.CORBA.PRIVATE_MEMBER;
 
 import by.news.service.dao.exception.DAOException;
 import by.news.service.dao.impl.UserDAOImpl;
@@ -112,17 +111,3 @@ public class UserServiceImplTest {
 		userService.authorizeUser(user);
 	} 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -8,7 +8,6 @@
 	<modules>
 		<module>news.service-dao</module>
 		<module>news-service-entity</module>
-		<module>news-service-service</module>
 		<module>news-service-web</module>
 		<module>news-service-script</module>
 	</modules>
@@ -25,12 +24,11 @@
 				</configuration>
 			</plugin>
 
-			<!-- -->
-
 			<plugin>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>2.3</version>
 			</plugin>
+			<!--
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.1</version>
@@ -38,7 +36,7 @@
 					<source>1.7</source>
 					<target>1.7</target>
 				</configuration>
-			</plugin>
+			</plugin> -->
 			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat7-maven-plugin</artifactId>
@@ -55,6 +53,12 @@
 
 	<dependencyManagement>
 		<dependencies>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>1.7.12</version>
+			</dependency>
+
 			<dependency>
 				<groupId>commons-codec</groupId>
 				<artifactId>commons-codec</artifactId>
