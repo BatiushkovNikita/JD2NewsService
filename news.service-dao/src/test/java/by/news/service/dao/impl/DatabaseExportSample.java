@@ -30,7 +30,7 @@ public class DatabaseExportSample {
 
 		// full database export
 		IDataSet fullDataSet = connection.createDataSet();
-		FlatXmlDataSet.write(fullDataSet, new FileOutputStream("src/test/resources/full.xml"));
+		FlatXmlDataSet.write(fullDataSet, new FileOutputStream("src/test/resources/UserDaoImplTest.xml"));
 
 		// dependent tables database export: export table X and all tables that
 		// have a PK which is a FK on X, in the right order for insertion

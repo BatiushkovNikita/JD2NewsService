@@ -22,7 +22,7 @@ public class App {
 	public static void main(String[] args) throws DAOException {
 		Connection connection = ConnectionPool.getInstance().getConnection();
 		
-		
+		System.out.println(System.getProperty("user.home"));
 
 		AbstractDAO<User, Integer> userDAO = UserDAOImpl.getInstance();
 		userDAO.setConnection(connection);
