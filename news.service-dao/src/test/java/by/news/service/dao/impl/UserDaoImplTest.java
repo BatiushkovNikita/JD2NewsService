@@ -23,58 +23,45 @@ import by.news.service.entity.User;
 
 @DataSet
 public class UserDaoImplTest extends UnitilsJUnit4 {
-	
+
 	@TestDataSource
 	private DataSource dataSource;
-	
+
 	private AbstractDAO<User, Integer> userDao;
-	
+
 	@Before
-    public void setUp() throws SQLException {
+	public void setUp() throws SQLException {
 		userDao = UserDAOImpl.getInstance();
 		userDao.setConnection(dataSource.getConnection());
-    }
-    
-    @DataSet
-    @Test
-    public void testMethod() throws SQLException {
-    	 Connection cnnx = dataSource.getConnection();
-         Statement stmt = cnnx.createStatement();
-         ResultSet rs = null;
-         try {
-             // check that the GG_LANGUAGES1 table exists
-             rs = stmt.executeQuery("SELECT * FROM users");
+	}
 
+	@DataSet
+	@Test
+	public void testMethod() throws SQLException {
+		Connection cnnx = dataSource.getConnection();
+		Statement stmt = cnnx.createStatement();
+		ResultSet rs = null;
+		
+		try {
+			// check that the GG_LANGUAGES1 table exists
+			rs = stmt.executeQuery("SELECT * FROM users");
 
-             System.out.println("testGetLanguages succeeded");
-         } finally {
-             if (rs != null) {
-                 rs.close();
-             }
-         }
-         stmt.close();
-         cnnx.close(); 
-    }
-    
-    @Test
-    public void testDao() throws DAOException {
-    	User result = userDao.getByPK(777);
-    	User user = new User(777, "aaa@gmail.com", "d8578edf8458ce06fbc5bb76a58c5ca4", "Sergey", "Katabin");
-    	assertEquals(result, user);
-    }
+			System.out.println("testGetLanguages succeeded");
+		} finally {
+			if (rs != null) {
+				rs.close();
+			}
+		}
+		stmt.close();
+		cnnx.close();
+	}
+
+	@Test
+	public void testDao() throws DAOException {
+		User result = userDao.getByPK(777);
+		User user = new User(777, "aaa@gmail.com",
+				"d8578edf8458ce06fbc5bb76a58c5ca4", "Sergey", "Katabin");
+		assertEquals(result, user);
+	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

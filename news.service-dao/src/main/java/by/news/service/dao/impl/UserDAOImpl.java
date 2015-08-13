@@ -7,8 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.spi.ThrowableRendererSupport;
-
 import by.news.service.dao.exception.DAOException;
 import by.news.service.dao.interf.UserDAO;
 import by.news.service.dao.pool.ConnectionPool;
