@@ -25,16 +25,15 @@ public class Controller extends HttpServlet {
 		performAction(request, response);
 	}
 
-	private void performAction(HttpServletRequest request,
-			HttpServletResponse response) {
+	private void performAction(HttpServletRequest request, HttpServletResponse response) {
 		String paramCommand = request.getParameter("command");
 		if (paramCommand == null) {
 			throw new IllegalArgumentException("Param command is null");
 		}
+		
 		Command command = CommandFactory.getCommand(paramCommand);
 		String nextPage = command.execute(request, response);
-		RequestDispatcher requestDispatcher = request
-				.getRequestDispatcher(nextPage);
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher(nextPage);
 		try {
 			requestDispatcher.forward(request, response);
 		} catch (ServletException e) {

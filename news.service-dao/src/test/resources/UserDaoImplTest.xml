@@ -1,16 +1,21 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<dataset>
+<dataset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="dbxsd/dataset.xsd">
+         
   <news id="1" topic="topic1" publication_date="2015-12-08 00:00:00.0" news_text="News text1" user_id="777"/>
   <news id="2" topic="topic2" publication_date="2015-12-08 00:00:00.0" news_text="News text2" user_id="777"/>
   <news id="3" topic="topic3" publication_date="2015-12-08 00:00:00.0" news_text="News text3" user_id="888"/>
+  
   <roles id="1" role_name="admin"/>
   <roles id="2" role_name="moderator"/>
   <roles id="3" role_name="user"/>
+  
   <users id="777" email="aaa@gmail.com" password="d8578edf8458ce06fbc5bb76a58c5ca4" first_name="Sergey" last_name="Katabin"/>
   <users id="888" email="bbb@gmail.com" password="827ccb0eea8a706c4c34a16891f84e7b" first_name="Nikita" last_name="Petrov"/>
   <users id="999" email="ccc@gmail.com" password="202cb962ac59075b964b07152d234b70" first_name="Ivan" last_name="Ivanov"/>
+  
   <users_roles user_id="777" role_id="2"/>
   <users_roles user_id="777" role_id="3"/>
   <users_roles user_id="999" role_id="1"/>
   <users_roles user_id="888" role_id="3"/>
+  
 </dataset>
