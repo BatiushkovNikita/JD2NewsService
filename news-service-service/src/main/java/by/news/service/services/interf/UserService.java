@@ -19,12 +19,8 @@ public interface UserService {
 	List<User> getAllUsers() throws ServiceException;
 
 	List<Role> getUserRoles(int user_id) throws ServiceException;
-	
-	GenericDAO<User, Integer> getUserGenericDAO() throws ServiceException;
 
-	void setUserGenericDAO(GenericDAO<User, Integer> userDAO);
-	
-	UserDAO getUserDAO() throws ServiceException;
-	
 	void setUserDAO(UserDAO userDAO);
+	
+	void setUserGenericDAO(GenericDAO<User, Integer> userGenericDAO);
 }

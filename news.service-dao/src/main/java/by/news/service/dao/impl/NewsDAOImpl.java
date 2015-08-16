@@ -1,12 +1,12 @@
 package by.news.service.dao.impl;
 
+import by.news.service.entity.News;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import by.news.service.entity.News;
 
 public class NewsDAOImpl extends AbstractDAO<News, Integer> {
 	private static volatile NewsDAOImpl instance;
@@ -44,7 +44,15 @@ public class NewsDAOImpl extends AbstractDAO<News, Integer> {
 
 	@Override
 	public void pStatementForInsert(PreparedStatement pStatement, News news) {
-		pStatementSetFields(pStatement, news);
+		/*pStatementSetFields(pStatement, news);*/
+        try {
+            pStatement.setString(1, news.getTopic());
+            pStatement.setString(2, news.getPublicationDate());
+            pStatement.setString(3, news.getNewsText());
+            pStatement.setInt(4, news.getUserID());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 	}
 
 	@Override

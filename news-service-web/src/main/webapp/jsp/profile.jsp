@@ -2,37 +2,37 @@
 
 <html>
 <head>
-<title>Sign up page</title>
+<title>Profile</title>
 <%@ include file="include.jsp"%>
 </head>
 <body>
+	<%@ include file="frag-header-admin.jsp"%>
+	<%-- <ctg:info-role role="${role}"> --%>
 	<div class="container">
-		<h1>
-			<fmt:message key="registration.title" />
-		</h1>
 		<h2>
-			<fmt:message key="registration.sign.up" />
+			<fmt:message key="profile.title" />
 		</h2>
+		<form class="form-horizontal" role="form" action="Controller" method="post">
+			<input type=hidden name="command" value="profile">
 
-		<form class="form-horizontal" role="form" action="/news-service/Controller" method="post">
-			<input type=hidden name="command" value="registration">
-			
 			<%@ include file="frag-userdata.jsp"%>
-			
+
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
-					<span style="color: #ff0000;">${errorRegistrationInput}</span>
+					<span style="color: #ff0000;">${errorLoginInput}</span>
 				</div>
 			</div>
 
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
-					<fmt:message var="submitButton" key="registration.button" />
+					<fmt:message var="submitButton" key="profile.button.save" />
 					<button type="submit" class="btn btn-success">${submitButton}</button>
 				</div>
 			</div>
-			
+			<br>
 		</form>
+	
+
 	</div>
 </body>
 </html>

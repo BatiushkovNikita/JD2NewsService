@@ -1,14 +1,15 @@
-package by.news.service.web.command.impl;
+package by.news.service.web.command.impl.commands;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import by.news.service.web.command.interf.Command;
 
-public class NewsFeedCommand implements Command {
+public class ProfileCommand implements Command {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
-		return "jsp/newsfeed.jsp";
+		return "http://localhost:8085/news-service-web/jsp/profile.jsp";
 	}
+
 }

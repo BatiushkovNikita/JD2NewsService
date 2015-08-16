@@ -1,20 +1,11 @@
 package by.news.service.dao;
 
-import java.io.IOException;
-import java.sql.Connection;
-import java.util.ArrayList;
-import java.util.List;
-
+import by.news.service.dao.exception.DAOException;
+import by.news.service.dao.pool.ConnectionPool;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.poi.hssf.record.chart.BarRecord;
 
-import by.news.service.dao.exception.DAOException;
-import by.news.service.dao.impl.AbstractDAO;
-import by.news.service.dao.impl.UserDAOImpl;
-import by.news.service.dao.interf.GenericDAO;
-import by.news.service.dao.pool.ConnectionPool;
-import by.news.service.entity.User;
+import java.sql.Connection;
 
 public class App {
 	
@@ -25,12 +16,12 @@ public class App {
 
 		System.out.println(System.getProperty("user.home"));
 
-		AbstractDAO<User, Integer> userDAO = UserDAOImpl.getInstance();
-		userDAO.setConnection(connection);
+/*		AbstractDAO<User, Integer> userDAO = UserDAOImpl.getInstance();
+		userDAO.setConnection(connection);*/
 
-		User user = new User("ZZZZZZZZZZZZ", "dsds", "sdsd", "dsdsds");
+/*		User user = new User("ZZZZZZZZZZZZ", "dsds", "sdsd", "dsdsds");
 		int s = userDAO.create(user);
-		System.out.println("User was added: " + s);
+		System.out.println("User was added: " + s);*/
 
 		/*
 		 * try { System.in.read(); } catch (IOException e) {

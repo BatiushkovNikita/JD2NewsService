@@ -1,22 +1,14 @@
 package by.news.service.dao.impl;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
-
-import javax.sql.DataSource;
-
+import by.news.service.dao.exception.DAOException;
+import by.news.service.dao.interf.GenericDAO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import by.news.service.dao.exception.DAOException;
-import by.news.service.dao.interf.GenericDAO;
-import by.news.service.dao.pool.ConnectionPool;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
 
 public abstract class AbstractDAO<T, PK> implements GenericDAO<T, PK> {
 	public static final ResourceBundle QUERIES = ResourceBundle.getBundle("queries");
@@ -71,7 +63,7 @@ public abstract class AbstractDAO<T, PK> implements GenericDAO<T, PK> {
 	public T getByPK(PK key) throws DAOException {
 		Log.info("Getting object by key: " + key);
 		List<T> entities = new ArrayList<T>();
-		String query = getSelectQuery();
+		String query = QUERIES.getString("get.all.query.news");
 		//Connection connection = null;
 		PreparedStatement pStatement = null;
 		ResultSet resultSet = null;
@@ -79,7 +71,7 @@ public abstract class AbstractDAO<T, PK> implements GenericDAO<T, PK> {
 			Log.trace("Open connection");
 			//connection = ConnectionPool.getInstance().getConnection();
 			Log.trace("Create prepared statement");
-			pStatement = connection.prepareStatement(query);
+			pStatement = getConnection().prepareStatement(query);
 			pStatement.setObject(1, key);
 			Log.trace("Getting result set");
 			resultSet = pStatement.executeQuery();
@@ -107,7 +99,7 @@ public abstract class AbstractDAO<T, PK> implements GenericDAO<T, PK> {
 			Log.trace("Open connection");
 			//connection = ConnectionPool.getInstance().getConnection();
 			Log.trace("Create prepared statement");
-			pStatement = connection.prepareStatement(query);
+			pStatement = getConnection().prepareStatement(query);
 			pStatementForUpdate(pStatement, object);
 			int count = pStatement.executeUpdate();
 			if (count == 1) {
@@ -155,7 +147,7 @@ public abstract class AbstractDAO<T, PK> implements GenericDAO<T, PK> {
 	public List<T> getAll() throws DAOException {
 		Log.info("Getting list of objects");
 		List<T> entities = new ArrayList<T>();
-		String query = getSelectQuery();
+		String query = QUERIES.getString("get.all.query.news");
 		//Connection connection = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
@@ -163,7 +155,7 @@ public abstract class AbstractDAO<T, PK> implements GenericDAO<T, PK> {
 			Log.trace("Open connection");
 			//connection = ConnectionPool.getInstance().getConnection();
 			Log.trace("Create statement");
-			statement = connection.createStatement();
+			statement = getConnection().createStatement();
 			Log.trace("Getting result set");
 			resultSet = statement.executeQuery(query);
 			entities = parseResultSet(resultSet);

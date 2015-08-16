@@ -1,5 +1,13 @@
 package by.news.service.dao.impl;
 
+import by.news.service.dao.exception.DAOException;
+import by.news.service.dao.interf.UserDAO;
+import by.news.service.dao.pool.ConnectionPool;
+import by.news.service.entity.Role;
+import by.news.service.entity.User;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,13 +15,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import by.news.service.dao.exception.DAOException;
-import by.news.service.dao.interf.UserDAO;
-import by.news.service.dao.pool.ConnectionPool;
-import by.news.service.entity.Role;
-import by.news.service.entity.User;
-
 public class UserDAOImpl extends AbstractDAO<User, Integer>implements UserDAO {
+	public static Logger Log = LogManager.getLogger(AbstractDAO.class.getName());
 	private static volatile UserDAOImpl instance;
 
 	private UserDAOImpl() {
@@ -109,7 +112,7 @@ public class UserDAOImpl extends AbstractDAO<User, Integer>implements UserDAO {
 	public User getUserByEmailAndPassword(String email, String password) throws DAOException {
 		Log.info("Getting User with email: " + email);
 		User user = null;
-		//String query = QUERIES.getString("get.user.by.email.and.password");
+		// String query = QUERIES.getString("get.user.by.email.and.password");
 		String query = "SELECT id, email, password, first_name, last_name FROM users WHERE email = ? AND password = ?";
 		Connection connection = null;
 		PreparedStatement pStatement = null;
@@ -123,13 +126,21 @@ public class UserDAOImpl extends AbstractDAO<User, Integer>implements UserDAO {
 			pStatement.setString(2, password);
 			Log.trace("Getting result set");
 			resultSet = pStatement.executeQuery();
-			user = parseResultSet(resultSet).get(0);
+			while (resultSet.next()) {
+				user = new User(resultSet.getInt("id"), resultSet.getString("email"), resultSet.getString("password"),
+						resultSet.getString("first_name"), resultSet.getString("last_name"));
+			}
+/*			if (users == null || users.size() == 0) {
+				return null;
+			}*/
 		} catch (SQLException e) {
+			Log.trace("error");
 			Log.error("Cannot get User with email: " + email, e);
 			throw new DAOException("Cannot get User with email: " + email, e);
 		} finally {
 			closeResources(connection, pStatement, resultSet);
 		}
+		Log.trace("Returning User: " + user);
 		Log.info("Returning User: " + user);
 		return user;
 	}
