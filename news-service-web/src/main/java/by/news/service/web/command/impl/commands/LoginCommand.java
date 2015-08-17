@@ -7,9 +7,11 @@ import by.news.service.services.exception.ServiceException;
 import by.news.service.services.impl.UserServiceImpl;
 import by.news.service.services.interf.UserService;
 import by.news.service.web.command.interf.Command;
+import org.hibernate.Session;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.Objects;
 
 public class LoginCommand implements Command {
@@ -43,6 +45,8 @@ public class LoginCommand implements Command {
 		}
 		if (user != null) {
 			isValide = true;
+            HttpSession session = request.getSession();
+            session.setAttribute("user", user.getUserID());
 		}
 		return isValide;
 	}

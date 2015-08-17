@@ -31,9 +31,9 @@ public class RegistrationCommand implements Command {
             } catch (ServiceException e) {
                 e.printStackTrace();
             }
-            nextPage = "/jsp/newsfeed.jsp";
+            nextPage = "Controller?command=news_feed";
         } else {
-            request.setAttribute("errorNewsInput", "Wrong input");
+            request.setAttribute("errorRegistrationInput", "Wrong input");
         }
         return nextPage;
     }
