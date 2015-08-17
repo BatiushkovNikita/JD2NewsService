@@ -6,4 +6,4 @@
 6. Enter MySQL root password.
 7. Enter MySQL root password again ).
 8. Project will be deployed in d:/opt and will be available at the following adress:
-localhost:8085/news-service-web/
+localhost:8085/news-service/

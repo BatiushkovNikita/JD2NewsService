@@ -86,7 +86,7 @@
 				<configuration>
 					<url>http://localhost:8085/manager/text</url>
 					<server>tomcat7-maven-plugin</server>
-					<path>/${project.artifactId}</path>
+					<path>/news-service</path>
 				</configuration>
 			</plugin>
 		</plugins>

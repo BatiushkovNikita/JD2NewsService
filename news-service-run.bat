@@ -10,4 +10,5 @@ cd %CATALINA_HOME%/bin/
 call startup.bat
 
 cd /d d:\opt\JD2NewsService\
-call mvn clean tomcat7:redeploy
+call mvn clean install
+call mvn tomcat7:redeploy
