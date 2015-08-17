@@ -6,48 +6,74 @@ import by.news.service.entity.User;
 import by.news.service.services.exception.ServiceException;
 import by.news.service.services.impl.UserServiceImpl;
 import by.news.service.services.interf.UserService;
-import by.news.service.web.command.interf.Command;
-import org.hibernate.Session;
+import by.news.service.web.command.impl.AbstractCommand;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Objects;
+import java.util.ResourceBundle;
 
-public class LoginCommand implements Command {
+public class LoginCommand extends AbstractCommand {
 
-	public String execute(HttpServletRequest request, HttpServletResponse response) {
-		String nextPage = "jsp/login.jsp";
-		if (isValidUser(request)) {
-			nextPage = "Controller?command=news_feed";
-		} else {
-			request.setAttribute("errorLoginInput", "Either the email or password is incorrect. Try again.");
-		}
+    @Override
+    public String execute(HttpServletRequest request, HttpServletResponse response) {
+        String nextPage = ResourceBundle.getBundle("resources").getString("page.login");
+        User user = validate(request);
+        if (user == null) {
+            errorHandling(request);
+            return nextPage;
+        }
+        User authorizedUser = authorizeUser(user);
+        if (authorizedUser == null) {
+            errorHandling(request);
+            return nextPage;
+        }
+        addUserToSession(request, authorizedUser);
+        nextPage = ResourceBundle.getBundle("resources").getString("page.command.news.feed");
+        return nextPage;
+    }
 
-		return nextPage;
-	}
+    private User authorizeUser(User user) {
+        User authorizedUser = null;
+        Log.debug("Get DAO");
+        UserDAO userDAO = UserDAOImpl.getInstance();
+        Log.debug("Get Service");
+        UserService userService = UserServiceImpl.getInstance();
+        Log.debug("Dependency injection");
+        userService.setUserDAO(userDAO);
+        try {
+            Log.debug("Authorizing user");
+            authorizedUser = userService.authorizeUser(user);
+        } catch (ServiceException e) {
+            Log.error("Cannot authorize user", e);
+        }
+        Log.debug("Authentication successful");
+        return authorizedUser;
+    }
 
-	private boolean isValidUser(HttpServletRequest request) {
-		boolean isValide = false;
-		String email = request.getParameter("email");
-		String password = request.getParameter("password");
-		if (Objects.equals(email, "") || Objects.equals(password, "")) {
-			return false;
-		}
-		UserDAO userDAO = UserDAOImpl.getInstance();
-		UserService userService = UserServiceImpl.getInstance();
-		userService.setUserDAO(userDAO);
-		User user = null;
-		try {
-			user = userService.authorizeUser(new User(email, password));
-		} catch (ServiceException e) {
-			e.printStackTrace();
-		}
-		if (user != null) {
-			isValide = true;
-            HttpSession session = request.getSession();
-            session.setAttribute("user", user.getUserID());
-		}
-		return isValide;
-	}
+    private User validate(HttpServletRequest request) {
+        User user = null;
+        Log.debug("Checking valid input");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        if (Objects.equals(email, "") || Objects.equals(password, "")) {
+            Log.debug("Input not valid. Empty form.");
+        } else {
+            user = new User(email, password);
+        }
+        return user;
+    }
+
+    private void errorHandling(HttpServletRequest request) {
+        Log.warn("Wrong or empty input password and/or login");
+        request.setAttribute(
+                ResourceBundle.getBundle("resources").getString("param.error.login.input"),
+                ResourceBundle.getBundle("content").getString("error.login.input.message"));
+    }
+
+    private void addUserToSession(HttpServletRequest request, User user) {
+        HttpSession session = request.getSession();
+        session.setAttribute("userID", user.getUserID());
+    }
 }
