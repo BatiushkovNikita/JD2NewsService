@@ -1,3 +1,5 @@
+USE news_service
+
 INSERT INTO users (email, password, first_name, last_name) VALUES
   ('aaa@gmail.com', MD5('pass'), 'Sergey', 'Katabin');
 INSERT INTO users (email, password, first_name, last_name) VALUES

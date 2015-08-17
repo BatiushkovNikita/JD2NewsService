@@ -39,6 +39,7 @@
 					<path>/${project.artifactId}</path>
 				</configuration>
 			</plugin>
+			
 		</plugins>
 	</build>
 
