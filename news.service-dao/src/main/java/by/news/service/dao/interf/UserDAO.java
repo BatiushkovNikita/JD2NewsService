@@ -9,5 +9,5 @@ import by.news.service.entity.User;
 public interface UserDAO extends GenericDAO<User, Integer> {
 	User getUserByEmailAndPassword(String email, String password) throws DAOException;
 	
-	List<Role> getUserRoles(int user_id) throws DAOException;
+	List<Role> getUserRoles(int userId) throws DAOException;
 }

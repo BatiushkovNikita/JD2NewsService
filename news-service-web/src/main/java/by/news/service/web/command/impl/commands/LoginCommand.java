@@ -24,7 +24,12 @@ public class LoginCommand extends AbstractCommand {
             errorHandling(request);
             return nextPage;
         }
-        User authorizedUser = authorizeUser(user);
+        User authorizedUser = null;
+        try {
+            authorizedUser = authorizeUser(user);
+        } catch (ServiceException e) {
+            errorHandling(request, "Cannot authorize user", e);
+        }
         if (authorizedUser == null) {
             errorHandling(request);
             return nextPage;
@@ -34,20 +39,16 @@ public class LoginCommand extends AbstractCommand {
         return nextPage;
     }
 
-    private User authorizeUser(User user) {
-        User authorizedUser = null;
+    private User authorizeUser(User user) throws ServiceException {
+        User authorizedUser;
         Log.debug("Get DAO");
         UserDAO userDAO = UserDAOImpl.getInstance();
         Log.debug("Get Service");
         UserService userService = UserServiceImpl.getInstance();
         Log.debug("Dependency injection");
         userService.setUserDAO(userDAO);
-        try {
-            Log.debug("Authorizing user");
-            authorizedUser = userService.authorizeUser(user);
-        } catch (ServiceException e) {
-            Log.error("Cannot authorize user", e);
-        }
+        Log.debug("Authorizing user");
+        authorizedUser = userService.authorizeUser(user);
         Log.debug("Authentication successful");
         return authorizedUser;
     }

@@ -25,18 +25,24 @@ public class RegistrationCommand extends AbstractCommand {
             errorHandling(request);
             return nextPage;
         }
-        int userID = registerUser(user);
+        Log.debug("Registering user");
+        int userID = 0;
+        try {
+            userID = registerUser(user);
+        } catch (ServiceException e) {
+            errorHandling(request, "Cannot register user", e);
+        }
         if (userID == 0) {
             errorHandling(request);
             return nextPage;
         }
+        Log.debug("Registration successful");
         addUserToSession(request, userID);
         nextPage = ResourceBundle.getBundle("resources").getString("page.command.news.feed");
         return nextPage;
     }
 
-    private int registerUser(User user) {
-        int userID = 0;
+    private int registerUser(User user) throws ServiceException {
         Log.debug("Get DAO");
         AbstractDAO<User, Integer> userDAO = UserDAOImpl.getInstance();
         Log.debug("Get Service");
@@ -45,15 +51,7 @@ public class RegistrationCommand extends AbstractCommand {
         userDAO.setConnection(connection);
         Log.debug("Dependency injection");
         userService.setUserGenericDAO(userDAO);
-        try {
-            Log.debug("Registering user");
-            userID = userService.registerUser(user);
-        } catch (ServiceException e) {
-            Log.error("Cannot register user", e);
-            e.printStackTrace();
-        }
-        Log.debug("Registration successful");
-        return userID;
+        return  userService.registerUser(user);
     }
 
     private User validate(HttpServletRequest request) {

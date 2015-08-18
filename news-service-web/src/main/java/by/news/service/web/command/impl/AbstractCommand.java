@@ -19,6 +19,11 @@ public abstract class AbstractCommand implements Command {
 
     public boolean isUserLoggedIn(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        return  Objects.equals(session.getAttribute("userID"), null);
+        return Objects.equals(session.getAttribute("userID"), null);
+    }
+
+    protected void errorHandling(HttpServletRequest request, String message, Throwable cause) {
+        request.getSession().getId();
+        Log.error("In session: " + request.getSession().getId() + " " + message + " " + cause);
     }
 }

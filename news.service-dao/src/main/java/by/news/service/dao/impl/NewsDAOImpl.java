@@ -44,7 +44,6 @@ public class NewsDAOImpl extends AbstractDAO<News, Integer> {
 
 	@Override
 	public void pStatementForInsert(PreparedStatement pStatement, News news) {
-		/*pStatementSetFields(pStatement, news);*/
         try {
             pStatement.setString(1, news.getTopic());
             pStatement.setString(2, news.getPublicationDate());

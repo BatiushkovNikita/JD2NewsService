@@ -15,7 +15,6 @@ import by.news.service.services.interf.NewsService;
 public class NewsServiceImpl implements NewsService {
 	private static volatile NewsServiceImpl instance;
 	private GenericDAO<News, Integer> newsDAO;
-	public static Logger Log = LogManager.getLogger(AbstractDAO.class.getName());
 	
 	private NewsServiceImpl() {
 		
@@ -28,6 +27,7 @@ public class NewsServiceImpl implements NewsService {
 		return instance;
 	}
 
+    @Override
 	public int addNews(News news) throws ServiceException {
 		Log.info("Adding News to news feed");
 		int key = 0;
@@ -41,6 +41,7 @@ public class NewsServiceImpl implements NewsService {
 		return key;
 	}
 
+    @Override
 	public void deleteNews(int id) throws ServiceException {
 		Log.info("Deleting News by id: " + id);
 		try {
@@ -52,6 +53,7 @@ public class NewsServiceImpl implements NewsService {
 		Log.info("News with id: " + id + " was deleted");
 	}
 
+    @Override
 	public void updateNews(News news) throws ServiceException {
 		Log.info("Updating News with id " + news.getNewsID());
 		String publicationDate = Utills.getCurrentDate();
@@ -65,6 +67,7 @@ public class NewsServiceImpl implements NewsService {
 		Log.info("News with id " + news.getNewsID() + " was updated");
 	}
 
+    @Override
 	public List<News> getNewsFeed() throws ServiceException {
 		Log.info("Getting news feed");
 		List<News> newsFeed;
@@ -78,6 +81,7 @@ public class NewsServiceImpl implements NewsService {
 		return newsFeed;
 	}
 
+    @Override
 	public News getNews(int id) throws ServiceException {
 		Log.info("Getting News by id: " + id);
 		News news = null;
@@ -90,7 +94,8 @@ public class NewsServiceImpl implements NewsService {
 		Log.info("Returning News with id: " + id);
 		return news;
 	}
-	
+
+    @Override
 	public GenericDAO<News, Integer> getNewsDAO() throws ServiceException {
 		if (newsDAO == null) {
 			Log.error("Cannot configured NewsService. NewsDAO is not submitted.");

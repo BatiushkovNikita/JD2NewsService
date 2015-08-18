@@ -1,6 +1,6 @@
 CREATE TABLE news
 (
-    id INT PRIMARY KEY NOT NULL,
+    id INT PRIMARY KEY NOT NULL DEFAULT 0,
     topic VARCHAR(255),
     publication_date DATETIME,
     news_text LONGTEXT,
@@ -8,12 +8,12 @@ CREATE TABLE news
 );
 CREATE TABLE roles
 (
-    id INT PRIMARY KEY NOT NULL,
+    id INT PRIMARY KEY NOT NULL DEFAULT 0,
     role_name VARCHAR(50)
 );
 CREATE TABLE users
 (
-    id INT PRIMARY KEY NOT NULL,
+    id INT PRIMARY KEY NOT NULL DEFAULT 0,
     email VARCHAR(50),
     password VARCHAR(50),
     first_name VARCHAR(50),

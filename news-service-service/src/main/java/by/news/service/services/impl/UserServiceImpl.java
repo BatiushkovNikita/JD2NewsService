@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService {
 
 	private GenericDAO<User, Integer> userGenericDAO;
 	private UserDAO userDAO;
-	public static Logger Log = LogManager.getLogger(AbstractDAO.class.getName());
+
 
 	/*
 	 * public UserServiceImpl(GenericDAO<User, Integer> userGenericDAO) {
@@ -41,6 +41,7 @@ public class UserServiceImpl implements UserService {
 		
 	}
 
+    @Override
 	public int registerUser(User user) throws ServiceException {
 		Log.info("Registering user");
 		int id = 0;
@@ -54,6 +55,7 @@ public class UserServiceImpl implements UserService {
 		return id;
 	}
 
+    @Override
 	public void updateUser(User user) throws ServiceException {
 		Log.info("Updating user profile");
 		try {
@@ -65,6 +67,7 @@ public class UserServiceImpl implements UserService {
 		Log.info("User profile was updated");
 	}
 
+    @Override
 	public List<User> getAllUsers() throws ServiceException {
 		Log.info("Getting all users");
 		List<User> users;
@@ -78,6 +81,7 @@ public class UserServiceImpl implements UserService {
 		return users;
 	}
 
+    @Override
 	public List<Role> getUserRoles(int user_id) throws ServiceException {
 		Log.info("Getting user roles");
 		List<Role> roles;
@@ -91,6 +95,7 @@ public class UserServiceImpl implements UserService {
 		return roles;
 	}
 
+    @Override
 	public User authorizeUser(User user) throws ServiceException {
 		Log.info("Authorizing user");
 		User authorizedUser;

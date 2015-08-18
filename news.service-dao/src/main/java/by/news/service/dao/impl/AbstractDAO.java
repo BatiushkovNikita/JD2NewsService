@@ -2,6 +2,7 @@ package by.news.service.dao.impl;
 
 import by.news.service.dao.exception.DAOException;
 import by.news.service.dao.interf.GenericDAO;
+import by.news.service.dao.pool.ConnectionPool;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -11,9 +12,9 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public abstract class AbstractDAO<T, PK> implements GenericDAO<T, PK> {
-	public static final ResourceBundle QUERIES = ResourceBundle.getBundle("queries");
+	public final ResourceBundle QUERIES = ResourceBundle.getBundle("queries");
 
-	public static Logger Log = LogManager.getLogger(AbstractDAO.class.getName());
+	public Logger Log = LogManager.getLogger(AbstractDAO.class.getName());
 	
 	private Connection connection;
 
@@ -34,20 +35,17 @@ public abstract class AbstractDAO<T, PK> implements GenericDAO<T, PK> {
 	public abstract PK parseResultSetKey(ResultSet resultSet) throws DAOException;
 
 	public PK create(T object) throws DAOException {
-		Log.info("Creating new " + object);
+		Log.debug("Creating new " + object);
 		PK key = null;
 		String query = getInsertQuery();
-		Connection connection = null;
 		PreparedStatement pStatement = null;
 		ResultSet resultSet = null;
 		try {
-			//Log.trace("Open connection");
-			//connection = ConnectionPool.getInstance().getConnection();
-			Log.trace("Create prepared statement");
+			Log.debug("Create prepared statement");
 			pStatement = getConnection().prepareStatement(query);
 			pStatementForInsert(pStatement, object);
 			pStatement.executeUpdate();
-			Log.trace("Getting result set");
+			Log.debug("Getting result set");
 			resultSet = pStatement.executeQuery(QUERIES.getString("select.last.insert.id.query"));
 			key = parseResultSetKey(resultSet);
 		} catch (SQLException e) {
@@ -56,24 +54,21 @@ public abstract class AbstractDAO<T, PK> implements GenericDAO<T, PK> {
 		} finally {
 			closeResources(connection, pStatement, resultSet);
 		}
-		Log.info(object + " was created");
+		Log.debug(object + " was created");
 		return key;
 	}
 
 	public T getByPK(PK key) throws DAOException {
-		Log.info("Getting object by key: " + key);
+		Log.debug("Getting object by key: " + key);
 		List<T> entities = new ArrayList<T>();
-		String query = QUERIES.getString("get.all.query.news");
-		//Connection connection = null;
+		String query = getSelectQuery();
 		PreparedStatement pStatement = null;
 		ResultSet resultSet = null;
 		try {
-			Log.trace("Open connection");
-			//connection = ConnectionPool.getInstance().getConnection();
-			Log.trace("Create prepared statement");
+			Log.debug("Create prepared statement");
 			pStatement = getConnection().prepareStatement(query);
 			pStatement.setObject(1, key);
-			Log.trace("Getting result set");
+			Log.debug("Getting result set");
 			resultSet = pStatement.executeQuery();
 			entities = parseResultSet(resultSet);
 		} catch (SQLException e) {
@@ -91,19 +86,16 @@ public abstract class AbstractDAO<T, PK> implements GenericDAO<T, PK> {
 	}
 
 	public void update(T object) throws DAOException {
-		Log.info("Updating " + object);
+		Log.debug("Updating " + object);
 		String query = getUpdateQuery();
-		//Connection connection = null;
 		PreparedStatement pStatement = null;
 		try {
-			Log.trace("Open connection");
-			//connection = ConnectionPool.getInstance().getConnection();
-			Log.trace("Create prepared statement");
+			Log.debug("Create prepared statement");
 			pStatement = getConnection().prepareStatement(query);
 			pStatementForUpdate(pStatement, object);
 			int count = pStatement.executeUpdate();
 			if (count == 1) {
-				Log.info("Object: " + object + " was updated");
+				Log.debug("Object: " + object + " was updated");
 			} else if (count > 1) {
 				Log.warn("On update modify more then 1 record: " + count);
 			} else {
@@ -118,19 +110,17 @@ public abstract class AbstractDAO<T, PK> implements GenericDAO<T, PK> {
 	}
 
 	public void delete(PK key) throws DAOException {
-		Log.info("Deleting object by key: " + key);
+		Log.debug("Deleting object by key: " + key);
 		String query = getDeleteQuery();
-		//Connection connection = null;
+
 		PreparedStatement pStatement = null;
 		try {
-			//Log.trace("Open connection");
-			//connection = ConnectionPool.getInstance().getConnection();
-			Log.trace("Create prepared statement");
+			Log.debug("Create prepared statement");
 			pStatement = getConnection().prepareStatement(query);
 			pStatement.setObject(1, key);
 			int count = pStatement.executeUpdate();
 			if (count == 1) {
-				Log.info("Object with key: " + key + " was deleted");
+				Log.debug("Object with key: " + key + " was deleted");
 			} else if (count > 1) {
 				Log.warn("On delete modify more then 1 record: " + count);
 			} else {
@@ -145,24 +135,21 @@ public abstract class AbstractDAO<T, PK> implements GenericDAO<T, PK> {
 	}
 
 	public List<T> getAll() throws DAOException {
-		Log.info("Getting list of objects");
+		Log.debug("Getting list of objects");
 		List<T> entities = new ArrayList<T>();
 		String query = QUERIES.getString("get.all.query.news");
-		//Connection connection = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
 		try {
-			Log.trace("Open connection");
-			//connection = ConnectionPool.getInstance().getConnection();
-			Log.trace("Create statement");
+			Log.debug("Create statement");
 			statement = getConnection().createStatement();
-			Log.trace("Getting result set");
+			Log.debug("Getting result set");
 			resultSet = statement.executeQuery(query);
 			entities = parseResultSet(resultSet);
 			if (entities.size() == 0) {
 				Log.warn("Object not found");
 			} else {
-				Log.info("Returning list of objects");
+				Log.debug("Returning list of objects");
 			}
 		} catch (SQLException e) {
 			Log.error("Cannot get list of objects", e);
@@ -173,7 +160,11 @@ public abstract class AbstractDAO<T, PK> implements GenericDAO<T, PK> {
 		return entities;
 	}
 	
-	public Connection getConnection() {
+	public Connection getConnection() throws DAOException {
+        if (connection == null) {
+            Log.error("Cannot configured DAO. Connection is not submitted.");
+            throw new DAOException("Cannot configured DAO. Connection is not submitted.");
+        }
 		return connection;
 	}
 
@@ -185,7 +176,7 @@ public abstract class AbstractDAO<T, PK> implements GenericDAO<T, PK> {
 		if (resultSet != null) {
 			try {
 				resultSet.close();
-				Log.trace("ResultSet closed");
+				Log.debug("ResultSet closed");
 			} catch (SQLException e) {
 				Log.warn("Cannot close ResultSet", e);
 			}
@@ -193,7 +184,7 @@ public abstract class AbstractDAO<T, PK> implements GenericDAO<T, PK> {
 		if (statement != null) {
 			try {
 				statement.close();
-				Log.trace("Statement closed");
+				Log.debug("Statement closed");
 			} catch (SQLException e) {
 				Log.warn("Cannot close Statement", e);
 			}
@@ -201,7 +192,7 @@ public abstract class AbstractDAO<T, PK> implements GenericDAO<T, PK> {
 		if (connection != null) {
 			try {
 				connection.close();
-				Log.trace("Connection closed");
+				Log.debug("Connection closed");
 			} catch (SQLException e) {
 				Log.warn("Cannot close Connection", e);
 			}

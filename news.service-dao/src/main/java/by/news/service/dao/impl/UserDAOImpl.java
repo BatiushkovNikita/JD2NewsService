@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDAOImpl extends AbstractDAO<User, Integer>implements UserDAO {
-	public static Logger Log = LogManager.getLogger(AbstractDAO.class.getName());
 	private static volatile UserDAOImpl instance;
 
 	private UserDAOImpl() {
@@ -79,6 +78,7 @@ public class UserDAOImpl extends AbstractDAO<User, Integer>implements UserDAO {
 		}
 	}
 
+    @Override
 	public List<User> parseResultSet(ResultSet resultSet) throws DAOException {
 		List<User> users = new ArrayList<User>();
 		try {

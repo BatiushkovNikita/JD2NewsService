@@ -11,8 +11,8 @@
 			<div class="container-fluid">
 				<div>
 					<ul class="nav navbar-nav">
-						<li><a href="../Controller?command=edit_news"><fmt:message key="frag.news.manager.edit" /></a></li>
-						<li><a href="../Controller?command=delete_news"><fmt:message key="frag.news.manager.delete" /></a></li>
+						<li><a href="${pageContext.request.pathInfo}?command=edit_news"><fmt:message key="frag.news.manager.edit" /></a></li>
+						<li><a href="${pageContext.request.pathInfo}?command=delete_news"><fmt:message key="frag.news.manager.delete" /></a></li>
 					</ul>
 				</div>
 			</div>
