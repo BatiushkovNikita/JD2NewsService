@@ -41,8 +41,7 @@ public class UserServiceImpl implements UserService {
 		
 	}
 
-    @Override
-	public int registerUser(User user) throws ServiceException {
+    public int registerUser(User user) throws ServiceException {
 		Log.info("Registering user");
 		int id = 0;
 		try {
@@ -55,8 +54,7 @@ public class UserServiceImpl implements UserService {
 		return id;
 	}
 
-    @Override
-	public void updateUser(User user) throws ServiceException {
+    public void updateUser(User user) throws ServiceException {
 		Log.info("Updating user profile");
 		try {
 			userGenericDAO.update(user);
@@ -67,8 +65,7 @@ public class UserServiceImpl implements UserService {
 		Log.info("User profile was updated");
 	}
 
-    @Override
-	public List<User> getAllUsers() throws ServiceException {
+    public List<User> getAllUsers() throws ServiceException {
 		Log.info("Getting all users");
 		List<User> users;
 		try {
@@ -81,8 +78,7 @@ public class UserServiceImpl implements UserService {
 		return users;
 	}
 
-    @Override
-	public List<Role> getUserRoles(int user_id) throws ServiceException {
+    public List<Role> getUserRoles(int user_id) throws ServiceException {
 		Log.info("Getting user roles");
 		List<Role> roles;
 		try {
@@ -95,8 +91,7 @@ public class UserServiceImpl implements UserService {
 		return roles;
 	}
 
-    @Override
-	public User authorizeUser(User user) throws ServiceException {
+    public User authorizeUser(User user) throws ServiceException {
 		Log.info("Authorizing user");
 		User authorizedUser;
 		try {

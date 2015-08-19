@@ -27,8 +27,7 @@ public class NewsServiceImpl implements NewsService {
 		return instance;
 	}
 
-    @Override
-	public int addNews(News news) throws ServiceException {
+    public int addNews(News news) throws ServiceException {
 		Log.info("Adding News to news feed");
 		int key = 0;
 		try {
@@ -41,8 +40,7 @@ public class NewsServiceImpl implements NewsService {
 		return key;
 	}
 
-    @Override
-	public void deleteNews(int id) throws ServiceException {
+    public void deleteNews(int id) throws ServiceException {
 		Log.info("Deleting News by id: " + id);
 		try {
 			getNewsDAO().delete(id);
@@ -53,8 +51,7 @@ public class NewsServiceImpl implements NewsService {
 		Log.info("News with id: " + id + " was deleted");
 	}
 
-    @Override
-	public void updateNews(News news) throws ServiceException {
+    public void updateNews(News news) throws ServiceException {
 		Log.info("Updating News with id " + news.getNewsID());
 		String publicationDate = Utills.getCurrentDate();
 		news.setPublicationDate(publicationDate);
@@ -67,8 +64,7 @@ public class NewsServiceImpl implements NewsService {
 		Log.info("News with id " + news.getNewsID() + " was updated");
 	}
 
-    @Override
-	public List<News> getNewsFeed() throws ServiceException {
+    public List<News> getNewsFeed() throws ServiceException {
 		Log.info("Getting news feed");
 		List<News> newsFeed;
 		try {
@@ -81,8 +77,7 @@ public class NewsServiceImpl implements NewsService {
 		return newsFeed;
 	}
 
-    @Override
-	public News getNews(int id) throws ServiceException {
+    public News getNews(int id) throws ServiceException {
 		Log.info("Getting News by id: " + id);
 		News news = null;
 		try {
@@ -95,8 +90,7 @@ public class NewsServiceImpl implements NewsService {
 		return news;
 	}
 
-    @Override
-	public GenericDAO<News, Integer> getNewsDAO() throws ServiceException {
+    public GenericDAO<News, Integer> getNewsDAO() throws ServiceException {
 		if (newsDAO == null) {
 			Log.error("Cannot configured NewsService. NewsDAO is not submitted.");
 			throw new ServiceException("Cannot configured NewsService. NewsDAO is not submitted.");
