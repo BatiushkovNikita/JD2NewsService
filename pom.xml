@@ -11,6 +11,8 @@
 		<module>news-service-web</module>
 		<module>news-service-service</module>
 		<module>news-service-script</module>
+		<module>news-service-to</module>
+		<module>news-service-daoh</module>
 	</modules>
 
 	<build>
@@ -39,45 +41,50 @@
 					<path>/${project.artifactId}</path>
 				</configuration>
 			</plugin>
-			
+
 		</plugins>
 	</build>
 
 	<dependencyManagement>
 		<dependencies>
+		
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-entitymanager</artifactId>
+				<version>4.3.11.Final</version>
+			</dependency>
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-core</artifactId>
+				<version>4.3.11.Final</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-log4j12</artifactId>
+				<version>1.7.12</version>
+			</dependency>
+
 
 			<dependency>
 				<groupId>javax.servlet</groupId>
 				<artifactId>javax.servlet-api</artifactId>
 				<version>3.0.1</version>
 			</dependency>
-
 			<dependency>
 				<groupId>javax.servlet</groupId>
 				<artifactId>jstl</artifactId>
 				<version>1.2</version>
 			</dependency>
-
 			<dependency>
 				<groupId>javax.servlet.jsp</groupId>
 				<artifactId>jsp-api</artifactId>
 				<version>2.2</version>
 			</dependency>
-
-			<!--
-			<dependency>
-				<groupId>javax.servlet</groupId>
-				<artifactId>jsp-api</artifactId>
-				<version>2.0</version>
-			</dependency>
-			-->
-
 			<dependency>
 				<groupId>org.unitils</groupId>
 				<artifactId>unitils-dbmaintainer</artifactId>
 				<version>3.4.2</version>
 			</dependency>
-
 			<dependency>
 				<groupId>org.unitils</groupId>
 				<artifactId>unitils-database</artifactId>
@@ -110,27 +117,10 @@
 				<version>2.8.1</version>
 			</dependency>
 			<dependency>
-				<groupId>org.hamcrest</groupId>
-				<artifactId>hamcrest-core</artifactId>
-				<version>1.3</version>
-			</dependency>
-			<dependency>
-				<groupId>org.hamcrest</groupId>
-				<artifactId>hamcrest-library</artifactId>
-				<version>1.3</version>
-			</dependency>
-			<dependency>
 				<groupId>org.jmock</groupId>
 				<artifactId>jmock-junit4</artifactId>
 				<version>2.8.1</version>
 			</dependency>
-			<!--
-			<dependency>
-				<groupId>log4j</groupId>
-				<artifactId>log4j</artifactId>
-				<version>1.2.17</version>
-			</dependency>
-			-->
 			<dependency>
 				<groupId>org.apache.logging.log4j</groupId>
 				<artifactId>log4j-api</artifactId>
