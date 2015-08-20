@@ -1,9 +1,8 @@
 package by.news.service.daoh.impl;
 
-import org.hibernate.Session;
-
 import by.news.service.daoh.util.HibernateUtil;
 import by.news.service.to.User;
+import org.hibernate.Session;
 
 public class UserDaoImpl {
 
@@ -13,7 +12,8 @@ public class UserDaoImpl {
 		session = HibernateUtil.getSessionFactory().openSession();
 		session.beginTransaction();
 		user = (User) session.get(User.class, id);
-		session.getTransaction().commit();
+		//session.getTransaction().commit();
+        //session.close();
 		return user;
 	}
 

@@ -2,30 +2,25 @@ package by.news.service.to;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Entity
-@Table(name = "users")
+/*@Entity
+@Table(name = "users")*/
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@Column(name = "id")
+/*	@Id
+	@Column(name = "id")*/
 	private int userID;
 
-	@Column(name = "email")
+	//@Column(name = "email")
 	private String email;
 
-	@Column(name = "password")
+	//@Column(name = "password")
 	private String password;
 
-	@Column(name = "first_name")
+	//@Column(name = "first_name")
 	private String firstName;
 
-	@Column(name = "last_name")
+	//@Column(name = "last_name")
 	private String lastName;
 
 	public User() {
