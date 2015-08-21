@@ -10,9 +10,9 @@ public interface GenericDao<T, PK> {
 
     T getByPK(PK key) throws DaoException;
 
-    int update(T object) throws DaoException;
+    boolean update(T object) throws DaoException;
 
-    int delete(PK key) throws DaoException;
+    boolean delete(PK key) throws DaoException;
 
     List<T> getAll() throws DaoException;
 }

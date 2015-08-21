@@ -11,15 +11,14 @@ import org.hibernate.cfg.Configuration;
 
 public final class HibernateUtil {
 	private static SessionFactory sessionFactory;
-	//private static StandardServiceRegistryBuilder serviceRegistry;
 	private static Logger Log = LogManager.getLogger(HibernateUtil.class.getName());
 
 	private HibernateUtil() {
-		getSessionFactory();
+
 	}
 
 	public static SessionFactory getSessionFactory() {
-		Log.debug("Creating SessionFactory");
+		Log.info("Creating SessionFactory");
 		Configuration configuration;
 		try {
 			configuration = new Configuration();
@@ -34,12 +33,12 @@ public final class HibernateUtil {
 		serviceRegistry.applySettings(configuration.getProperties());
 		Log.debug("Creating SessionFactory");
 		sessionFactory = configuration.buildSessionFactory(serviceRegistry.build());
-		Log.debug("Returning SessionFactory");
+		Log.info("Returning SessionFactory");
 		return sessionFactory;
 	}
 
-	public Session getSession() {
-		Log.debug("Returning ORM Session");
+	public static Session getSession() {
+		Log.info("Returning ORM Session");
 		return sessionFactory.openSession();
 	}
 
