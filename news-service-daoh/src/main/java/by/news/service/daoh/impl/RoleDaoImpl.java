@@ -1,7 +1,7 @@
 package by.news.service.daoh.impl;
 
 
-import by.news.service.to.Role;
+import by.news.service.daoh.pojos.Role;
 
 public class RoleDaoImpl extends AbstractDao<Role, Integer>{
 

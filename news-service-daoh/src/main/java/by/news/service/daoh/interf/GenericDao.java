@@ -1,6 +1,7 @@
 package by.news.service.daoh.interf;
 
 import by.news.service.daoh.exception.DaoException;
+import org.hibernate.SessionFactory;
 
 import java.util.List;
 
@@ -15,4 +16,8 @@ public interface GenericDao<T, PK> {
     boolean delete(PK key) throws DaoException;
 
     List<T> getAll() throws DaoException;
+
+    SessionFactory getSessionFactory();
+
+    void setSessionFactory(SessionFactory sessionFactory);
 }

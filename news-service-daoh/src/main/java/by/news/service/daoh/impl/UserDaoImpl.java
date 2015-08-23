@@ -1,7 +1,7 @@
 package by.news.service.daoh.impl;
 
-import by.news.service.to.User;
 
+import by.news.service.daoh.pojos.User;
 
 public class UserDaoImpl extends AbstractDao<User, Integer>{
 

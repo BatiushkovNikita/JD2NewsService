@@ -1,4 +1,4 @@
-package by.news.service.to;
+package by.news.service.daoh.pojos;
 
 import java.io.Serializable;
 

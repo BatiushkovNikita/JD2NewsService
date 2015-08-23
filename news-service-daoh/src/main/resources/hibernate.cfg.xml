@@ -11,8 +11,9 @@
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="hibernate.connection.pool_size">10</property>
 		<property name="hibernate.show_sql">true</property>
-		<mapping resource="User.hbm.xml"/>
-		<!-- <property name="hibernate.hbm2ddl.auto">validate</property> -->
+		<mapping resource="user.hbm.xml"/>
+        <!--<mapping class="by.news.service.to.News"/>-->
+		<!--<property name="hibernate.hbm2ddl.auto">validate</property>-->
 	</session-factory>
 </hibernate-configuration>
 

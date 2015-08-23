@@ -1,31 +1,27 @@
-package by.news.service.to;
+package by.news.service.daoh.pojos;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Entity
-@Table(name = "news")
+/*@Entity
+@Table(name = "news")*/
 public class News implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
+/*	@Id
 	@Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)*/
 	private int newsID;
 
-	@Column(name = "topic")
+	//@Column(name = "topic")
 	private String topic;
 
-	@Column(name = "publication_date")
+	//@Column(name = "publication_date")
 	private String publicationDate;
 
-	@Column(name = "news_text")
+	//@Column(name = "news_text")
 	private String newsText;
 
-	@Column(name = "user_id")
+	//@Column(name = "user_id")
 	private int userID;
 
 	public News() {

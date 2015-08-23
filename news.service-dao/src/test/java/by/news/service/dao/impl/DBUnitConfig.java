@@ -1,12 +1,5 @@
 package by.news.service.dao.impl;
 
-import java.io.FileInputStream;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-
-import javax.sql.DataSource;
-
 import org.dbunit.DBTestCase;
 import org.dbunit.DatabaseUnitException;
 import org.dbunit.PropertiesBasedJdbcDatabaseTester;
@@ -14,11 +7,11 @@ import org.dbunit.database.DatabaseConnection;
 import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.unitils.UnitilsJUnit4TestClassRunner;
-import org.unitils.database.annotations.TestDataSource;
-import org.unitils.dbunit.annotation.DataSet;
+
+import java.io.FileInputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class DBUnitConfig extends DBTestCase {
 

@@ -3,11 +3,11 @@ package by.news.service.daoh.impl;
 
 import by.news.service.daoh.exception.DaoException;
 import by.news.service.daoh.interf.GenericDao;
-import by.news.service.daoh.util.HibernateUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import java.io.Serializable;
@@ -15,6 +15,19 @@ import java.util.List;
 
 public abstract class AbstractDao<T, PK extends Serializable> implements GenericDao<T, PK> {
     private Logger Log = LogManager.getLogger(AbstractDao.class.getName());
+    private SessionFactory sessionFactory;
+
+    public SessionFactory getSessionFactory() {
+        if (sessionFactory == null) {
+            Log.error("Cannot configured DAO. SessionFactory is not submitted");
+            throw new DaoException("Cannot configured DAO. SessionFactory is not submitted");
+        }
+        return sessionFactory;
+    }
+
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 
     protected abstract Class getPersistentClass();
 
@@ -26,7 +39,7 @@ public abstract class AbstractDao<T, PK extends Serializable> implements Generic
         Transaction transaction = null;
         try {
             Log.debug("Opening session");
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = getSessionFactory().openSession();
             Log.debug("Beginning transaction");
             transaction = session.beginTransaction();
             Log.debug("Saving object: " + object.getClass().getSimpleName());
@@ -55,7 +68,7 @@ public abstract class AbstractDao<T, PK extends Serializable> implements Generic
         Transaction transaction = null;
         try {
             Log.debug("Opening session");
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = getSessionFactory().openSession();
             Log.debug("Beginning transaction");
             transaction = session.beginTransaction();
             Log.debug("Getting object");
@@ -82,7 +95,7 @@ public abstract class AbstractDao<T, PK extends Serializable> implements Generic
         Transaction transaction = null;
         try {
             Log.debug("Opening session");
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = getSessionFactory().openSession();
             Log.debug("Beginning transaction");
             transaction = session.beginTransaction();
             Log.debug("Updating object: " + object.getClass().getSimpleName());
@@ -109,7 +122,7 @@ public abstract class AbstractDao<T, PK extends Serializable> implements Generic
         Transaction transaction = null;
         try {
             Log.debug("Opening session");
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = getSessionFactory().openSession();
             Log.debug("Beginning transaction");
             transaction = session.beginTransaction();
             Log.debug("Getting object by key");
@@ -138,7 +151,7 @@ public abstract class AbstractDao<T, PK extends Serializable> implements Generic
         Session session = null;
         try {
             Log.debug("Opening session");
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = getSessionFactory().openSession();
             Log.debug("Getting objects from session");
             list = session.createCriteria(getPersistentClass()).list();
         } catch (HibernateException e) {

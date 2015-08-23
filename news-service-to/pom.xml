@@ -7,16 +7,4 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>news-service-to</artifactId>
-	<dependencies>
-
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-		</dependency>
-		
-	</dependencies>
 </project>
