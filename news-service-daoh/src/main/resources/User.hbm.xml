@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Configuration DTD//EN"
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<hibernate-mapping package="by.news.service.to">
+<hibernate-mapping package="by.news.service.daoh.pojos">
     <class name="User" table="users">
         <id name="userID" column="id" type="int">
             <generator class="increment"/>
