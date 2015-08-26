@@ -5,10 +5,13 @@
 		<xsd:complexType>
 			<xsd:choice minOccurs="0" maxOccurs="unbounded">
 				<xsd:element name="dbmaintain_scripts" type="dflt:dbmaintain_scripts__type" />
-				<xsd:element name="users" type="dflt:users__type" />
-				<xsd:element name="users_roles" type="dflt:users_roles__type" />
+				<xsd:element name="user_role" type="dflt:user_role__type" />
+				<xsd:element name="user_details" type="dflt:user_details__type" />
 				<xsd:element name="news" type="dflt:news__type" />
-				<xsd:element name="roles" type="dflt:roles__type" />
+				<xsd:element name="tag" type="dflt:tag__type" />
+				<xsd:element name="news_tag" type="dflt:news_tag__type" />
+				<xsd:element name="role" type="dflt:role__type" />
+				<xsd:element name="user" type="dflt:user__type" />
 				<xsd:any namespace="news_service_test" />
 			</xsd:choice>
 		</xsd:complexType>

@@ -4,7 +4,6 @@ package by.news.service.daoh;
 import by.news.service.daoh.impl.AbstractDao;
 import by.news.service.daoh.impl.UserDaoImpl;
 import by.news.service.daoh.pojos.User;
-import by.news.service.daoh.util.Hibernate3Util;
 import by.news.service.daoh.util.HibernateUtil;
 import org.hibernate.SessionFactory;
 import org.junit.Before;
@@ -14,7 +13,7 @@ import org.unitils.orm.hibernate.annotation.HibernateSessionFactory;
 
 import static junit.framework.Assert.assertEquals;
 
-@HibernateSessionFactory("test.hibernate.cfg.xml")
+@HibernateSessionFactory("hibernate.cfg.xml")
 public class UserDaoImplTest extends UnitilsJUnit4 {
 
     @HibernateSessionFactory
@@ -26,19 +25,20 @@ public class UserDaoImplTest extends UnitilsJUnit4 {
     public void setUp() {
         userDao = new UserDaoImpl();
         userDao.setSessionFactory(HibernateUtil.INSTANCE.getSessionFactory());
-        //userDao.setSessionFactory(Hibernate3Util.getSessionFactory());
-
     }
+
+/*    @Test
+    public void testMappingToDatabase() {
+        HibernateUnitils.assertMappingWithDatabaseConsistent();
+    }*/
 
     @Test
     public void testGettingUserByKey() {
-        User user = userDao.getByPK(1);
+        User user = userDao.getByPK(111);
         User expectUser = new User();
-        expectUser.setUserID(777);
-        expectUser.setEmail("aaa@gmail.com");
-        expectUser.setPassword("d8578edf8458ce06fbc5bb76a58c5ca4");
-        expectUser.setFirstName("Sergey");
-        expectUser.setLastName("Katabin");
+        expectUser.setUserID(111);
+        expectUser.setEmail("email1");
+        expectUser.setPassword("password1");
         assertEquals(expectUser, user);
     }
 }

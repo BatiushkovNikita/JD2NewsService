@@ -20,17 +20,15 @@ public class Main {
     public static void main(String[] args) {
         System.setProperty("org.jboss.logging.provider", "log4j2");
 
-        User user = get(1);
+        User user = get(222);
         System.out.println(user);
-
-
     }
 
     public static User get(int id) {
         GenericDao<User, Integer> userDao = new UserDaoImpl();
         userDao.setSessionFactory(HibernateUtil.INSTANCE.getSessionFactory());
         //userDao.setSessionFactory(Hibernate3Util.getSessionFactory());
-        return userDao.getByPK(1);
+        return userDao.getByPK(id);
     }
 
     public static void getUsers() {
