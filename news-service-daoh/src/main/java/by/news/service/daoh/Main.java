@@ -1,10 +1,9 @@
 package by.news.service.daoh;
 
-import by.news.service.daoh.impl.DaoFactory;
 import by.news.service.daoh.impl.UserDaoImpl;
 import by.news.service.daoh.interf.GenericDao;
-import by.news.service.daoh.pojos.News;
 import by.news.service.daoh.pojos.User;
+import by.news.service.daoh.util.Hibernate3Util;
 import by.news.service.daoh.util.HibernateUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -20,30 +19,23 @@ public class Main {
 
     public static void main(String[] args) {
         System.setProperty("org.jboss.logging.provider", "log4j2");
-        System.out.println(get(1));
-        User user = new User();
-        System.out.println("Main.main: " + user.getClass().getSimpleName());
 
-
-        //getUsers();
-        delete();
-        News news = new News();
-        news.setTopic("GDHSGDhsgdhsgdhsgh");
-        news.setNewsText("dsdsdsds");
-        news.setPublicationDate("2015-08-17 23:33:29");
-        news.setUserID(1);
-        DaoFactory.NEWS_DAO.getDao().create(news);
+        User user = get(1);
+        System.out.println(user);
 
 
     }
 
-    public static User get(int key) {
+    public static User get(int id) {
         GenericDao<User, Integer> userDao = new UserDaoImpl();
-        return userDao.getByPK(key);
+        userDao.setSessionFactory(HibernateUtil.INSTANCE.getSessionFactory());
+        //userDao.setSessionFactory(Hibernate3Util.getSessionFactory());
+        return userDao.getByPK(1);
     }
 
     public static void getUsers() {
         GenericDao<User, Integer> userDao = new UserDaoImpl();
+        userDao.setSessionFactory(HibernateUtil.INSTANCE.getSessionFactory());
         for (User user : userDao.getAll()) {
             System.out.println(user);
         }
@@ -52,7 +44,7 @@ public class Main {
 
     public static void delete() {
         GenericDao<User, Integer> userDao = new UserDaoImpl();
-        userDao.setSessionFactory(HibernateUtil.getSessionFactory());
+        userDao.setSessionFactory(Hibernate3Util.getSessionFactory());
         userDao.delete(11);
     }
 

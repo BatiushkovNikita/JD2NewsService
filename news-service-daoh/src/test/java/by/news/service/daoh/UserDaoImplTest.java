@@ -1,8 +1,10 @@
 package by.news.service.daoh;
 
+
 import by.news.service.daoh.impl.AbstractDao;
 import by.news.service.daoh.impl.UserDaoImpl;
 import by.news.service.daoh.pojos.User;
+import by.news.service.daoh.util.Hibernate3Util;
 import by.news.service.daoh.util.HibernateUtil;
 import org.hibernate.SessionFactory;
 import org.junit.Before;
@@ -12,7 +14,7 @@ import org.unitils.orm.hibernate.annotation.HibernateSessionFactory;
 
 import static junit.framework.Assert.assertEquals;
 
-@HibernateSessionFactory("hibernate.cfg.xml")
+@HibernateSessionFactory("test.hibernate.cfg.xml")
 public class UserDaoImplTest extends UnitilsJUnit4 {
 
     @HibernateSessionFactory
@@ -23,12 +25,14 @@ public class UserDaoImplTest extends UnitilsJUnit4 {
     @Before
     public void setUp() {
         userDao = new UserDaoImpl();
-        userDao.setSessionFactory(HibernateUtil.getSessionFactory());
+        userDao.setSessionFactory(HibernateUtil.INSTANCE.getSessionFactory());
+        //userDao.setSessionFactory(Hibernate3Util.getSessionFactory());
+
     }
 
     @Test
     public void testGettingUserByKey() {
-        User user = userDao.getByPK(777);
+        User user = userDao.getByPK(1);
         User expectUser = new User();
         expectUser.setUserID(777);
         expectUser.setEmail("aaa@gmail.com");

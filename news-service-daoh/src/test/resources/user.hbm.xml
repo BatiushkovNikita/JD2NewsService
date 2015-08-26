@@ -6,7 +6,6 @@
         <id name="userID" column="id" type="int">
             <generator class="increment"/>
         </id>
-
         <property name="email" column="email" type="java.lang.String"/>
         <property name="password" column="password" type="java.lang.String"/>
         <property name="firstName" column="first_name" type="java.lang.String"/>

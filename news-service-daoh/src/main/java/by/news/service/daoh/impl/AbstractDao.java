@@ -84,7 +84,7 @@ public abstract class AbstractDao<T, PK extends Serializable> implements Generic
         } finally {
             closeSession(session);
         }
-        Log.info("Returning object: " + object.getClass().getSimpleName());
+        Log.info("Returning object");
         return object;
     }
 
