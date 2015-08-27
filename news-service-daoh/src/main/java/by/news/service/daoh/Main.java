@@ -3,6 +3,7 @@ package by.news.service.daoh;
 import by.news.service.daoh.impl.UserDaoImpl;
 import by.news.service.daoh.interf.GenericDao;
 import by.news.service.daoh.pojos.User;
+import by.news.service.daoh.pojos.UserDetail;
 import by.news.service.daoh.util.Hibernate3Util;
 import by.news.service.daoh.util.HibernateUtil;
 import org.apache.logging.log4j.LogManager;
@@ -20,8 +21,31 @@ public class Main {
     public static void main(String[] args) {
         System.setProperty("org.jboss.logging.provider", "log4j2");
 
-        User user = get(222);
-        System.out.println(user);
+        //create();
+        oneToOne();
+    }
+
+    public static void oneToOne() {
+        User user = new User("email1", "pass1");
+        UserDetail userDetail = new UserDetail("firstname1", "lastname1", "phone1");
+
+        GenericDao<User, Integer> userDao = new UserDaoImpl();
+        //GenericDao<UserDetail, Integer> userDetailDao = new UserDetailDaoImpl();
+        userDao.setSessionFactory(HibernateUtil.INSTANCE.getSessionFactory());
+
+        user.setUserDetail(userDetail);
+        userDetail.setUser(user);
+        userDao.create(user);
+
+    }
+
+    public static void create() {
+        GenericDao<User, Integer> userDao = new UserDaoImpl();
+        userDao.setSessionFactory(HibernateUtil.INSTANCE.getSessionFactory());
+        User user = new User();
+        user.setEmail("dsewegfgfwds");
+        user.setPassword("dewgfgfewsds");
+        userDao.create(user);
     }
 
     public static User get(int id) {

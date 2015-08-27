@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" xmlns:dflt="news_service_test">
-	<xsd:import namespace="news_service_test" schemaLocation="news_service_test.xsd" />
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" xmlns:dflt="daoh_test">
+	<xsd:import namespace="daoh_test" schemaLocation="daoh_test.xsd" />
 	<xsd:element name="dataset">
 		<xsd:complexType>
 			<xsd:choice minOccurs="0" maxOccurs="unbounded">
@@ -12,7 +12,7 @@
 				<xsd:element name="news_tag" type="dflt:news_tag__type" />
 				<xsd:element name="role" type="dflt:role__type" />
 				<xsd:element name="user" type="dflt:user__type" />
-				<xsd:any namespace="news_service_test" />
+				<xsd:any namespace="daoh_test" />
 			</xsd:choice>
 		</xsd:complexType>
 	</xsd:element>

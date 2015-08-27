@@ -10,4 +10,5 @@ public class UserDaoImpl extends AbstractDao<User, Integer>{
         return User.class;
     }
 
+
 }

@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Configuration DTD//EN"
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="by.news.service.daoh.pojos">
-    <class name="User" table="users">
+    <class name="User" table="user">
         <id name="userID" column="id" type="int">
             <generator class="increment"/>
         </id>

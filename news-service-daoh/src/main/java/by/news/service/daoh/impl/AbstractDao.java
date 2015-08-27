@@ -33,7 +33,7 @@ public abstract class AbstractDao<T, PK extends Serializable> implements Generic
 
     @Override
     public PK create(T object) throws DaoException {
-        Log.info("Creating new object: " + object.getClass().getSimpleName());
+        Log.info("Creating new object");
         PK key;
         Session session = null;
         Transaction transaction = null;
@@ -42,7 +42,7 @@ public abstract class AbstractDao<T, PK extends Serializable> implements Generic
             session = getSessionFactory().openSession();
             Log.debug("Beginning transaction");
             transaction = session.beginTransaction();
-            Log.debug("Saving object: " + object.getClass().getSimpleName());
+            Log.debug("Saving object.");
             key = (PK) session.save(object);
             Log.debug("Committing transaction");
             transaction.commit();

@@ -29,7 +29,6 @@ public class UserDaoImplTest extends UnitilsJUnit4 {
         userDao = UserDAOImpl.getInstance();
         userDao.setConnection(dataSource.getConnection());
     }
-
     @Test
     public void testMethod() throws SQLException {
         Connection cnnx = dataSource.getConnection();
@@ -46,12 +45,12 @@ public class UserDaoImplTest extends UnitilsJUnit4 {
         cnnx.close();
     }
 
-    @Test
+/*    @Test
     public void testGettingUserByPK() throws DAOException {
         User result = userDao.getByPK(777);
         User user = new User(777, "aaa@gmail.com", "d8578edf8458ce06fbc5bb76a58c5ca4", "Sergey", "Katabin");
         assertEquals(result, user);
-    }
+    }*/
 
 /*    @Test
     public void testCreatingUser() throws DAOException {
