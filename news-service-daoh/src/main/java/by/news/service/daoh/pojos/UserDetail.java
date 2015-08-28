@@ -1,8 +1,5 @@
 package by.news.service.daoh.pojos;
 
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
-
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -12,13 +9,8 @@ public class UserDetail implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GenericGenerator(
-            name = "gen",
-            strategy = "foreign",
-            parameters = @Parameter(name = "property", value = "user")
-    )
-    @GeneratedValue(generator = "gen")
-    private int id;
+    @Column(name = "user_id")
+    private int userId;
 
     @Column(name = "first_name")
     private String firstName;
@@ -29,26 +21,15 @@ public class UserDetail implements Serializable {
     @Column(name = "phone")
     private String phoneNumber;
 
-    @OneToOne
-    @PrimaryKeyJoinColumn
-    private User user;
-
-
     public UserDetail() {
     }
 
-    public UserDetail(String firstName, String lastName, String phoneNumber) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.phoneNumber = phoneNumber;
+    public int getUserId() {
+        return userId;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getFirstName() {
@@ -75,48 +56,13 @@ public class UserDetail implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        UserDetail that = (UserDetail) o;
-
-        if (id != that.id) return false;
-        if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
-        if (lastName != null ? !lastName.equals(that.lastName) : that.lastName != null) return false;
-        if (phoneNumber != null ? !phoneNumber.equals(that.phoneNumber) : that.phoneNumber != null) return false;
-        if (user != null ? !user.equals(that.user) : that.user != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
-        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
-        result = 31 * result + (phoneNumber != null ? phoneNumber.hashCode() : 0);
-        result = 31 * result + (user != null ? user.hashCode() : 0);
-        return result;
-    }
-
     @Override
     public String toString() {
         return "UserDetail{" +
-                "id=" + id +
+                "userId=" + userId +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
-                ", user=" + user +
                 '}';
     }
 }

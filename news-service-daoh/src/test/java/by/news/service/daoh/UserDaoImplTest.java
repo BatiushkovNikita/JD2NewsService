@@ -1,4 +1,4 @@
-package by.news.service.daoh;
+/*package by.news.service.daoh;
 
 
 import by.news.service.daoh.impl.AbstractDao;
@@ -32,9 +32,9 @@ public class UserDaoImplTest extends UnitilsJUnit4 {
 
     }
 
- /*   final User user1 = new User(111, "email1", "password1");
+ *//*   final User user1 = new User(111, "email1", "password1");
     final User user2 = new User(222, "email2", "password2");
-    final User user3 = new User(333, "email3", "password3");*/
+    final User user3 = new User(333, "email3", "password3");*//*
 
 
     @Test
@@ -42,20 +42,20 @@ public class UserDaoImplTest extends UnitilsJUnit4 {
         HibernateUnitils.assertMappingWithDatabaseConsistent();
     }
 
-/*    @Test
+*//*    @Test
     public void testGettingUserByKey() {
         User user = userDao.getByPK(111);
         User expectUser = user1;
         assertEquals(expectUser, user);
-    }*/
+    }*//*
 
-/*    @Test
+*//*    @Test
     public void testUpdatingUser() {
         boolean expected = userDao.update(user1);
         assertEquals(expected, true);
-    }*/
+    }*//*
 
-/*    @Test
+*//*    @Test
     public void testCreatingUser() {
         User user = new User();
         user.setUserID(0);
@@ -64,6 +64,6 @@ public class UserDaoImplTest extends UnitilsJUnit4 {
         int id = userDao.create(user);
         int expectedId = 0;
         assertEquals(expectedId, id);
-    }*/
+    }*//*
 
-}
+}*/
