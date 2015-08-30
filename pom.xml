@@ -12,9 +12,9 @@
 		<module>news-service-web</module>
 		<module>news-service-service</module>
 		<module>news-service-script</module>
-		<module>news-service-to</module>
 		<module>news-service-daoh</module>
-	</modules>
+        <module>news-service-vo</module>
+    </modules>
 
     <repositories>
         <repository>

@@ -1,4 +1,4 @@
-package by.news.service.daoh.interf;
+package by.news.service.daoh.hibernate;
 
 public interface Dao {
 

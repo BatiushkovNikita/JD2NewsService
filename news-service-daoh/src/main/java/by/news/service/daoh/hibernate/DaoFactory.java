@@ -1,8 +1,5 @@
-package by.news.service.daoh.impl;
+package by.news.service.daoh.hibernate;
 
-
-import by.news.service.daoh.interf.Dao;
-import by.news.service.daoh.interf.GenericDao;
 
 public enum DaoFactory implements Dao {
     USER_DAO {

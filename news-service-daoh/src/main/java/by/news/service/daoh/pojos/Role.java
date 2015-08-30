@@ -1,29 +1,31 @@
 package by.news.service.daoh.pojos;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
-/*@Entity
-@Table(name = "roles")*/
+@Entity
+@Table(name = "role")
 public class Role implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-/*	@Id
-	@Column(name = "id")*/
-	private int roleID;
+	@Id
+	@Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 	
-/*	@Column(name = "role_name")*/
+    @Column(name = "role_name")
 	private String roleName;
 
 	public Role() {
 
 	}
 
-	public int getRoleID() {
-		return roleID;
+	public int getId() {
+		return id;
 	}
 
-	public void setRoleID(int roleID) {
-		this.roleID = roleID;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getRoleName() {
@@ -38,7 +40,7 @@ public class Role implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + roleID;
+		result = prime * result + id;
 		result = prime * result + ((roleName == null) ? 0 : roleName.hashCode());
 		return result;
 	}
@@ -52,7 +54,7 @@ public class Role implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Role other = (Role) obj;
-		if (roleID != other.roleID)
+		if (id != other.id)
 			return false;
 		if (roleName == null) {
 			if (other.roleName != null)
@@ -64,6 +66,6 @@ public class Role implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Role [roleID=" + roleID + ", roleName=" + roleName + "]";
+		return "Role [id=" + id + ", roleName=" + roleName + "]";
 	}
 }

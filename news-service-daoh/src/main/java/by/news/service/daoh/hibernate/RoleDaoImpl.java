@@ -1,4 +1,4 @@
-package by.news.service.daoh.impl;
+package by.news.service.daoh.hibernate;
 
 
 import by.news.service.daoh.pojos.Role;

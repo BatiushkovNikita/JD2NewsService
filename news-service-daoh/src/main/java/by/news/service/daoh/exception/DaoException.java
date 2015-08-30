@@ -1,10 +1,8 @@
 package by.news.service.daoh.exception;
 
-import org.hibernate.HibernateException;
+import javax.persistence.PersistenceException;
 
-import java.sql.SQLException;
-
-public class DaoException extends HibernateException {
+public class DaoException extends PersistenceException {
 
 	public DaoException(String message, Throwable cause) {
 		super(message, cause);

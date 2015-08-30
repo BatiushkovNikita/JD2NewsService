@@ -1,11 +1,12 @@
 package by.news.service.daoh.interf;
 
 import by.news.service.daoh.exception.DaoException;
-import org.hibernate.SessionFactory;
 
+import javax.persistence.EntityManager;
+import java.io.Serializable;
 import java.util.List;
 
-public interface GenericDao<T, PK> {
+public interface BaseDao<T, PK extends Serializable> {
 
     PK create(T object) throws DaoException;
 
@@ -17,7 +18,5 @@ public interface GenericDao<T, PK> {
 
     List<T> getAll() throws DaoException;
 
-    SessionFactory getSessionFactory();
-
-    void setSessionFactory(SessionFactory sessionFactory);
+    void setEntityManager(EntityManager entityManager);
 }

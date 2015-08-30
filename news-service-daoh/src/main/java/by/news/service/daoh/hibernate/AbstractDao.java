@@ -1,8 +1,7 @@
-package by.news.service.daoh.impl;
+package by.news.service.daoh.hibernate;
 
 
 import by.news.service.daoh.exception.DaoException;
-import by.news.service.daoh.interf.GenericDao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;

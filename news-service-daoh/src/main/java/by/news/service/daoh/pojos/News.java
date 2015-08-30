@@ -1,119 +1,98 @@
 package by.news.service.daoh.pojos;
 
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
-/*@Entity
-@Table(name = "news")*/
+@Entity
+@Table(name = "news")
 public class News implements Serializable {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-/*	@Id
-	@Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)*/
-	private int newsID;
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-	//@Column(name = "topic")
-	private String topic;
+    @Column(name = "topic")
+    private String topic;
 
-	//@Column(name = "publication_date")
-	private String publicationDate;
+    @Column(name = "publication_date")
+    private String publicationDate;
 
-	//@Column(name = "news_text")
-	private String newsText;
+    @Column(name = "news_text")
+    private String newsText;
 
-	//@Column(name = "user_id")
-	private int userID;
+    @Column(name = "user_id")
+    private int userId;
 
-	public News() {
+    @ManyToOne
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
+    private User user;
 
-	}
+    @ManyToMany
+    @JoinTable(name = "news_tag",
+            joinColumns = @JoinColumn(name = "news_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id"))
+    private Set<Tag> tags;
 
-	public int getNewsID() {
-		return newsID;
-	}
+    public News() {
 
-	public void setNewsID(int newsID) {
-		this.newsID = newsID;
-	}
+    }
 
-	public String getTopic() {
-		return topic;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public void setTopic(String topic) {
-		this.topic = topic;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public String getPublicationDate() {
-		return publicationDate;
-	}
+    public String getTopic() {
+        return topic;
+    }
 
-	public void setPublicationDate(String publicationDate) {
-		this.publicationDate = publicationDate;
-	}
+    public void setTopic(String topic) {
+        this.topic = topic;
+    }
 
-	public String getNewsText() {
-		return newsText;
-	}
+    public String getPublicationDate() {
+        return publicationDate;
+    }
 
-	public void setNewsText(String newsText) {
-		this.newsText = newsText;
-	}
+    public void setPublicationDate(String publicationDate) {
+        this.publicationDate = publicationDate;
+    }
 
-	public int getUserID() {
-		return userID;
-	}
+    public String getNewsText() {
+        return newsText;
+    }
 
-	public void setUserID(int userID) {
-		this.userID = userID;
-	}
+    public void setNewsText(String newsText) {
+        this.newsText = newsText;
+    }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + newsID;
-		result = prime * result + ((newsText == null) ? 0 : newsText.hashCode());
-		result = prime * result + ((publicationDate == null) ? 0 : publicationDate.hashCode());
-		result = prime * result + ((topic == null) ? 0 : topic.hashCode());
-		result = prime * result + userID;
-		return result;
-	}
+    public int getUserId() {
+        return userId;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		News other = (News) obj;
-		if (newsID != other.newsID)
-			return false;
-		if (newsText == null) {
-			if (other.newsText != null)
-				return false;
-		} else if (!newsText.equals(other.newsText))
-			return false;
-		if (publicationDate == null) {
-			if (other.publicationDate != null)
-				return false;
-		} else if (!publicationDate.equals(other.publicationDate))
-			return false;
-		if (topic == null) {
-			if (other.topic != null)
-				return false;
-		} else if (!topic.equals(other.topic))
-			return false;
-		if (userID != other.userID)
-			return false;
-		return true;
-	}
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 
-	@Override
-	public String toString() {
-		return "News [newsID=" + newsID + ", topic=" + topic + ", publicationDate=" + publicationDate + ", newsText="
-				+ newsText + ", userID=" + userID + "]";
-	}
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Set<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(Set<Tag> tags) {
+        this.tags = tags;
+    }
 }
