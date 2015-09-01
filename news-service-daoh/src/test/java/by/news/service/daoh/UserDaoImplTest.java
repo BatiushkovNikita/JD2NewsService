@@ -14,29 +14,28 @@ import org.unitils.orm.jpa.annotation.JpaEntityManagerFactory;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-@DataSet
+import static org.junit.Assert.assertNotNull;
+
+@DataSet("UserDaoTest.xml")
 @JpaEntityManagerFactory(persistenceUnit = "test", configFile = "META-INF/persistence-test.xml")
 public class UserDaoImplTest extends UnitilsJUnit4 {
 
     @PersistenceContext
-    EntityManager entityManager;
-
-    BaseDao<UserVO, Integer> userDao;
-
+    private EntityManager entityManager;
+    private BaseDao<UserVO, Integer> userDao;
 
     @Before
     public void setUp() {
         userDao = new UserDao();
         //entityManager = JpaUtil.INSTANCE.getEntityManager();
-        //userDao.setEntityManager(JpaUnitils.getEntityManager());
-        JpaUnitils.injectEntityManagerInto(userDao);
+        userDao.setEntityManager(JpaUnitils.getEntityManager());
+        //JpaUnitils.injectEntityManagerInto(userDao);
 
     }
-
 
     @Test
-    public void testMappingToDatabase() {
-        JpaUnitils.assertMappingWithDatabaseConsistent();
+    public void testTest() {
+        UserVO userVO = userDao.getByPK(111);
+        assertNotNull(userVO);
     }
-
 }

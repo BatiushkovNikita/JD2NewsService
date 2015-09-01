@@ -20,10 +20,10 @@ public class Main {
     static EntityManager entityManager = JpaUtil.INSTANCE.getEntityManager();
 
     public static void main(String[] args) {
-        //userTest();
+        userTest();
         //newsTest();
         //getUserRoles(2);
-        System.out.println(geUser(6));
+        //System.out.println(geUser(6));
 
 
     }

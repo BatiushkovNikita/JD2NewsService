@@ -13,6 +13,7 @@ import org.apache.logging.log4j.Logger;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import java.util.HashSet;
 import java.util.List;
@@ -21,6 +22,7 @@ import java.util.Set;
 public class UserDao implements BaseDao<UserVO, Integer> {
 
     private Logger Log = LogManager.getLogger(UserDao.class.getName());
+
     private EntityManager entityManager;
 
     public EntityManager getEntityManager() {
@@ -95,7 +97,6 @@ public class UserDao implements BaseDao<UserVO, Integer> {
         Log.info("Returning UserVO");
         return userVO;
     }
-
 
 
     @Override
