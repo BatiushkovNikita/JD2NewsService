@@ -54,6 +54,7 @@ public class UserDao implements BaseDao<UserVO, Integer> {
             user.setUserDetail(userDetail);
             Log.debug("Persisting User");
             getEntityManager().persist(user);
+
             Log.debug("Committing transaction");
             transaction.commit();
         } catch (PersistenceException e) {
@@ -76,18 +77,35 @@ public class UserDao implements BaseDao<UserVO, Integer> {
         EntityTransaction transaction = null;
         try {
             Log.debug("Getting transaction");
+
+            Log.error("Состояние энтитиманагера. Открыт?:" + getEntityManager().isOpen());
+
             transaction = getEntityManager().getTransaction();
             Log.debug("Beginning transaction");
-            transaction.begin();
+
+            Log.error("Начинаем транзакцию. Транзакция активна?: " + transaction.isActive());
+
+            if (!transaction.isActive()) {
+                transaction.begin();
+            }
+            //transaction.begin();
+
+
             Log.debug("Finding user by key");
+
+            Log.error("Ищем юзера с ключом: " + key);
             User user = getEntityManager().find(User.class, key);
+
+            Log.error("Парсим юзера с ключом:" + key);
             Log.debug("Composing data for returning");
             userVO = composeUser(user);
+
+            Log.error("Комитим транзакцию:" + key);
             Log.debug("Committing transaction");
             transaction.commit();
         } catch (PersistenceException e) {
             Log.error("Cannot complete transaction ", e);
-            if (transaction != null) {
+            if (transaction.isActive()) {
                 transaction.rollback();
             }
             throw new DaoException("Cannot complete transaction ", e);
@@ -95,9 +113,10 @@ public class UserDao implements BaseDao<UserVO, Integer> {
             JpaUtil.INSTANCE.closeResources(entityManager);
         }
         Log.info("Returning UserVO");
+
+        Log.error("Держи юзера с ключом:" + key);
         return userVO;
     }
-
 
     @Override
     public boolean update(UserVO object) throws DaoException {
@@ -116,12 +135,19 @@ public class UserDao implements BaseDao<UserVO, Integer> {
 
     private User extractUser(UserVO userVO) {
         User user = new User();
+        user.setId(userVO.getId());
         user.setEmail(userVO.getEmail());
         user.setPassword(userVO.getPassword());
-        Set<RoleVO> rolesVO = userVO.getRoles();
+        RoleVO roleVO = new RoleVO();
+        roleVO.setId(3);
+        Set<RoleVO> rolesVO = new HashSet<>();
+        rolesVO.add(roleVO);
+        userVO.setRoles(rolesVO);
+        rolesVO = userVO.getRoles();
         user.setRoles(extractRoles(rolesVO));
         return user;
     }
+
 
     private UserDetail extractUserDetail(UserVO userVO) {
         UserDetail userDetail = new UserDetail();

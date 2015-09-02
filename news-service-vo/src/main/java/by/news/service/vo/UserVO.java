@@ -14,8 +14,7 @@ public class UserVO {
     public UserVO() {
     }
 
-    public UserVO(int id, String email, String password, String firstName, String lastName, String cellPhone) {
-        this.id = id;
+    public UserVO(String email, String password, String firstName, String lastName, String cellPhone) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;

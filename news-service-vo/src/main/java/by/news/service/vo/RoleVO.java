@@ -7,6 +7,11 @@ public class RoleVO {
     public RoleVO() {
     }
 
+    public RoleVO(int id, String roleName) {
+        this.id = id;
+        this.roleName = roleName;
+    }
+
     public int getId() {
         return id;
     }

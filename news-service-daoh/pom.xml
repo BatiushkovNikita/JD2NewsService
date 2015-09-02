@@ -10,17 +10,17 @@
 
     <dependencies>
 
-        <dependency>
+<!--        <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-         <!--   <version>4.3.11.Final</version>-->
-           <!-- <version>4.3.0.Final</version>-->
+         &lt;!&ndash;   <version>4.3.11.Final</version>&ndash;&gt;
+           &lt;!&ndash; <version>4.3.0.Final</version>&ndash;&gt;
             <version>4.2.20.Final</version>
-       <!--     <version>4.1.6.Final</version>-->
-           <!-- <version>4.0.0.Final</version>-->
-       <!--     <version>5.0.0.Final</version>-->
-         <!--   <version>3.6.10.Final</version>-->
-        </dependency>
+       &lt;!&ndash;     <version>4.1.6.Final</version>&ndash;&gt;
+           &lt;!&ndash; <version>4.0.0.Final</version>&ndash;&gt;
+       &lt;!&ndash;     <version>5.0.0.Final</version>&ndash;&gt;
+         &lt;!&ndash;   <version>3.6.10.Final</version>&ndash;&gt;
+        </dependency>-->
 
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -31,7 +31,7 @@
               <!--  <version>4.2.0.Final</version>-->
           <!--  <version>4.1.6.Final</version>-->
            <!-- <version>4.0.0.Final</version>-->
-        <!--    <version>5.0.0.Final</version>-->
+            <!--<version>5.0.0.Final</version>-->
           <!--  <version>3.6.10.Final</version>-->
         </dependency>
 

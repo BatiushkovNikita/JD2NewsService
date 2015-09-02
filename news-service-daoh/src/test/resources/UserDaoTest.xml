@@ -4,6 +4,7 @@
     <user_detail id="1" first_name="FirstName1" last_name="LastName1" cellphone="1234567890"/>
 
     <user id="111" email="email1" password="password1" user_detail_id="1"/>
+    <user id="222" email="email2" password="password2" user_detail_id="1"/>
 
     <user_role user_id="111" role_id="1" />
 
@@ -13,6 +14,8 @@
 
     <news_tag news_id="1" tag_id="1" />
 
-    <role id="1" role_name="role1"/>
+    <role id="1" role_name="user"/>
+    <role id="2" role_name="moderator"/>
+    <role id="3" role_name="admin"/>
 
 </dataset>

@@ -2,11 +2,9 @@ package by.news.service.daoh.util;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.hibernate.Session;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.PersistenceException;
+import javax.persistence.*;
 
 public enum JpaUtil {
     INSTANCE;
@@ -21,9 +19,9 @@ public enum JpaUtil {
     }
 
     public void closeResources(EntityManager entityManager) {
-        EntityManagerFactory entityManagerFactory = entityManager.getEntityManagerFactory();
+        //EntityManagerFactory entityManagerFactory = entityManager.getEntityManagerFactory();
         Log.info("Closing resources");
-        if (entityManager != null) {
+        if (entityManager.isOpen()) {
             try {
                 entityManager.close();
                 Log.debug("EntityManager closed");
@@ -31,13 +29,13 @@ public enum JpaUtil {
                 Log.warn("Cannot close EntityManager", e);
             }
         }
-        if (entityManagerFactory != null) {
+/*        if (entityManagerFactory != null) {
             try {
                 entityManagerFactory.close();
                 Log.debug("EntityManagerFactory closed");
             } catch (PersistenceException e) {
                 Log.warn("Cannot close EntityManagerFactory", e);
             }
-        }
+        }*/
     }
 }
