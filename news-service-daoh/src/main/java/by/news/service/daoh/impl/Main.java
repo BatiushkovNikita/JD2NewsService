@@ -21,9 +21,10 @@ public class Main {
 
     public static void main(String[] args) {
         userTest();
+        userTest();
         //newsTest();
         //getUserRoles(2);
-        //System.out.println(geUser(6));
+        System.out.println(geUser(6));
 
 
     }
@@ -66,12 +67,13 @@ public class Main {
         userVO.setFirstName("Nikita");
         userVO.setLastName("Batsiushkov");
         userVO.setCellPhone("6234981");
-        RoleVO roleVO = new RoleVO();
+
+/*        RoleVO roleVO = new RoleVO();
         roleVO.setId(3);
         roleVO.setRoleName("user");
         Set<RoleVO> rolesVO = new HashSet<>();
         rolesVO.add(roleVO);
-        userVO.setRoles(rolesVO);
+        userVO.setRoles(rolesVO);*/
 
         BaseDao<UserVO, Integer> userDao = new UserDao();
         userDao.setEntityManager(entityManager);

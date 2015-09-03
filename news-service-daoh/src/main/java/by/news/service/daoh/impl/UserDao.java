@@ -23,7 +23,7 @@ public class UserDao implements BaseDao<UserVO, Integer> {
 
     private Logger Log = LogManager.getLogger(UserDao.class.getName());
 
-    private EntityManager entityManager;
+    private EntityManager entityManager;// = JpaUtil.INSTANCE.getEntityManager();
 
     public EntityManager getEntityManager() {
         if (entityManager == null) {
@@ -43,12 +43,12 @@ public class UserDao implements BaseDao<UserVO, Integer> {
         Log.debug("Preparing data");
         User user = extractUser(userVO);
         UserDetail userDetail = extractUserDetail(userVO);
-        EntityTransaction transaction = null;
         try {
             Log.debug("Getting transaction");
-            transaction = getEntityManager().getTransaction();
+
             Log.debug("Beginning transaction");
-            transaction.begin();
+            getEntityManager().getTransaction().begin();
+
             Log.debug("Persisting UserDetails");
             getEntityManager().persist(userDetail);
             user.setUserDetail(userDetail);
@@ -56,15 +56,13 @@ public class UserDao implements BaseDao<UserVO, Integer> {
             getEntityManager().persist(user);
 
             Log.debug("Committing transaction");
-            transaction.commit();
-        } catch (PersistenceException e) {
+            getEntityManager().getTransaction().commit();
+        } catch (Exception e) {
             Log.error("Cannot complete transaction ", e);
-            if (transaction != null) {
-                transaction.rollback();
+            if (getEntityManager().getTransaction() != null) {
+                getEntityManager().getTransaction().rollback();
             }
             throw new DaoException("Cannot complete transaction ", e);
-        } finally {
-            JpaUtil.INSTANCE.closeResources(entityManager);
         }
         return user.getId();
     }
@@ -73,48 +71,31 @@ public class UserDao implements BaseDao<UserVO, Integer> {
     public UserVO getByPK(Integer key) throws DaoException {
         Log.info("Getting user by key: " + key);
         Log.debug("Preparing data");
-        UserVO userVO = null;
-        EntityTransaction transaction = null;
+        UserVO userVO;
         try {
-            Log.debug("Getting transaction");
-
-            Log.error("Состояние энтитиманагера. Открыт?:" + getEntityManager().isOpen());
-
-            transaction = getEntityManager().getTransaction();
             Log.debug("Beginning transaction");
-
-            Log.error("Начинаем транзакцию. Транзакция активна?: " + transaction.isActive());
-
-            if (!transaction.isActive()) {
-                transaction.begin();
-            }
-            //transaction.begin();
-
+            getEntityManager().getTransaction().begin();
+            //entityManager.getTransaction().begin();
 
             Log.debug("Finding user by key");
-
-            Log.error("Ищем юзера с ключом: " + key);
             User user = getEntityManager().find(User.class, key);
+            //User user = entityManager.find(User.class, key);
 
-            Log.error("Парсим юзера с ключом:" + key);
             Log.debug("Composing data for returning");
             userVO = composeUser(user);
 
-            Log.error("Комитим транзакцию:" + key);
             Log.debug("Committing transaction");
-            transaction.commit();
-        } catch (PersistenceException e) {
+            getEntityManager().getTransaction().commit();
+            //entityManager.getTransaction().commit();
+
+        } catch (Exception e) {
             Log.error("Cannot complete transaction ", e);
-            if (transaction.isActive()) {
-                transaction.rollback();
+            if (getEntityManager().getTransaction().isActive()) {
+                getEntityManager().getTransaction().rollback();
             }
             throw new DaoException("Cannot complete transaction ", e);
-        } finally {
-            JpaUtil.INSTANCE.closeResources(entityManager);
         }
         Log.info("Returning UserVO");
-
-        Log.error("Держи юзера с ключом:" + key);
         return userVO;
     }
 
