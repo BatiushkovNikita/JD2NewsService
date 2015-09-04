@@ -12,8 +12,8 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
-public enum UserServiceImpl implements UserService {
-    INSTANCE;
+public class UserServiceImpl implements UserService {
+
     private Logger Log = LogManager.getLogger(UserServiceImpl.class.getName());
     private BaseDao<UserVO, Integer> userDao;
 

@@ -20,7 +20,7 @@ public interface UserService {
 
     List<RoleVO> getUserRoles(int userId) throws ServiceException;
 
-    BaseDao<UserVO, Integer> getUserDao();
+    BaseDao<UserVO, Integer> getUserDao() throws ServiceException;
 
     void setUserDao(BaseDao<UserVO, Integer> userDao);
 }
