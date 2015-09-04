@@ -2,26 +2,22 @@ package by.news.service.daoh;
 
 
 import by.news.service.daoh.impl.UserDao;
-import by.news.service.daoh.pojos.User;
 import by.news.service.vo.UserVO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
-import org.unitils.database.annotations.Transactional;
 import org.unitils.dbunit.annotation.DataSet;
 import org.unitils.orm.jpa.JpaUnitils;
 import org.unitils.orm.jpa.annotation.JpaEntityManagerFactory;
 import org.unitils.reflectionassert.ReflectionAssert;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 
 @DataSet("UserDaoTest.xml")
-@JpaEntityManagerFactory(persistenceUnit = "test", configFile = "META-INF/persistence-test.xml")
+@JpaEntityManagerFactory(persistenceUnit = "test2", configFile = "META-INF/persistence-test2.xml")
 public class UserDaoTest extends org.unitils.UnitilsJUnit4 {
     private Logger Log = LogManager.getLogger(UserDaoTest.class.getName());
 
@@ -43,15 +39,17 @@ public class UserDaoTest extends org.unitils.UnitilsJUnit4 {
         entityManager.close();
     }
 
+
     @Test
     public void test1() {
         UserVO userVO = userDao.getByPK(111);
         ReflectionAssert.assertLenientEquals(userVO, userVO);
     }
 
+
     @Test
     public void test3() {
-        UserVO userVO = userDao.getByPK(222);
+        UserVO userVO = userDao.getByPK(111);
         ReflectionAssert.assertLenientEquals(userVO, userVO);
     }
 }

@@ -16,6 +16,7 @@
 	
 		<module>news-service-daoh</module>
         <module>news-service-vo</module>
+        <module>news-service-serviceh</module>
     </modules>
 	<!--
     <repositories>
@@ -184,7 +185,8 @@
 			<dependency>
 				<groupId>org.dbunit</groupId>
 				<artifactId>dbunit</artifactId>
-				<version>2.5.1</version>
+				<!--<version>2.5.1</version>-->
+                <version>2.4.9</version>
 			</dependency>
 			<dependency>
 				<groupId>junit</groupId>

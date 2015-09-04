@@ -31,10 +31,6 @@
             <groupId>org.unitils</groupId>
             <artifactId>unitils-orm</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.unitils</groupId>
-            <artifactId>unitils-testng</artifactId>
-        </dependency>
 
         <dependency>
             <groupId>org.unitils</groupId>
