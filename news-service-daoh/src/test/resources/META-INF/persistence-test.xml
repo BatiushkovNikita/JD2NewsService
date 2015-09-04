@@ -4,7 +4,6 @@
              version="2.0">
 
     <persistence-unit name="test" transaction-type="RESOURCE_LOCAL">
-        <provider>org.hibernate.ejb.HibernatePersistence</provider>
         <class>by.news.service.daoh.pojos.User</class>
         <class>by.news.service.daoh.pojos.UserDetail</class>
         <class>by.news.service.daoh.pojos.News</class>

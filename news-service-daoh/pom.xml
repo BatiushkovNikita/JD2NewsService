@@ -7,106 +7,22 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <artifactId>news-service-daoh</artifactId>
-    <build>
-        <testResources>
-            <testResource>
-                <directory>src/test/resources</directory>
-            </testResource>
-
-            <testResource>
-                <directory>${basedir}/src/test/java/</directory>
-                <excludes>
-                    <exclude>**/*.java</exclude>
-                </excludes>
-            </testResource>
-        </testResources>
-    </build>
 
     <dependencies>
-
-        <!--        <dependency>
-                    <groupId>org.hibernate</groupId>
-                    <artifactId>hibernate-core</artifactId>
-                 &lt;!&ndash;   <version>4.3.11.Final</version>&ndash;&gt;
-                   &lt;!&ndash; <version>4.3.0.Final</version>&ndash;&gt;
-                    <version>4.2.20.Final</version>
-               &lt;!&ndash;     <version>4.1.6.Final</version>&ndash;&gt;
-                   &lt;!&ndash; <version>4.0.0.Final</version>&ndash;&gt;
-               &lt;!&ndash;     <version>5.0.0.Final</version>&ndash;&gt;
-                 &lt;!&ndash;   <version>3.6.10.Final</version>&ndash;&gt;
-                </dependency>-->
 
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
             <version>4.2.20.Final</version>
             <!--  <version>4.3.11.Final</version>-->
+             <!-- <version>4.3.6.Final</version>-->
             <!--   <version>4.3.0.Final</version>-->
             <!--   <version>4.2.0.Final</version>-->
             <!--  <version>4.1.6.Final</version>-->
             <!-- <version>4.0.0.Final</version>-->
             <!--<version>5.0.0.Final</version>-->
-            <!--  <version>3.6.10.Final</version>-->
+             <!-- <version>3.6.10.Final</version>-->
         </dependency>
-
-
-
-
-        <!--        <dependency>
-                    <groupId>org.hibernate.javax.persistence</groupId>
-                    <artifactId>hibernate-jpa-2.1-api</artifactId>
-                    <version>1.0.0.Final</version>
-                </dependency>-->
-
-        <!--        <dependency>
-                    <groupId>org.hibernate</groupId>
-                    <artifactId>hibernate-annotations</artifactId>
-                    <version>3.5.6-Final</version>
-                </dependency>-->
-
-
-        <!--
-                <dependency>
-                    <groupId>org.apache.commons</groupId>
-                    <artifactId>commons-collections4</artifactId>
-                    <version>4.0</version>
-                </dependency>-->
-
-
-        <!-- -->
-
-        <!--        <dependency>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-api</artifactId>
-                    <version>1.6.4</version>
-                </dependency>-->
-
-        <!--        <dependency>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-nop</artifactId>
-                    <version>1.6.4</version>
-                </dependency>-->
-
-        <!-- -->
-
-
-        <!--        <dependency>
-                    <groupId>org.hibernate</groupId>
-                    <artifactId>ejb3-persistence</artifactId>
-                    <version>1.0.2.GA</version>
-                </dependency>
-
-                <dependency>
-                    <groupId>javax.transaction</groupId>
-                    <artifactId>jta</artifactId>
-                    <version>1.1</version>
-                </dependency>
-
-                <dependency>
-                    <groupId>hibernate-commons-annotations</groupId>
-                    <artifactId>hibernate-commons-annotations</artifactId>
-                    <version>3.0.0.GA</version>
-                </dependency>-->
 
 
         <!-- Testing -->
@@ -120,18 +36,11 @@
             <artifactId>unitils-testng</artifactId>
         </dependency>
 
-        <!--        <dependency>
-                    <groupId>org.unitils</groupId>
-                    <artifactId>unitils-database</artifactId>
-                </dependency>-->
         <dependency>
             <groupId>org.unitils</groupId>
             <artifactId>unitils-dbmaintainer</artifactId>
         </dependency>
-        <!--        <dependency>
-                    <groupId>org.unitils</groupId>
-                    <artifactId>unitils-core</artifactId>
-                </dependency>-->
+
         <dependency>
             <groupId>org.unitils</groupId>
             <artifactId>unitils-inject</artifactId>
@@ -141,49 +50,10 @@
             <artifactId>unitils-dbunit</artifactId>
         </dependency>
 
-        <!--        <dependency>
-                    <groupId>org.dbunit</groupId>
-                    <artifactId>dbunit</artifactId>
-                    <exclusions>
-                        <exclusion>
-                            <artifactId>junit</artifactId>
-                            <groupId>junit</groupId>
-                        </exclusion>
-                    </exclusions>
-                </dependency>-->
-
-        <!--        <dependency>
-                    <groupId>junit</groupId>
-                    <artifactId>junit</artifactId>
-                    <scope>test</scope>
-                </dependency>-->
-
-        <!-- Logging -->
-
-        <!--        <dependency>
-                    <groupId>org.apache.logging.log4j</groupId>
-                    <artifactId>log4j-api</artifactId>
-                </dependency>-->
-
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
         </dependency>
-
-        <!--        <dependency>
-                    <groupId>org.jboss.logging</groupId>
-                    <artifactId>jboss-logging</artifactId>
-                </dependency>-->
-
-        <!--        <dependency>
-                    <groupId>org.apache.commons</groupId>
-                    <artifactId>commons-dbcp2</artifactId>
-                </dependency>
-
-                <dependency>
-                    <groupId>commons-pool</groupId>
-                    <artifactId>commons-pool</artifactId>
-                </dependency>-->
 
         <dependency>
             <groupId>mysql</groupId>

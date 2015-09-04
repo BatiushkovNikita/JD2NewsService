@@ -23,7 +23,7 @@ public class UserDao implements BaseDao<UserVO, Integer> {
 
     private Logger Log = LogManager.getLogger(UserDao.class.getName());
 
-    private EntityManager entityManager;// = JpaUtil.INSTANCE.getEntityManager();
+    private EntityManager entityManager;
 
     public EntityManager getEntityManager() {
         if (entityManager == null) {
@@ -75,18 +75,15 @@ public class UserDao implements BaseDao<UserVO, Integer> {
         try {
             Log.debug("Beginning transaction");
             getEntityManager().getTransaction().begin();
-            //entityManager.getTransaction().begin();
 
             Log.debug("Finding user by key");
             User user = getEntityManager().find(User.class, key);
-            //User user = entityManager.find(User.class, key);
 
             Log.debug("Composing data for returning");
             userVO = composeUser(user);
 
             Log.debug("Committing transaction");
             getEntityManager().getTransaction().commit();
-            //entityManager.getTransaction().commit();
 
         } catch (Exception e) {
             Log.error("Cannot complete transaction ", e);

@@ -2,26 +2,27 @@ package by.news.service.daoh;
 
 
 import by.news.service.daoh.impl.UserDao;
-import by.news.service.daoh.interf.BaseDao;
 import by.news.service.daoh.pojos.User;
-import by.news.service.daoh.util.JpaUtil;
 import by.news.service.vo.UserVO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Ignore;
+import org.junit.Test;
 import org.unitils.database.annotations.Transactional;
-import org.unitils.database.util.TransactionMode;
 import org.unitils.dbunit.annotation.DataSet;
 import org.unitils.orm.jpa.JpaUnitils;
 import org.unitils.orm.jpa.annotation.JpaEntityManagerFactory;
 import org.unitils.reflectionassert.ReflectionAssert;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 
 @DataSet("UserDaoTest.xml")
 @JpaEntityManagerFactory(persistenceUnit = "test", configFile = "META-INF/persistence-test.xml")
-public class UserDaoTest extends org.unitils.UnitilsJUnit4 {//org.unitils.UnitilsTestNG {
+public class UserDaoTest extends org.unitils.UnitilsJUnit4 {
     private Logger Log = LogManager.getLogger(UserDaoTest.class.getName());
 
     @PersistenceContext
@@ -29,29 +30,28 @@ public class UserDaoTest extends org.unitils.UnitilsJUnit4 {//org.unitils.Unitil
 
     private UserDao userDao;
 
-    //@org.testng.annotations.BeforeClass
-    @org.junit.Before
+
+    @Before
     public void setUp() {
         userDao = new UserDao();
         userDao.setEntityManager(JpaUnitils.getEntityManager());
+        //JpaUnitils.injectEntityManagerInto(userDao);
     }
 
-    @Ignore
-    //@org.testng.annotations.Test
-    @org.junit.Test
-    @Transactional
+    @After
+    public void tearDown() {
+        entityManager.close();
+    }
+
+    @Test
     public void test1() {
         UserVO userVO = userDao.getByPK(111);
         ReflectionAssert.assertLenientEquals(userVO, userVO);
-        //org.testng.Assert.assertEquals(userVO, userVO);
     }
 
-    //@org.testng.annotations.Test
-    @org.junit.Test
-    public void test() {
-        entityManager.getTransaction().begin();
-        User user = entityManager.find(User.class, 111);
-        entityManager.getTransaction().commit();
-        ReflectionAssert.assertLenientEquals(user, user);
+    @Test
+    public void test3() {
+        UserVO userVO = userDao.getByPK(222);
+        ReflectionAssert.assertLenientEquals(userVO, userVO);
     }
 }

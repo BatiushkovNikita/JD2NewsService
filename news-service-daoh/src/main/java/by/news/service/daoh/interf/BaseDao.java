@@ -18,5 +18,5 @@ public interface BaseDao<T, PK extends Serializable> {
 
     List<T> getAll() throws DaoException;
 
-    void setEntityManager(EntityManager entityManager);
+  /*  void setEntityManager(EntityManager entityManager);*/
 }
