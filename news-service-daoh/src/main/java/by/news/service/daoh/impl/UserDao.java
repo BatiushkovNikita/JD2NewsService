@@ -44,8 +44,6 @@ public class UserDao implements BaseDao<UserVO, Integer> {
         User user = extractUser(userVO);
         UserDetail userDetail = extractUserDetail(userVO);
         try {
-            Log.debug("Getting transaction");
-
             Log.debug("Beginning transaction");
             getEntityManager().getTransaction().begin();
 
@@ -71,20 +69,19 @@ public class UserDao implements BaseDao<UserVO, Integer> {
     public UserVO getByPK(Integer key) throws DaoException {
         Log.info("Getting user by key: " + key);
         Log.debug("Preparing data");
-        UserVO userVO;
+        UserVO userVO = null;
         try {
             Log.debug("Beginning transaction");
             getEntityManager().getTransaction().begin();
-
             Log.debug("Finding user by key");
             User user = getEntityManager().find(User.class, key);
-
+            if (user == null) {
+                return null;
+            }
             Log.debug("Composing data for returning");
             userVO = composeUser(user);
-
             Log.debug("Committing transaction");
             getEntityManager().getTransaction().commit();
-
         } catch (Exception e) {
             Log.error("Cannot complete transaction ", e);
             if (getEntityManager().getTransaction().isActive()) {
@@ -141,7 +138,7 @@ public class UserDao implements BaseDao<UserVO, Integer> {
         userVO.setEmail(user.getEmail());
         userVO.setPassword(null);
         userVO.setFirstName(user.getUserDetail().getFirstName());
-        userVO.setLastName(user.getUserDetail().getFirstName());
+        userVO.setLastName(user.getUserDetail().getLastName());
         userVO.setCellPhone(user.getUserDetail().getCellPhone());
         userVO.setRoles(composeRole(user.getRoles()));
         return userVO;

@@ -13,7 +13,7 @@
 		<module>news-service-web</module>
 		<module>news-service-service</module>
 		<module>news-service-script</module>
-	
+
 		<module>news-service-daoh</module>
         <module>news-service-vo</module>
         <module>news-service-serviceh</module>
@@ -69,8 +69,9 @@
 		</plugins>
 	</build>
     <properties>
+       <!-- <unitils.version>3.4.1</unitils.version>-->
         <unitils.version>3.4.1</unitils.version>
-        <junit.version>4.12</junit.version>
+        <junit.version>4.11</junit.version>
     </properties>
 
 	<dependencyManagement>
@@ -136,7 +137,7 @@
 				<version>${unitils.version}</version>
 				<scope>test</scope>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>commons-codec</groupId>
 				<artifactId>commons-codec</artifactId>
@@ -199,7 +200,8 @@
 				<artifactId>commons-dbcp2</artifactId>
 				<version>2.0</version>
 			</dependency>
-			<dependency>
+
+            <dependency>
 				<groupId>commons-pool</groupId>
 				<artifactId>commons-pool</artifactId>
 				<version>1.6</version>
@@ -207,7 +209,8 @@
 			<dependency>
 				<groupId>mysql</groupId>
 				<artifactId>mysql-connector-java</artifactId>
-				<version>5.1.36</version>
+				<version>5.1.6</version>
+              <!--  <version>5.1.13</version>-->
 			</dependency>
 
             <dependency>
