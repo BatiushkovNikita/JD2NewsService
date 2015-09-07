@@ -28,7 +28,7 @@
 	-->
 
 	<build>
-        <testResources>
+       <!-- <testResources>
             <testResource>
                 <directory>src/test/resources</directory>
             </testResource>
@@ -39,7 +39,7 @@
                     <exclude>**/*.java</exclude>
                 </excludes>
             </testResource>
-        </testResources>
+        </testResources>-->
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -72,6 +72,7 @@
        <!-- <unitils.version>3.4.1</unitils.version>-->
         <unitils.version>3.4.1</unitils.version>
         <junit.version>4.11</junit.version>
+        <!--<catalina.version>7.0.55</catalina.version>-->
     </properties>
 
 	<dependencyManagement>
@@ -175,13 +176,11 @@
 				<artifactId>jboss-logging</artifactId>
 				<version>3.3.0.Final</version>
 			</dependency>
-			<!--
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
                 <artifactId>log4j-1.2-api</artifactId>
                 <version>2.3</version>
             </dependency>
-            -->
 
 			<dependency>
 				<groupId>org.dbunit</groupId>
@@ -213,12 +212,11 @@
               <!--  <version>5.1.13</version>-->
 			</dependency>
 
-            <dependency>
+            <!--<dependency>
                 <groupId>org.apache.tomcat</groupId>
                 <artifactId>tomcat-catalina</artifactId>
-                <version>8.0.26</version>
-            </dependency>
-
+                <version>${catalina.version}</version>
+            </dependency>-->
 
         </dependencies>
 	</dependencyManagement>

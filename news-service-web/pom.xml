@@ -9,8 +9,7 @@
 		<artifactId>news-service</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<groupId>by.news.service</groupId>
-	<artifactId>news-service-web</artifactId>
+    <artifactId>news-service-web</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>news-service-web Maven Webapp</name>
@@ -46,10 +45,10 @@
 			<artifactId>junit</artifactId>
 		</dependency>
 
-        <dependency>
+<!--        <dependency>
             <groupId>org.apache.tomcat</groupId>
             <artifactId>tomcat-catalina</artifactId>
-        </dependency>
+        </dependency>-->
 		
 		<dependency>
 			<groupId>by.news.service</groupId>

@@ -6,5 +6,6 @@
 </head>
 <body>
 	<jsp:forward page="/jsp/login.jsp"></jsp:forward>
+  <%--  <jsp:forward page="/jsp/login_realm.jsp"></jsp:forward>--%>
 </body>
 </html>

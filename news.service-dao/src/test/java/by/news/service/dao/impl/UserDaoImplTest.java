@@ -3,6 +3,7 @@ package by.news.service.dao.impl;
 import by.news.service.dao.exception.DAOException;
 import by.news.service.entity.User;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.unitils.UnitilsJUnit4;
 import org.unitils.database.annotations.TestDataSource;
@@ -29,6 +30,8 @@ public class UserDaoImplTest extends UnitilsJUnit4 {
         userDao = UserDAOImpl.getInstance();
         userDao.setConnection(dataSource.getConnection());
     }
+
+    @Ignore
     @Test
     public void testMethod() throws SQLException {
         Connection cnnx = dataSource.getConnection();

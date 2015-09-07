@@ -7,10 +7,7 @@ import by.news.service.vo.UserVO;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runner.RunWith;
 import org.unitils.UnitilsJUnit4TestClassRunner;
 import org.unitils.dbunit.annotation.DataSet;
@@ -70,6 +67,7 @@ public class UserDaoTest {
         Assert.assertNull(userVO);
     }
 
+    @Ignore
     @Test
     public void testCreatingUser() {
         int expectedId = 12345;
