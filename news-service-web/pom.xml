@@ -45,10 +45,10 @@
 			<artifactId>junit</artifactId>
 		</dependency>
 
-<!--        <dependency>
+        <dependency>
             <groupId>org.apache.tomcat</groupId>
             <artifactId>tomcat-catalina</artifactId>
-        </dependency>-->
+        </dependency>
 		
 		<dependency>
 			<groupId>by.news.service</groupId>

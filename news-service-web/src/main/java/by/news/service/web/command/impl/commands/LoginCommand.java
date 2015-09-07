@@ -19,6 +19,10 @@ public class LoginCommand extends AbstractCommand {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         String nextPage = ResourceBundle.getBundle("resources").getString("page.login");
+
+
+
+
         User user = validate(request);
         if (user == null) {
             errorHandling(request);

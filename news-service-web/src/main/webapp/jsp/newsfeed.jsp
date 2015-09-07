@@ -8,7 +8,6 @@
 <body>
 <%@ include file="frag-header-admin.jsp" %>
 <form action="/news-service/Controller" method="post">
-    <%-- <ctg:info-role role="${role}"> --%>
     <input type=hidden name="command" value="news_feed">
 
     <div class="container">

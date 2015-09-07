@@ -14,6 +14,15 @@
         <fmt:message key="login.sign.in" />
     </h2>
 
+    <p>Введите логин и пароль для доступа к приложению</p>
+    <form method="post" action="j_security_check">
+        <input type="text" name="j_username"/> login
+        <br/><br/>
+        <input type="password" name="j_password"/> password
+        <br/><br/>
+        <input type="submit" value="войти"/>
+    </form>
+
     <form class="form-horizontal" role="form" action="j_security_check" method="post">
 
         <div class="form-group">

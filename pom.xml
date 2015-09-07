@@ -72,7 +72,7 @@
        <!-- <unitils.version>3.4.1</unitils.version>-->
         <unitils.version>3.4.1</unitils.version>
         <junit.version>4.11</junit.version>
-        <!--<catalina.version>7.0.55</catalina.version>-->
+        <catalina.version>7.0.55</catalina.version>
     </properties>
 
 	<dependencyManagement>
@@ -212,11 +212,12 @@
               <!--  <version>5.1.13</version>-->
 			</dependency>
 
-            <!--<dependency>
+            <dependency>
                 <groupId>org.apache.tomcat</groupId>
                 <artifactId>tomcat-catalina</artifactId>
                 <version>${catalina.version}</version>
-            </dependency>-->
+                <scope>provided</scope>
+            </dependency>
 
         </dependencies>
 	</dependencyManagement>
