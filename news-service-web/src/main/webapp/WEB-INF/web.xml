@@ -23,22 +23,25 @@
         <error-code>500</error-code>
         <location>/jsp/error500.jsp</location>
     </error-page>
-<!--    <security-constraint>
+
+    <security-constraint>
+        <display-name>Constraint1</display-name>
         <web-resource-collection>
             <web-resource-name>NewsService</web-resource-name>
-            <url-pattern>/jsp/news_feed.jsp</url-pattern>
+            <url-pattern>/*</url-pattern>
         </web-resource-collection>
-        <auth-constraint>
-            <role-name></role-name>
-        </auth-constraint>
-    </security-constraint>-->
+<!--        <auth-constraint>
+            <role-name>user</role-name>
+        </auth-constraint>-->
+    </security-constraint>
 
-<!--    <login-config>
+    <login-config>
         <auth-method>FORM</auth-method>
+        <realm-name>JDBC</realm-name>
         <form-login-config>
-            <form-login-page>/jsp/login_realm.jsp</form-login-page>
-            <form-error-page>/jsp/login_realm_error.jsp</form-error-page>
+            <form-login-page>/html/login.xhtml</form-login-page>
+            <form-error-page>/html/error.xhtml</form-error-page>
         </form-login-config>
-    </login-config>-->
+    </login-config>
 </web-app>
 

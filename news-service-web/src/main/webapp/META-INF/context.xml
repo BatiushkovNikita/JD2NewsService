@@ -19,14 +19,14 @@
 <Context path="" docBase="news_service" debug="99"
          reloadable="true" antiJARLocking="true" antiResourceLocking="true">
 
-    <Realm className="org.apache.catalina.realm.JDBCRealm" debug="99"
-           allRolesMode="true"
-           driverName="com.mysql.jdbc.Driver"
-           connectionURL="jdbc:mysql://localhost:3306/news_service_2?autoReconnect=true"
-           connectionName="root" connectionPassword="admin123"
+        <Realm className="org.apache.catalina.realm.JDBCRealm" debug="99"
+               allRolesMode="true"
+               driverName="com.mysql.jdbc.Driver"
+               connectionURL="jdbc:mysql://localhost:3306/news_service_2?autoReconnect=true"
+               connectionName="root" connectionPassword="admin123"
+               userTable="user" userNameCol="email" userCredCol="password" />
+    <!--userRoleTable="role" roleNameCol="role_id"/>-->
 
-           userTable="user" userNameCol="email" userCredCol="password"/>
-    <!-- userRoleTable="user_role" roleNameCol="role_name"-->
 
     <!-- Default set of monitored resources -->
     <WatchedResource>WEB-INF/web.xml</WatchedResource>
@@ -41,5 +41,10 @@
     <!--
     <Valve className="org.apache.catalina.valves.CometConnectionManagerValve" />
     -->
+    <!--    <Resource name="jdbc/TestDB" auth="Container" type="javax.sql.DataSource"
+                  maxActive="100" maxIdle="30" maxWait="10000"
+                  username="javauser" password="javadude" driverClassName="com.mysql.jdbc.Driver"
+                  url="jdbc:mysql://localhost:3306/javatest"/>-->
+
 
 </Context>

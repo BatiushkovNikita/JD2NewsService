@@ -21,6 +21,12 @@ public class NewsFeedCommand extends AbstractCommand {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         String nextPage = ResourceBundle.getBundle("resources").getString("page.news.feed");
+
+        String userName = request.getUserPrincipal().getName();
+        request.setAttribute("userName", userName);
+
+        request.setAttribute("userRole", request.isUserInRole("user"));
+
         List<News> newsFeed = null;
         Log.debug("Getting news");
         try {

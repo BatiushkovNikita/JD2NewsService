@@ -11,6 +11,9 @@
     <input type=hidden name="command" value="news_feed">
 
     <div class="container">
+        <p>userName: ${userName}</p>
+        <p>userRole: ${userRole}</p>
+
         <h2>
             <fmt:message key="newsfeed.title"/>
         </h2>

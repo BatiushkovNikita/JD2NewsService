@@ -56,6 +56,9 @@
 				</div>
 			</div>
 		</div>
+
+        <p>user@user:user:user</p><br>
+        <p>root@root:root:admin</p>
 	</div>
 
 

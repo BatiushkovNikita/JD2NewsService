@@ -8,6 +8,7 @@ import by.news.service.services.impl.UserServiceImpl;
 import by.news.service.services.interf.UserService;
 import by.news.service.web.command.impl.AbstractCommand;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -19,42 +20,23 @@ public class LoginCommand extends AbstractCommand {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         String nextPage = ResourceBundle.getBundle("resources").getString("page.login");
-
-
-
-
         User user = validate(request);
         if (user == null) {
             errorHandling(request);
             return nextPage;
         }
-        User authorizedUser = null;
         try {
-            authorizedUser = authorizeUser(user);
-        } catch (ServiceException e) {
-            errorHandling(request, "Cannot authorize user", e);
+            request.login(request.getParameter("email"), request.getParameter("password"));
+
+        } catch (ServletException e) {
+            e.printStackTrace();
         }
-        if (authorizedUser == null) {
+        if (request.getUserPrincipal() == null) {
             errorHandling(request);
             return nextPage;
         }
-        addUserToSession(request, authorizedUser);
         nextPage = ResourceBundle.getBundle("resources").getString("page.command.news.feed");
         return nextPage;
-    }
-
-    private User authorizeUser(User user) throws ServiceException {
-        User authorizedUser;
-        Log.debug("Get DAO");
-        UserDAO userDAO = UserDAOImpl.getInstance();
-        Log.debug("Get Service");
-        UserService userService = UserServiceImpl.getInstance();
-        Log.debug("Dependency injection");
-        userService.setUserDAO(userDAO);
-        Log.debug("Authorizing user");
-        authorizedUser = userService.authorizeUser(user);
-        Log.debug("Authentication successful");
-        return authorizedUser;
     }
 
     private User validate(HttpServletRequest request) {
@@ -75,10 +57,5 @@ public class LoginCommand extends AbstractCommand {
         request.setAttribute(
                 ResourceBundle.getBundle("resources").getString("param.error.login.input"),
                 ResourceBundle.getBundle("content").getString("error.login.input.message"));
-    }
-
-    private void addUserToSession(HttpServletRequest request, User user) {
-        HttpSession session = request.getSession();
-        session.setAttribute("userID", user.getUserID());
     }
 }

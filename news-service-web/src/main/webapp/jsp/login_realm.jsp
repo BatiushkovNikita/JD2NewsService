@@ -21,6 +21,7 @@
         <input type="password" name="j_password"/> password
         <br/><br/>
         <input type="submit" value="войти"/>
+        <input type="reset" value="Reset"/>
     </form>
 
     <form class="form-horizontal" role="form" action="j_security_check" method="post">

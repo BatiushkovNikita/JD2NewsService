@@ -13,6 +13,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache-core</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>by.news.service</groupId>
             <artifactId>news-service-daoh</artifactId>
             <version>0.0.1-SNAPSHOT</version>
