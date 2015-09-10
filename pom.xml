@@ -8,7 +8,7 @@
 	<packaging>pom</packaging>
 	<modules>
 	<!---->
-		<module>news.service-dao</module>
+		<module>news-service-dao</module>
 		<module>news-service-entity</module>
 		<module>news-service-web</module>
 		<module>news-service-service</module>
@@ -17,6 +17,7 @@
 		<module>news-service-daoh</module>
         <module>news-service-vo</module>
         <module>news-service-serviceh</module>
+        <module>news-service-daojpa</module>
     </modules>
 	<!--
     <repositories>
@@ -73,10 +74,36 @@
         <unitils.version>3.4.1</unitils.version>
         <junit.version>4.11</junit.version>
         <catalina.version>7.0.55</catalina.version>
+        <hibernate.version>4.2.20.Final</hibernate.version>
+        <spring.version>4.2.1.RELEASE</spring.version>
     </properties>
 
 	<dependencyManagement>
 		<dependencies>
+
+            <!-- SPRING -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-core</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+
+
+
+            <!-- HIBERNATE -->
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-entitymanager</artifactId>
+                <version>${hibernate.version}</version>
+            </dependency>
+
 
             <dependency>
                 <groupId>net.sf.ehcache</groupId>
