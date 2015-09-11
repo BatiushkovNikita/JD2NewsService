@@ -129,6 +129,8 @@
 				<version>2.2</version>
 			</dependency>
 
+            <!-- TESTING -->
+
 			<dependency>
 				<groupId>org.unitils</groupId>
 				<artifactId>unitils-orm</artifactId>
@@ -171,6 +173,12 @@
 				<version>${unitils.version}</version>
 				<scope>test</scope>
 			</dependency>
+            <dependency>
+                <groupId>org.unitils</groupId>
+                <artifactId>unitils-spring</artifactId>
+                <version>${unitils.version}</version>
+                <scope>test</scope>
+            </dependency>
 
 			<dependency>
 				<groupId>commons-codec</groupId>
