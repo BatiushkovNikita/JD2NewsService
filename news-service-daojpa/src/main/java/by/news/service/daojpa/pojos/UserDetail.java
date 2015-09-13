@@ -26,6 +26,19 @@ public class UserDetail implements Serializable {
 
     }
 
+    public UserDetail(int id, String firstName, String lastName, String cellPhone) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.cellPhone = cellPhone;
+    }
+
+    public UserDetail(String firstName, String lastName, String cellPhone) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.cellPhone = cellPhone;
+    }
+
     public int getId() {
         return id;
     }

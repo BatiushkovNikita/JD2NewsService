@@ -20,7 +20,12 @@ public class Role implements Serializable {
 
 	}
 
-	public int getId() {
+    public Role(int id, String roleName) {
+        this.id = id;
+        this.roleName = roleName;
+    }
+
+    public int getId() {
 		return id;
 	}
 

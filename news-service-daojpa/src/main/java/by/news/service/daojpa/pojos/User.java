@@ -1,6 +1,7 @@
 package by.news.service.daojpa.pojos;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -19,17 +20,23 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "user_detail_id")
     private UserDetail userDetail;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles;
+    private Set<Role> roles = new HashSet<>();
 
     public User() {
+    }
+
+    public User(int id, String email, String password) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
     }
 
     public int getId() {
@@ -102,6 +109,8 @@ public class User {
                 "id=" + id +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", userDetail=" + userDetail +
+                ", roles=" + roles +
                 '}';
     }
 }

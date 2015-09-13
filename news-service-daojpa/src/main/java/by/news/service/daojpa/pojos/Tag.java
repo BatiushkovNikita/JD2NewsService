@@ -22,6 +22,12 @@ public class Tag implements Serializable {
     public Tag() {
     }
 
+    public Tag(int id, String tagName, Set<News> newses) {
+        this.id = id;
+        this.tagName = tagName;
+        this.newses = newses;
+    }
+
     public int getId() {
         return id;
     }

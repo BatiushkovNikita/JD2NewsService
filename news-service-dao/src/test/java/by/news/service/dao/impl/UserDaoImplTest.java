@@ -1,6 +1,5 @@
 package by.news.service.dao.impl;
 
-import by.news.service.dao.exception.DAOException;
 import by.news.service.entity.User;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -14,8 +13,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
-import static junit.framework.Assert.assertEquals;
 
 @DataSet
 public class UserDaoImplTest extends UnitilsJUnit4 {

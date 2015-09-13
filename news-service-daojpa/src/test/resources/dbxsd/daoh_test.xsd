@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" xmlns="daoh_test" targetNamespace="daoh_test">
+	<xsd:element name="user_detail" type="user_detail__type" />
+	<xsd:element name="dbmaintain_scripts" type="dbmaintain_scripts__type" />
+	<xsd:element name="user_role" type="user_role__type" />
+	<xsd:element name="news" type="news__type" />
+	<xsd:element name="tag" type="tag__type" />
+	<xsd:element name="news_tag" type="news_tag__type" />
+	<xsd:element name="role" type="role__type" />
+	<xsd:element name="user" type="user__type" />
+	<xsd:complexType name="user_detail__type">
+		<xsd:attribute name="id" use="optional" />
+		<xsd:attribute name="first_name" use="optional" />
+		<xsd:attribute name="cellphone" use="optional" />
+		<xsd:attribute name="last_name" use="optional" />
+	</xsd:complexType>
+	<xsd:complexType name="dbmaintain_scripts__type">
+		<xsd:attribute name="succeeded" use="optional" />
+		<xsd:attribute name="file_last_modified_at" use="optional" />
+		<xsd:attribute name="executed_at" use="optional" />
+		<xsd:attribute name="checksum" use="optional" />
+		<xsd:attribute name="file_name" use="optional" />
+		<xsd:attribute name="version" use="optional" />
+	</xsd:complexType>
+	<xsd:complexType name="user_role__type">
+		<xsd:attribute name="role_id" use="optional" />
+		<xsd:attribute name="user_id" use="optional" />
+	</xsd:complexType>
+	<xsd:complexType name="news__type">
+		<xsd:attribute name="topic" use="optional" />
+		<xsd:attribute name="id" use="optional" />
+		<xsd:attribute name="news_text" use="optional" />
+		<xsd:attribute name="user_id" use="optional" />
+		<xsd:attribute name="publication_date" use="optional" />
+	</xsd:complexType>
+	<xsd:complexType name="tag__type">
+		<xsd:attribute name="id" use="optional" />
+		<xsd:attribute name="tag_name" use="optional" />
+	</xsd:complexType>
+	<xsd:complexType name="news_tag__type">
+		<xsd:attribute name="news_id" use="optional" />
+		<xsd:attribute name="tag_id" use="optional" />
+	</xsd:complexType>
+	<xsd:complexType name="role__type">
+		<xsd:attribute name="id" use="optional" />
+		<xsd:attribute name="role_name" use="optional" />
+	</xsd:complexType>
+	<xsd:complexType name="user__type">
+		<xsd:attribute name="id" use="optional" />
+		<xsd:attribute name="user_detail_id" use="optional" />
+		<xsd:attribute name="email" use="optional" />
+		<xsd:attribute name="password" use="optional" />
+	</xsd:complexType>
+</xsd:schema>
