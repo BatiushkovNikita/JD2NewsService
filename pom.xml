@@ -1,53 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>by.news.service</groupId>
-	<artifactId>news-service</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>pom</packaging>
-	<modules>
-	<!---->
-		<module>news-service-dao</module>
-		<module>news-service-entity</module>
-		<module>news-service-web</module>
-		<module>news-service-service</module>
-		<module>news-service-script</module>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>by.news.service</groupId>
+    <artifactId>news-service</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <modules>
+        <!---->
+        <module>news-service-dao</module>
+        <module>news-service-entity</module>
+        <module>news-service-web</module>
+        <module>news-service-service</module>
+        <module>news-service-script</module>
 
-		<module>news-service-daoh</module>
+        <module>news-service-daoh</module>
         <module>news-service-vo</module>
         <module>news-service-daojpa</module>
     </modules>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.0</version>
-				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
-				</configuration>
-			</plugin>
+    <build>
+        <plugins>
 
-			<plugin>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>2.3</version>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.tomcat.maven</groupId>
-				<artifactId>tomcat7-maven-plugin</artifactId>
-				<version>2.2</version>
-				<configuration>
-					<url>http://localhost:8085/manager/text</url>
-					<server>tomcat7-maven-plugin</server>
-					<path>/${project.artifactId}</path>
-				</configuration>
-			</plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.12</version>
+                <configuration>
+                    <forkMode>always</forkMode>
+                </configuration>
+            </plugin>
 
-		</plugins>
-	</build>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.0</version>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.3</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <url>http://localhost:8085/manager/text</url>
+                    <server>tomcat7-maven-plugin</server>
+                    <path>/${project.artifactId}</path>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
     <properties>
         <unitils.version>3.4.1</unitils.version>
         <junit.version>4.11</junit.version>
@@ -58,8 +70,8 @@
         <slf4j.version>1.7.5</slf4j.version>
     </properties>
 
-	<dependencyManagement>
-		<dependencies>
+    <dependencyManagement>
+        <dependencies>
 
             <!-- SPRING -->
             <dependency>
@@ -108,37 +120,37 @@
             </dependency>
 
             <dependency>
-				<groupId>javax.servlet</groupId>
-				<artifactId>javax.servlet-api</artifactId>
-				<version>3.0.1</version>
-			</dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>3.0.1</version>
+            </dependency>
 
-			<dependency>
-				<groupId>javax.servlet</groupId>
-				<artifactId>jstl</artifactId>
-				<version>1.2</version>
-			</dependency>
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>jstl</artifactId>
+                <version>1.2</version>
+            </dependency>
 
-			<dependency>
-				<groupId>javax.servlet.jsp</groupId>
-				<artifactId>jsp-api</artifactId>
-				<version>2.2</version>
-			</dependency>
+            <dependency>
+                <groupId>javax.servlet.jsp</groupId>
+                <artifactId>jsp-api</artifactId>
+                <version>2.2</version>
+            </dependency>
 
             <!-- TESTING -->
 
-			<dependency>
-				<groupId>org.unitils</groupId>
-				<artifactId>unitils-orm</artifactId>
-				<version>${unitils.version}</version>
-				<scope>test</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.unitils</groupId>
-				<artifactId>unitils-dbmaintainer</artifactId>
-				<version>${unitils.version}</version>
-				<scope>test</scope>
-			</dependency>
+            <dependency>
+                <groupId>org.unitils</groupId>
+                <artifactId>unitils-orm</artifactId>
+                <version>${unitils.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.unitils</groupId>
+                <artifactId>unitils-dbmaintainer</artifactId>
+                <version>${unitils.version}</version>
+                <scope>test</scope>
+            </dependency>
             <dependency>
                 <groupId>org.unitils</groupId>
                 <artifactId>unitils-inject</artifactId>
@@ -146,17 +158,17 @@
                 <scope>test</scope>
             </dependency>
             <dependency>
-				<groupId>org.unitils</groupId>
-				<artifactId>unitils-database</artifactId>
-				<version>${unitils.version}</version>
-				<scope>test</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.unitils</groupId>
-				<artifactId>unitils-core</artifactId>
-				<version>${unitils.version}</version>
-				<scope>test</scope>
-			</dependency>
+                <groupId>org.unitils</groupId>
+                <artifactId>unitils-database</artifactId>
+                <version>${unitils.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.unitils</groupId>
+                <artifactId>unitils-core</artifactId>
+                <version>${unitils.version}</version>
+                <scope>test</scope>
+            </dependency>
             <dependency>
                 <groupId>org.unitils</groupId>
                 <artifactId>unitils-testng</artifactId>
@@ -164,11 +176,11 @@
                 <scope>test</scope>
             </dependency>
             <dependency>
-				<groupId>org.unitils</groupId>
-				<artifactId>unitils-dbunit</artifactId>
-				<version>${unitils.version}</version>
-				<scope>test</scope>
-			</dependency>
+                <groupId>org.unitils</groupId>
+                <artifactId>unitils-dbunit</artifactId>
+                <version>${unitils.version}</version>
+                <scope>test</scope>
+            </dependency>
             <dependency>
                 <groupId>org.unitils</groupId>
                 <artifactId>unitils-spring</artifactId>
@@ -182,45 +194,45 @@
                 <scope>test</scope>
             </dependency>
 
-			<dependency>
-				<groupId>commons-codec</groupId>
-				<artifactId>commons-codec</artifactId>
-				<version>1.10</version>
-			</dependency>
-			<dependency>
-				<groupId>org.jmock</groupId>
-				<artifactId>jmock-legacy</artifactId>
-				<version>2.5.1</version>
-			</dependency>
-			<dependency>
-				<groupId>org.jmock</groupId>
-				<artifactId>jmock</artifactId>
-				<version>2.8.1</version>
-			</dependency>
-			<dependency>
-				<groupId>org.jmock</groupId>
-				<artifactId>jmock-junit4</artifactId>
-				<version>2.8.1</version>
-			</dependency>
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>1.10</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jmock</groupId>
+                <artifactId>jmock-legacy</artifactId>
+                <version>2.5.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jmock</groupId>
+                <artifactId>jmock</artifactId>
+                <version>2.8.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jmock</groupId>
+                <artifactId>jmock-junit4</artifactId>
+                <version>2.8.1</version>
+            </dependency>
 
             <!-- LOGGING -->
 
-			<dependency>
-				<groupId>org.apache.logging.log4j</groupId>
-				<artifactId>log4j-api</artifactId>
-				<version>2.3</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.logging.log4j</groupId>
-				<artifactId>log4j-core</artifactId>
-				<version>2.3</version>
-			</dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-api</artifactId>
+                <version>2.3</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-core</artifactId>
+                <version>2.3</version>
+            </dependency>
 
-			<dependency>
-				<groupId>org.jboss.logging</groupId>
-				<artifactId>jboss-logging</artifactId>
-				<version>3.3.0.Final</version>
-			</dependency>
+            <dependency>
+                <groupId>org.jboss.logging</groupId>
+                <artifactId>jboss-logging</artifactId>
+                <version>3.3.0.Final</version>
+            </dependency>
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
                 <artifactId>log4j-1.2-api</artifactId>
@@ -239,35 +251,35 @@
 
             <!-- TESTING -->
 
-			<dependency>
-				<groupId>org.dbunit</groupId>
-				<artifactId>dbunit</artifactId>
-				<!--<version>2.5.1</version>-->
+            <dependency>
+                <groupId>org.dbunit</groupId>
+                <artifactId>dbunit</artifactId>
+                <!--<version>2.5.1</version>-->
                 <version>2.4.9</version>
-			</dependency>
-			<dependency>
-				<groupId>junit</groupId>
-				<artifactId>junit</artifactId>
-				<version>${junit.version}</version>
-				<scope>test</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.commons</groupId>
-				<artifactId>commons-dbcp2</artifactId>
-				<version>2.0</version>
-			</dependency>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-dbcp2</artifactId>
+                <version>2.0</version>
+            </dependency>
 
             <dependency>
-				<groupId>commons-pool</groupId>
-				<artifactId>commons-pool</artifactId>
-				<version>1.6</version>
-			</dependency>
-			<dependency>
-				<groupId>mysql</groupId>
-				<artifactId>mysql-connector-java</artifactId>
-				<version>5.1.6</version>
-              <!--  <version>5.1.13</version>-->
-			</dependency>
+                <groupId>commons-pool</groupId>
+                <artifactId>commons-pool</artifactId>
+                <version>1.6</version>
+            </dependency>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>5.1.6</version>
+                <!--  <version>5.1.13</version>-->
+            </dependency>
 
             <dependency>
                 <groupId>org.apache.tomcat</groupId>
@@ -277,5 +289,5 @@
             </dependency>
 
         </dependencies>
-	</dependencyManagement>
+    </dependencyManagement>
 </project>

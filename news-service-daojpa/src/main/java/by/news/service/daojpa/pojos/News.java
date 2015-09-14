@@ -2,6 +2,7 @@ package by.news.service.daojpa.pojos;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -30,14 +31,22 @@ public class News implements Serializable {
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
     private User user;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "news_tag",
             joinColumns = @JoinColumn(name = "news_id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id"))
-    private Set<Tag> tags;
+    private Set<Tag> tags = new HashSet<>();
 
     public News() {
 
+    }
+
+    public News(int id, String topic, String publicationDate, String newsText, int userId) {
+        this.id = id;
+        this.topic = topic;
+        this.publicationDate = publicationDate;
+        this.newsText = newsText;
+        this.userId = userId;
     }
 
     public int getId() {
@@ -108,7 +117,6 @@ public class News implements Serializable {
         if (newsText != null ? !newsText.equals(news.newsText) : news.newsText != null) return false;
         if (publicationDate != null ? !publicationDate.equals(news.publicationDate) : news.publicationDate != null)
             return false;
-        if (tags != null ? !tags.equals(news.tags) : news.tags != null) return false;
         if (topic != null ? !topic.equals(news.topic) : news.topic != null) return false;
         if (user != null ? !user.equals(news.user) : news.user != null) return false;
 
@@ -123,20 +131,18 @@ public class News implements Serializable {
         result = 31 * result + (newsText != null ? newsText.hashCode() : 0);
         result = 31 * result + userId;
         result = 31 * result + (user != null ? user.hashCode() : 0);
-        result = 31 * result + (tags != null ? tags.hashCode() : 0);
         return result;
     }
 
     @Override
     public String toString() {
         return "News{" +
-                "id=" + id +
-                ", topic='" + topic + '\'' +
-                ", publicationDate='" + publicationDate + '\'' +
-                ", newsText='" + newsText + '\'' +
+                "user=" + user +
                 ", userId=" + userId +
-                ", user=" + user +
-                ", tags=" + tags +
+                ", newsText='" + newsText + '\'' +
+                ", publicationDate='" + publicationDate + '\'' +
+                ", topic='" + topic + '\'' +
+                ", id=" + id +
                 '}';
     }
 }

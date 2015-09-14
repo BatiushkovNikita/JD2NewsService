@@ -7,13 +7,17 @@ import by.news.service.daojpa.repository.interf.UserRepository;
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.ExpectedDatabase;
+import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
+import javassist.expr.Cast;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.dbunit.dataset.ITable;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -26,7 +30,7 @@ import java.util.Set;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = TestConfig.class)
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DbUnitTestExecutionListener.class })
-@DatabaseSetup("classpath:UserRepositoryTest.xml")
+@DatabaseSetup("classpath:UserRepoTest.xml")
 public class UserRepositoryTest {
 
     private Logger Log = LogManager.getLogger(UserRepositoryTest.class.getName());
@@ -66,8 +70,8 @@ public class UserRepositoryTest {
     }
 
     @Test
-    //@DatabaseSetup("classpath:UserRepositoryTest.xml")
-    @ExpectedDatabase("classpath:UserRepositoryTestExpected.xml")
+    @ExpectedDatabase(assertionMode = DatabaseAssertionMode.NON_STRICT,
+            value = "classpath:UserRepoTestExpected.xml")
     public void testUpdateUser() {
         User user = userRepository.findOne(222);
         user.setEmail("updatedEmail");
@@ -75,8 +79,16 @@ public class UserRepositoryTest {
         UserDetail userDetail = user.getUserDetail();
         userDetail.setLastName("updatedLastName");
         user.setUserDetail(userDetail);
-        Log.error(user);
         userRepository.save(user);
     }
 
+    @Test
+    public  void testGetAllUsers() {
+        Iterable<User> users = userRepository.findAll();
+        int count = 0;
+        for (User user : users) {
+            count++;
+        }
+        Assert.assertEquals(2, count);
+    }
 }

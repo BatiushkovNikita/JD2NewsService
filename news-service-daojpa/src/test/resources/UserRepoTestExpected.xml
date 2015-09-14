@@ -14,10 +14,4 @@
     <user_role user_id="111" role_id="1" />
     <user_role user_id="111" role_id="2" />
 
-    <news user_id="111" id="1" news_text="Text1" publication_date="2015-09-01 16:37:00" topic="Topic1" />
-
-    <tag id="1" tag_name="TagName1" />
-
-    <news_tag news_id="1" tag_id="1" />
-
 </dataset>

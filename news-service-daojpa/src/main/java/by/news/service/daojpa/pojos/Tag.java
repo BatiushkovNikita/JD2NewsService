@@ -2,6 +2,7 @@ package by.news.service.daojpa.pojos;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -16,16 +17,15 @@ public class Tag implements Serializable {
     @Column(name = "tag_name")
     private String tagName;
 
-    @ManyToMany(mappedBy = "tags")
-    private Set<News> newses;
+    @ManyToMany(mappedBy = "tags", fetch = FetchType.EAGER)//, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private Set<News> newses = new HashSet<>();
 
     public Tag() {
     }
 
-    public Tag(int id, String tagName, Set<News> newses) {
+    public Tag(int id, String tagName) {
         this.id = id;
         this.tagName = tagName;
-        this.newses = newses;
     }
 
     public int getId() {
@@ -60,7 +60,6 @@ public class Tag implements Serializable {
         Tag tag = (Tag) o;
 
         if (id != tag.id) return false;
-        if (newses != null ? !newses.equals(tag.newses) : tag.newses != null) return false;
         if (tagName != null ? !tagName.equals(tag.tagName) : tag.tagName != null) return false;
 
         return true;
@@ -70,7 +69,6 @@ public class Tag implements Serializable {
     public int hashCode() {
         int result = id;
         result = 31 * result + (tagName != null ? tagName.hashCode() : 0);
-        result = 31 * result + (newses != null ? newses.hashCode() : 0);
         return result;
     }
 
@@ -79,7 +77,6 @@ public class Tag implements Serializable {
         return "Tag{" +
                 "id=" + id +
                 ", tagName='" + tagName + '\'' +
-                ", newses=" + newses +
                 '}';
     }
 }
