@@ -1,5 +1,6 @@
 package by.news.service.daojpa;
 
+import by.news.service.daojpa.config.DataConfig;
 import by.news.service.daojpa.pojos.Role;
 import by.news.service.daojpa.pojos.User;
 import by.news.service.daojpa.pojos.UserDetail;

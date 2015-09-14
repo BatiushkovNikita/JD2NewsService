@@ -27,7 +27,6 @@ public class TestConfig {
     public DriverManagerDataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        //dataSource.setUrl("jdbc:mysql://localhost:3306/news_service_2");
         dataSource.setUrl("jdbc:mysql://localhost:3306/daoh_test");
         dataSource.setUsername("root");
         dataSource.setPassword("admin123");

@@ -97,4 +97,9 @@ public class NewsRepositoryTest {
         News news = newsRepository.findOne(2);
         newsRepository.delete(news);
     }
+
+/*    @Test
+    public void test() {
+        newsRepository.findNewsesWhereTagLike("sport");
+    }*/
 }

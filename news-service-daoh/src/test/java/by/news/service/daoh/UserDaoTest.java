@@ -49,7 +49,7 @@ public class UserDaoTest {
     @Ignore
     @Test
     public void testGetByKey() {
-        int id = 111;
+         int id = 111;
         UserVO expectedUserVO = new UserVO("email1", null, "FirstName1", "LastName1", "1234567890");
         RoleVO roleVO = new RoleVO(1, "user");
         Set<RoleVO> rolesVO = new HashSet<>();

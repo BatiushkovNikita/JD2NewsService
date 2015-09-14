@@ -15,6 +15,7 @@ import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
+import java.util.List;
 import java.util.Set;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -30,8 +31,10 @@ public class TagRepositoryTest {
 
     @Test
     public void testGetNewsByTag() {
-        Set<News> newses = tagRepository.findNewses("Tag1");
-        Assert.assertNotNull(newses);
+        List newses1 = tagRepository.findByTag("sport");
+        Assert.assertEquals(3, newses1.size());
+        List newses2 = tagRepository.findByTag("finance");
+        Assert.assertEquals(0, newses2.size());
     }
 }
 

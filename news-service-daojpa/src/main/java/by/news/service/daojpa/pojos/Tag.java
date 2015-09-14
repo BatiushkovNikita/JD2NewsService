@@ -17,7 +17,7 @@ public class Tag implements Serializable {
     @Column(name = "tag_name")
     private String tagName;
 
-    @ManyToMany(mappedBy = "tags", fetch = FetchType.EAGER)//, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(mappedBy = "tags", fetch = FetchType.EAGER)
     private Set<News> newses = new HashSet<>();
 
     public Tag() {
