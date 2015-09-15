@@ -1,6 +1,6 @@
-package by.news.service.daojpa;
+package by.news.service.daojpa.repository;
 
-import by.news.service.daojpa.pojos.News;
+import by.news.service.daojpa.TestConfig;
 import by.news.service.daojpa.repository.interf.TagRepository;
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
@@ -16,7 +16,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
 import java.util.List;
-import java.util.Set;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = TestConfig.class)

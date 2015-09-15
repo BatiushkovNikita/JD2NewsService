@@ -22,6 +22,16 @@ public class UserVO {
         this.cellPhone = cellPhone;
     }
 
+    public UserVO(int id, String email, String password, String firstName, String lastName, String cellPhone, Set<RoleVO> roles) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.cellPhone = cellPhone;
+        this.roles = roles;
+    }
+
     public int getId() {
         return id;
     }

@@ -18,8 +18,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories
-@ComponentScan("by.news.service.daojpa")
+@EnableJpaRepositories("by.news.service.daojpa")
 //@PropertySource("classpath:app.properties")
 public class DataConfig {
 

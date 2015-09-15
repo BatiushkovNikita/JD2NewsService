@@ -1,6 +1,6 @@
-package by.news.service.daojpa;
+package by.news.service.daojpa.repository;
 
-import by.news.service.daojpa.config.DataConfig;
+import by.news.service.daojpa.TestConfig;
 import by.news.service.daojpa.pojos.Role;
 import by.news.service.daojpa.pojos.User;
 import by.news.service.daojpa.pojos.UserDetail;
@@ -9,16 +9,13 @@ import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.ExpectedDatabase;
 import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
-import javassist.expr.Cast;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.dbunit.dataset.ITable;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;

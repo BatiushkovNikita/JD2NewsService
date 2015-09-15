@@ -1,5 +1,6 @@
-package by.news.service.daojpa;
+package by.news.service.daojpa.repository;
 
+import by.news.service.daojpa.TestConfig;
 import by.news.service.daojpa.pojos.News;
 import by.news.service.daojpa.pojos.Tag;
 import by.news.service.daojpa.pojos.User;
