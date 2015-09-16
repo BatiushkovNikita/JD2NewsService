@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="dbxsd/dataset.xsd">
+
+    <user_detail id="1" first_name="FirstName1" last_name="LastName1" cellphone="1234567890"/>
+    <user_detail id="2" first_name="FirstName2" last_name="LastName2" cellphone="0987654321"/>
+
+    <user id="111" email="email1" password="password1" user_detail_id="1"/>
+    <user id="222" email="email2" password="password2" user_detail_id="2"/>
+
+    <news id="1" news_text="Text1" publication_date="2015-09-01 16:37:00" topic="Topic1" user_id="111"/>
+    <news id="2" news_text="Text2" publication_date="2015-07-02 13:23:44" topic="Topic2" user_id="111"/>
+    <news id="3" news_text="Text3" publication_date="2014-09-01 16:37:00" topic="Topic3" user_id="111"/>
+    <news id="4" news_text="Text4" publication_date="2013-07-02 13:23:44" topic="Topic4" user_id="111"/>
+
+    <tag id="1" tag_name="politics"/>
+    <tag id="2" tag_name="sport"/>
+    <tag id="3" tag_name="education"/>
+    <tag id="4" tag_name="finance" />
+
+    <news_tag news_id="1" tag_id="2"/>
+    <news_tag news_id="1" tag_id="3"/>
+
+    <news_tag news_id="2" tag_id="1"/>
+    <news_tag news_id="2" tag_id="2"/>
+    <news_tag news_id="2" tag_id="3"/>
+
+    <news_tag news_id="4" tag_id="2"/>
+
+</dataset>

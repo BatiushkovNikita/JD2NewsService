@@ -16,6 +16,14 @@ public class News {
 		this.userID = userID;
 	}
 
+	public News(String topic, String publicationDate, String newsText, int userID) {
+		super();
+		this.topic = topic;
+		this.publicationDate = publicationDate;
+		this.newsText = newsText;
+		this.userID = userID;
+	}
+
 	public int getNewsID() {
 		return newsID;
 	}

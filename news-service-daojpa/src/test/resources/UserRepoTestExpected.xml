@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="dbxsd/dataset.xsd">
+
+    <user_detail id="1" first_name="FirstName1" last_name="LastName1" cellphone="1234567890"/>
+    <user_detail id="2" first_name="FirstName2" last_name="updatedLastName" cellphone="0987654321"/>
+
+    <user id="111" email="email1" password="password1" user_detail_id="1"/>
+    <user id="222" email="updatedEmail" password="updatedPassword" user_detail_id="2"/>
+
+    <role id="1" role_name="user"/>
+    <role id="2" role_name="moderator"/>
+    <role id="3" role_name="admin"/>
+
+    <user_role user_id="111" role_id="1" />
+    <user_role user_id="111" role_id="2" />
+
+</dataset>
