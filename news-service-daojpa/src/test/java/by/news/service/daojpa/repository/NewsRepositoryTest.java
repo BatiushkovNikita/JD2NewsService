@@ -1,10 +1,9 @@
 package by.news.service.daojpa.repository;
 
-import by.news.service.daojpa.TestConfig;
+import by.news.service.daojpa.config.TestConfig;
 import by.news.service.daojpa.pojos.News;
 import by.news.service.daojpa.pojos.Tag;
 import by.news.service.daojpa.pojos.User;
-import by.news.service.daojpa.repository.interf.NewsRepository;
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.ExpectedDatabase;
@@ -15,12 +14,12 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
+import javax.inject.Inject;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -33,7 +32,7 @@ public class NewsRepositoryTest {
 
     private Logger Log = LogManager.getLogger(NewsRepositoryTest.class.getName());
 
-    @Autowired
+    @Inject
     private NewsRepository newsRepository;
 
     @Before
@@ -98,9 +97,4 @@ public class NewsRepositoryTest {
         News news = newsRepository.findOne(2);
         newsRepository.delete(news);
     }
-
-/*    @Test
-    public void test() {
-        newsRepository.findNewsesWhereTagLike("sport");
-    }*/
 }

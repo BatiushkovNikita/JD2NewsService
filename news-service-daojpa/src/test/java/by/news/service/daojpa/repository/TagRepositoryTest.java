@@ -1,7 +1,6 @@
 package by.news.service.daojpa.repository;
 
-import by.news.service.daojpa.TestConfig;
-import by.news.service.daojpa.repository.interf.TagRepository;
+import by.news.service.daojpa.config.TestConfig;
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import org.apache.logging.log4j.LogManager;
@@ -34,6 +33,10 @@ public class TagRepositoryTest {
         Assert.assertEquals(3, newses1.size());
         List newses2 = tagRepository.findByTag("finance");
         Assert.assertEquals(0, newses2.size());
+        for (Object news : newses1) {
+            Log.error(news);
+        }
+
     }
 }
 

@@ -7,6 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.unitils.UnitilsJUnit4TestClassRunner;
@@ -40,12 +41,14 @@ public class SimpleTest {
         entityManagerFactory.close();
     }
 
+    @Ignore
     @Test
     public void test1() {
         UserVO userVO = userDao.getByPK(111);
         ReflectionAssert.assertLenientEquals(userVO, userVO);
     }
 
+    @Ignore
     @Test
     public void test3() {
         UserVO userVO = userDao.getByPK(222);

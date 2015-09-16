@@ -3,7 +3,7 @@ package by.news.service.daojpa.service;
 import by.news.service.daojpa.pojos.Role;
 import by.news.service.daojpa.pojos.User;
 import by.news.service.daojpa.pojos.UserDetail;
-import by.news.service.daojpa.repository.interf.UserRepository;
+import by.news.service.daojpa.repository.UserRepository;
 import by.news.service.daojpa.service.impl.UserServiceImpl;
 import by.news.service.daojpa.service.interf.UserService;
 import by.news.service.vo.RoleVO;
@@ -16,12 +16,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.mockito.internal.matchers.apachecommons.ReflectionEquals;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import javax.inject.Inject;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -31,10 +31,10 @@ public class UserServiceTest {
 
     private Logger Log = LogManager.getLogger(UserServiceTest.class.getName());
 
-    @Autowired
+    @Inject
     private UserService userService;
 
-    @Autowired
+    @Inject
     private UserRepository userRepository;
 
     private UserVO userVO;
@@ -87,7 +87,7 @@ public class UserServiceTest {
     }
 
     @Configuration
-    public class UserServiceTestContextConfiguration {
+    static class UserServiceTestContextConfiguration {
         @Bean
         public UserService userService() {
             return new UserServiceImpl();

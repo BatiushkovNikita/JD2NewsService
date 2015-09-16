@@ -1,68 +1,35 @@
 package by.news.service.daojpa.service.impl;
 
-
 import by.news.service.daojpa.pojos.News;
 import by.news.service.daojpa.pojos.Tag;
-import by.news.service.daojpa.repository.NewsRepository;
+import by.news.service.daojpa.repository.TagRepository;
 import by.news.service.daojpa.service.interf.NewsService;
+import by.news.service.daojpa.service.interf.TagService;
 import by.news.service.vo.NewsVO;
 import by.news.service.vo.TagVO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ReflectionUtils;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 @Service
-public class NewsServiceImpl implements NewsService {
+public class TagServiceImpl implements TagService{
 
-    private Logger Log = LogManager.getLogger(NewsServiceImpl.class.getName());
+    private Logger Log = LogManager.getLogger(TagServiceImpl.class.getName());
 
     @Inject
-    private NewsRepository newsRepository;
-
-
-    @Override
-    public int createNews(NewsVO newsVO) {
-        News news = extractNews(newsVO);
-        News news1 = newsRepository.save(news);
-        return news1.getId();
-    }
+    private TagRepository tagRepository;
 
     @Override
-    public NewsVO getNewsByPK(int key) {
-        News news = newsRepository.findOne(key);
-        return extractNews(news);
-    }
-
-    @Override
-    public void updateNews(NewsVO newsVO) {
-        News news = extractNews(newsVO);
-        newsRepository.save(news);
-    }
-
-    @Override
-    public void deleteNews(int key) {
-        newsRepository.delete(key);
-    }
-
-    @Override
-    public List<NewsVO> getAll() {
-        List<News> newses = (List<News>) newsRepository.findAll();
+    public List<NewsVO> getNewsByTag(String tagName) {
+        List<News> newses = tagRepository.findByTag(tagName);
         return extractNewses(newses);
-    }
-
-    private News extractNews(NewsVO newsVO) {
-        News news = new News();
-        news.setTopic(newsVO.getTopic());
-        news.setPublicationDate(newsVO.getPublicationDate());
-        news.setTopic(newsVO.getPublicationDate());
-        return news;
     }
 
     private NewsVO extractNews(News news) {

@@ -1,11 +1,16 @@
 package by.news.service.vo;
 
-import java.util.Set;
-
 public class TagVO {
     private int id;
     private String tagName;
-    private Set<NewsVO> tags;
+
+    public TagVO() {
+    }
+
+    public TagVO(int id, String tagName) {
+        this.id = id;
+        this.tagName = tagName;
+    }
 
     public int getId() {
         return id;
@@ -23,13 +28,31 @@ public class TagVO {
         this.tagName = tagName;
     }
 
-    public Set<NewsVO> getTags() {
-        return tags;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        TagVO tagVO = (TagVO) o;
+
+        if (id != tagVO.id) return false;
+        if (tagName != null ? !tagName.equals(tagVO.tagName) : tagVO.tagName != null) return false;
+
+        return true;
     }
 
-    public void setTags(Set<NewsVO> tags) {
-        this.tags = tags;
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (tagName != null ? tagName.hashCode() : 0);
+        return result;
     }
 
-
+    @Override
+    public String toString() {
+        return "TagVO{" +
+                "id=" + id +
+                ", tagName='" + tagName + '\'' +
+                '}';
+    }
 }

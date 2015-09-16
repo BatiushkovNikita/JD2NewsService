@@ -88,7 +88,7 @@ public class NewsDao implements BaseDao<NewsVO, Integer>{
         news.setTopic(newsVO.getTopic());
         news.setNewsText(newsVO.getNewsText());
         news.setPublicationDate(newsVO.getPublicationDate());
-        news.setUserId(newsVO.getUserId());
+        //news.setUserId(newsVO.getUserId());
         return news;
     }
 }

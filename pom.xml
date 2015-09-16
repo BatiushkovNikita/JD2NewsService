@@ -112,12 +112,15 @@
                 <version>${hibernate.version}</version>
             </dependency>
 
+            <!-- CACHE -->
 
             <dependency>
                 <groupId>net.sf.ehcache</groupId>
                 <artifactId>ehcache-core</artifactId>
                 <version>2.6.9</version>
             </dependency>
+
+            <!--  -->
 
             <dependency>
                 <groupId>javax.servlet</groupId>
@@ -135,6 +138,14 @@
                 <groupId>javax.servlet.jsp</groupId>
                 <artifactId>jsp-api</artifactId>
                 <version>2.2</version>
+            </dependency>
+
+            <!--  -->
+
+            <dependency>
+                <groupId>javax.inject</groupId>
+                <artifactId>javax.inject</artifactId>
+                <version>1</version>
             </dependency>
 
             <!-- TESTING -->

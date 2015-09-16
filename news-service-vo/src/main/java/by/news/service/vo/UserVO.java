@@ -89,6 +89,36 @@ public class UserVO {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        UserVO userVO = (UserVO) o;
+
+        if (id != userVO.id) return false;
+        if (cellPhone != null ? !cellPhone.equals(userVO.cellPhone) : userVO.cellPhone != null) return false;
+        if (email != null ? !email.equals(userVO.email) : userVO.email != null) return false;
+        if (firstName != null ? !firstName.equals(userVO.firstName) : userVO.firstName != null) return false;
+        if (lastName != null ? !lastName.equals(userVO.lastName) : userVO.lastName != null) return false;
+        if (password != null ? !password.equals(userVO.password) : userVO.password != null) return false;
+        if (roles != null ? !roles.equals(userVO.roles) : userVO.roles != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
+        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+        result = 31 * result + (cellPhone != null ? cellPhone.hashCode() : 0);
+        result = 31 * result + (roles != null ? roles.hashCode() : 0);
+        return result;
+    }
+
+    @Override
     public String toString() {
         return "UserVO{" +
                 "id=" + id +

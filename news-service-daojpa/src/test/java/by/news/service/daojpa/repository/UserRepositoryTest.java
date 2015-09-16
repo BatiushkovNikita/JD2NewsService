@@ -1,10 +1,9 @@
 package by.news.service.daojpa.repository;
 
-import by.news.service.daojpa.TestConfig;
+import by.news.service.daojpa.config.TestConfig;
 import by.news.service.daojpa.pojos.Role;
 import by.news.service.daojpa.pojos.User;
 import by.news.service.daojpa.pojos.UserDetail;
-import by.news.service.daojpa.repository.interf.UserRepository;
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.ExpectedDatabase;
@@ -15,12 +14,13 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
+import javax.inject.Inject;
+import javax.inject.Named;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -33,7 +33,7 @@ public class UserRepositoryTest {
 
     private Logger Log = LogManager.getLogger(UserRepositoryTest.class.getName());
 
-    @Autowired
+    @Inject
     private UserRepository userRepository;
 
     @Before

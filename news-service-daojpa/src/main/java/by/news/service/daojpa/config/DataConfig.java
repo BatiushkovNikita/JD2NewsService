@@ -19,11 +19,9 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories("by.news.service.daojpa")
-//@PropertySource("classpath:app.properties")
 public class DataConfig {
 
     @Bean
-    //@Profile("dev")
     public DriverManagerDataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
@@ -34,7 +32,6 @@ public class DataConfig {
     }
 
     @Bean
-    //@Profile("dev")
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactoryBean.setDataSource(dataSource());
@@ -47,7 +44,6 @@ public class DataConfig {
     }
 
     @Bean
-    //@Profile("dev")
     public JpaTransactionManager transactionManager() {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
@@ -57,40 +53,8 @@ public class DataConfig {
     private Properties getHibernateProperties() {
         Properties properties = new Properties();
         properties.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
-        //properties.put("hibernate.show_sql", "true");
-        //properties.put("hibernate.hbm2ddl.auto", "create");
+        properties.put("hibernate.show_sql", "true");
+        properties.put("hibernate.hbm2ddl.auto", "create");
         return properties;
     }
-
-/*    @Bean
-    @Profile("test")
-    public DriverManagerDataSource testDataSource() {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/daoh_test");
-        dataSource.setUsername("root");
-        dataSource.setPassword("admin123");
-        return dataSource;
-    }
-
-    @Bean
-    @Profile("test")
-    public LocalContainerEntityManagerFactoryBean testEntityManagerFactory() {
-        LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
-        entityManagerFactoryBean.setDataSource(testDataSource());
-        entityManagerFactoryBean.setPersistenceProviderClass(HibernatePersistence.class);
-        entityManagerFactoryBean.setPackagesToScan("by.news.service.daojpa.pojos");
-        JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-        entityManagerFactoryBean.setJpaVendorAdapter(vendorAdapter);
-        entityManagerFactoryBean.setJpaProperties(getHibernateProperties());
-        return entityManagerFactoryBean;
-    }
-
-    @Bean
-    @Profile("test")
-    public JpaTransactionManager testTransactionManager() {
-        JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(testEntityManagerFactory().getObject());
-        return transactionManager;
-    }*/
 }

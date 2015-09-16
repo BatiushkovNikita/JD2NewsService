@@ -5,37 +5,41 @@ import by.news.service.daojpa.exception.DaoException;
 import by.news.service.daojpa.pojos.Role;
 import by.news.service.daojpa.pojos.User;
 import by.news.service.daojpa.pojos.UserDetail;
-import by.news.service.daojpa.repository.interf.UserRepository;
+import by.news.service.daojpa.repository.UserRepository;
 import by.news.service.daojpa.service.interf.UserService;
 import by.news.service.vo.RoleVO;
 import by.news.service.vo.UserVO;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
+import javax.inject.Inject;
 import java.util.HashSet;
 import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
+    private Logger Log = LogManager.getLogger(UserServiceImpl.class.getName());
+
+    @Inject
     private UserRepository userRepository;
 
     @Override
-    public int createUser(UserVO userVO) throws DaoException {
+    public int createUser(UserVO userVO) {
         User user = extractUser(userVO);
         User user1 = userRepository.save(user);
         return user1.getId();
     }
 
     @Override
-    public UserVO getUserByPK(int key) throws DaoException {
+    public UserVO getUserByPK(int key) {
         return extractUser(userRepository.findOne(key));
     }
 
     @Override
-    public void updateUser(UserVO userVO) throws DaoException {
+    public void updateUser(UserVO userVO) {
         User user = extractUser(userVO);
         userRepository.save(user);
     }
@@ -44,11 +48,10 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         user.setId(userVO.getId());
         user.setEmail(userVO.getEmail());
-        //user.setPassword(userVO.getPassword());
+
         user.setPassword("");
         user.setUserDetail(extractUserDetail(userVO));
         user.setRoles(extractRoles(userVO.getRoles()));
-
 /*
         RoleVO roleVO = new RoleVO();
         roleVO.setId(3);
