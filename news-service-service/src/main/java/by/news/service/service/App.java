@@ -1,4 +1,4 @@
-package by.news.service.entity;
+package by.news.service.service;
 
 /**
  * Hello world!
@@ -6,6 +6,17 @@ package by.news.service.entity;
  */
 public class App {
 	public static void main(String[] args) {
-		System.out.println("Hello World!");
+
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
