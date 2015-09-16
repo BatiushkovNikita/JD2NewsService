@@ -57,12 +57,12 @@
 		</dependency>
 		<dependency>
 			<groupId>by.news.service</groupId>
-			<artifactId>news-service-dao</artifactId>
+			<artifactId>news-service-daojpa</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>by.news.service</groupId>
-			<artifactId>news-service-entity</artifactId>
+			<artifactId>news-service-vo</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>	
 	</dependencies>
