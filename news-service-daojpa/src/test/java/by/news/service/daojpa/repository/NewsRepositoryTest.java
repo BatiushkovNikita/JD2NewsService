@@ -11,7 +11,6 @@ import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -34,11 +33,6 @@ public class NewsRepositoryTest {
 
     @Inject
     private NewsRepository newsRepository;
-
-    @Before
-    public void setUp() {
-
-    }
 
     @Test
     public void testGetNewsByPK() {
