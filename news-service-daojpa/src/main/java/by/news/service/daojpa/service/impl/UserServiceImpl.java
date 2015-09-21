@@ -1,7 +1,6 @@
 package by.news.service.daojpa.service.impl;
 
 
-import by.news.service.daojpa.exception.DaoException;
 import by.news.service.daojpa.pojos.Role;
 import by.news.service.daojpa.pojos.User;
 import by.news.service.daojpa.pojos.UserDetail;
@@ -11,7 +10,6 @@ import by.news.service.vo.RoleVO;
 import by.news.service.vo.UserVO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
@@ -48,19 +46,9 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         user.setId(userVO.getId());
         user.setEmail(userVO.getEmail());
-
         user.setPassword("");
         user.setUserDetail(extractUserDetail(userVO));
         user.setRoles(extractRoles(userVO.getRoles()));
-/*
-        RoleVO roleVO = new RoleVO();
-        roleVO.setId(3);
-        Set<RoleVO> rolesVO = new HashSet<>();
-        rolesVO.add(roleVO);
-        userVO.setRoles(rolesVO);
-        rolesVO = userVO.getRoles();
-        user.setRoles(extractRoles(rolesVO));
-*/
         return user;
     }
 

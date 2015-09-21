@@ -9,6 +9,7 @@
 	<div class="container">
 		<h1>
 			<fmt:message key="registration.title" />
+            <h3>${message}</h3>
 		</h1>
 		<h2>
 			<fmt:message key="registration.sign.up" />

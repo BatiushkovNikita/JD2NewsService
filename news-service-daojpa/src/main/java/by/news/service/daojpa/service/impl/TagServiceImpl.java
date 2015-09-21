@@ -3,7 +3,6 @@ package by.news.service.daojpa.service.impl;
 import by.news.service.daojpa.pojos.News;
 import by.news.service.daojpa.pojos.Tag;
 import by.news.service.daojpa.repository.TagRepository;
-import by.news.service.daojpa.service.interf.NewsService;
 import by.news.service.daojpa.service.interf.TagService;
 import by.news.service.vo.NewsVO;
 import by.news.service.vo.TagVO;
@@ -12,7 +11,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;

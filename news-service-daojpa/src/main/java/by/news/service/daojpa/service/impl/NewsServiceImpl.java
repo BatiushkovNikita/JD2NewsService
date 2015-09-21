@@ -38,6 +38,9 @@ public class NewsServiceImpl implements NewsService {
     @Override
     public NewsVO getNewsByPK(int key) {
         News news = newsRepository.findOne(key);
+        if (news == null) {
+            return null;
+        }
         return extractNews(news);
     }
 
@@ -55,6 +58,9 @@ public class NewsServiceImpl implements NewsService {
     @Override
     public List<NewsVO> getAll() {
         List<News> newses = (List<News>) newsRepository.findAll();
+        if (newses == null) {
+            return null;
+        }
         return extractNewses(newses);
     }
 

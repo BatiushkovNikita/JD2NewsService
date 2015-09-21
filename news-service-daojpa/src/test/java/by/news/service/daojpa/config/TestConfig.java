@@ -13,6 +13,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import javax.inject.Inject;
 import java.util.Properties;
 
 @Configuration
@@ -22,7 +23,7 @@ import java.util.Properties;
 @PropertySource({"persistence-config-test.properties"})
 public class TestConfig {
 
-    @Autowired
+    @Inject
     private Environment env;
 
     @Bean

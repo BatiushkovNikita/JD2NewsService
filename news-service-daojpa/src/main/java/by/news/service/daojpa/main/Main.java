@@ -11,10 +11,6 @@ public class Main {
     public static void main(String[] args) {
         ApplicationContext context = new AnnotationConfigApplicationContext(DataConfig.class, Beans.class);
         NewsService bean = context.getBean(NewsService.class);
-/*        List<NewsVO> allNews = bean.getAll();
-        for (NewsVO allNew : allNews) {
-            System.out.println(allNew);
-        }*/
         NewsVO newsByPK = bean.getNewsByPK(1);
         System.out.println(newsByPK);
     }
