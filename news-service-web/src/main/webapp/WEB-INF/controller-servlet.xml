@@ -16,7 +16,7 @@
     <mvc:annotation-driven/>
 
     <context:component-scan base-package="by.news.service.web"/>
-    <context:component-scan base-package="by.news.service.daojpa"/>
+   <!-- <context:component-scan base-package="by.news.service.daojpa"/>-->
 
     <!-- Spring mvc -->
 
