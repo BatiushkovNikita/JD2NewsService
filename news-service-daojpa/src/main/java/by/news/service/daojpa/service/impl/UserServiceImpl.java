@@ -10,14 +10,18 @@ import by.news.service.vo.RoleVO;
 import by.news.service.vo.UserVO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import java.util.HashSet;
 import java.util.Set;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, UserDetailsService {
 
     private Logger Log = LogManager.getLogger(UserServiceImpl.class.getName());
 
@@ -40,6 +44,18 @@ public class UserServiceImpl implements UserService {
     public void updateUser(UserVO userVO) {
         User user = extractUser(userVO);
         userRepository.save(user);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String email) {
+        User user;
+        try {
+            user = userRepository.findByEmail(email);
+        } catch (UsernameNotFoundException e) {
+            Log.error("User with email: " + email + " not found", e);
+            throw new UsernameNotFoundException("User with email: " + email + " not found", e);
+        }
+        return user;
     }
 
     private User extractUser(UserVO userVO) {

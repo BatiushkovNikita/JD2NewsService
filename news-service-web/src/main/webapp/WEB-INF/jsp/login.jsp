@@ -34,7 +34,10 @@
 			</div>
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
-					<span style="color: #ff0000;">${errorLoginInput}</span>
+                    <c:if test="${param.error == 'invalidLoginPassword'}">
+              <%--          <span style="color: #ff0000;">${errorLoginInput}</span>--%>
+                        <span style="color: #ff0000;"> Try again baby eeee</span>
+                    </c:if>
 				</div>
 			</div>
 

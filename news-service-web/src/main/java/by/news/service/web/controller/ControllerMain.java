@@ -10,7 +10,7 @@ public class ControllerMain {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String helloWord(ModelMap modelMap) {
-        modelMap.addAttribute("message", "test!");
-        return "jsp/login";
+        modelMap.addAttribute("message", "Hello word!");
+        return "/jsp/login";
     }
 }

@@ -6,7 +6,7 @@
     <%@ include file="include.jsp" %>
 </head>
 <body>
-<%@ include file="frag-header-admin.jsp" %>
+<%--<%@ include file="../../jsp/frag-header-admin.jsp" %>--%>
 <form action="/news-service/Controller" method="post">
     <input type=hidden name="command" value="news_feed">
 
@@ -30,7 +30,7 @@
                     <div class="panel-body">${news.newsText}</div>
                     <div class="panel-body">Autor</div>
                 </div>
-                <%@ include file="frag-news-manage.jsp" %>
+                <%@ include file="../../jsp/frag-news-manage.jsp" %>
             </div>
         </c:forEach>
 

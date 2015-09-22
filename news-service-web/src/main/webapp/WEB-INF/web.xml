@@ -5,50 +5,43 @@
         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_0.xsd"
         version="3.1">
 
+    <display-name>Archetype Created Web Application</display-name>
+
+    <!-- Spring mvc-->
+
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>WEB-INF/jsp/login.jsp</welcome-file>
+        <welcome-file>WEB-INF/jsp/access-denied.jsp</welcome-file>
+    </welcome-file-list>
+
+    <context-param>
+        <param-name>configContextLocation</param-name>
+        <param-value>/WEB_INF/controller-servlet.xml</param-value>
+    </context-param>
+
     <servlet>
-        <description>
-        </description>
-        <display-name>Controller</display-name>
-        <servlet-name>Controller</servlet-name>
-        <servlet-class>by.news.service.web.controller.Controller</servlet-class>
+        <servlet-name>controller</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>Controller</servlet-name>
-        <url-pattern>/Controller</url-pattern>
+        <servlet-name>controller</servlet-name>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
 
-    <error-page>
-        <error-code>404</error-code>
-        <location>/jsp/error404.jsp</location>
-    </error-page>
+    <!-- Spring security-->
 
-    <error-page>
-        <error-code>500</error-code>
-        <location>/jsp/error500.jsp</location>
-    </error-page>
+  <!--  <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>-->
 
-
-
-
-    <security-constraint>
-        <display-name>Constraint1</display-name>
-        <web-resource-collection>
-            <web-resource-name>NewsService</web-resource-name>
-            <url-pattern>/*</url-pattern>
-        </web-resource-collection>
-<!--        <auth-constraint>
-            <role-name>user</role-name>
-        </auth-constraint>-->
-    </security-constraint>
-
-    <login-config>
-        <auth-method>FORM</auth-method>
-        <realm-name>JDBC</realm-name>
-        <form-login-config>
-            <form-login-page>/html/login.xhtml</form-login-page>
-            <form-error-page>/html/error.xhtml</form-error-page>
-        </form-login-config>
-    </login-config>
 </web-app>
 

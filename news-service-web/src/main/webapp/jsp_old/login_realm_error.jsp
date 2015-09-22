@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Login realm error</title>
-    <%@ include file="include.jsp"%>
+    <%@ include file="../WEB-INF/jsp/include.jsp"%>
 </head>
 <body>
 <div class="container">

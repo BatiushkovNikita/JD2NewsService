@@ -3,23 +3,23 @@
 <html>
 <head>
 <title>News feed page</title>
-<%@ include file="include.jsp"%>
+<%@ include file="../WEB-INF/jsp/include.jsp"%>
 </head>
 <body>
 	<%@ include file="frag-header-admin.jsp"%>
-	<form action="/news-service/Controller" method="post">
+	<form action="Controller" method="post">
 		<%-- <ctg:info-role role="${role}"> --%>
-		<input type=hidden name="command" value="add_news">
+		<input type=hidden name="command" value="edit_news">
 		<div class="container">
 			<h2>
-				<fmt:message key="add.news.title" />
+				<fmt:message key="edit.news.title" />
 			</h2>
 			
 			<%@ include file="frag-editnews.jsp"%>
 			
 			<div class="form-group">
 				<div class="col-sm-10">
-					<fmt:message var="submitButton" key="add.new.button" />
+					<fmt:message var="submitButton" key="edit.news.button" />
 					<button type="submit" class="btn btn-primary">${submitButton}</button>
 				</div>
 			</div>

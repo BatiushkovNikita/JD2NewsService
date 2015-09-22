@@ -86,6 +86,13 @@ public class UserServiceTest {
         userService.createUser(userVO);
     }
 
+    @Test
+    public void testFindUserByEmail() {
+        Mockito.when(userRepository.findByEmail(user.getEmail())).thenReturn(user);
+        User user1 = userRepository.findByEmail(user.getEmail());
+        Assert.assertEquals(user, user1);
+    }
+
     @Configuration
     static class UserServiceTestContextConfiguration {
         @Bean

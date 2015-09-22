@@ -5,7 +5,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<jsp:forward page="/jsp/login.jsp"></jsp:forward>
+    <h3>starting page</h3>
+    <a href="login">Hello word</a>
+	<%--<jsp:forward page="/jsp/login.jsp"></jsp:forward>--%>
     <%--<jsp:forward page="/jsp/login_realm.jsp"></jsp:forward>--%>
 <%--    <jsp:forward page="/html/login.xhtml"></jsp:forward>--%>
 </body>
