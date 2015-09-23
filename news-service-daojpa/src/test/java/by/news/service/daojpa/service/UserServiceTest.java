@@ -96,11 +96,11 @@ public class UserServiceTest {
     @Configuration
     static class UserServiceTestContextConfiguration {
         @Bean
-        public UserService userService() {
+        UserService userService() {
             return new UserServiceImpl();
         }
         @Bean
-        public UserRepository userRepository() {
+        UserRepository userRepository() {
             return Mockito.mock(UserRepository.class);
         }
     }

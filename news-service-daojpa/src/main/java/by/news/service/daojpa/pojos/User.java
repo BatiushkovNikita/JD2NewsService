@@ -11,7 +11,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "user")
-public class User implements UserDetails {
+public class User { //implements UserDetails {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -44,7 +44,7 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    @Override
+ /*   @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set<SimpleGrantedAuthority> rolesSet = new HashSet<>();
         for (Role role : roles) {
@@ -76,7 +76,7 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
-    }
+    }*/
 
 
     public int getId() {

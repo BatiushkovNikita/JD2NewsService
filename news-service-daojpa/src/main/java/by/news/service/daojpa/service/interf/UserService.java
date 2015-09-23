@@ -8,6 +8,8 @@ public interface UserService {
 
     UserVO getUserByPK(int key);
 
+    UserVO getUserByEmail(String email);
+
     void updateUser(UserVO userVO);
 
     //Collection<UserVO> getAll();

@@ -21,7 +21,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Service
-public class UserServiceImpl implements UserService, UserDetailsService {
+public class UserServiceImpl implements UserService {
 
     private Logger Log = LogManager.getLogger(UserServiceImpl.class.getName());
 
@@ -41,28 +41,30 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
+    public UserVO getUserByEmail(String email) {
+        User user = userRepository.findByEmail(email);
+        if (user == null) {
+            return null;
+        }
+        return extractUser(user);
+    }
+
+    @Override
     public void updateUser(UserVO userVO) {
         User user = extractUser(userVO);
         userRepository.save(user);
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String email) {
-        User user;
-        try {
-            user = userRepository.findByEmail(email);
-        } catch (UsernameNotFoundException e) {
-            Log.error("User with email: " + email + " not found", e);
-            throw new UsernameNotFoundException("User with email: " + email + " not found", e);
-        }
-        return user;
-    }
+
 
     private User extractUser(UserVO userVO) {
         User user = new User();
         user.setId(userVO.getId());
         user.setEmail(userVO.getEmail());
-        user.setPassword("");
+
+        //user.setPassword("");
+        user.setPassword(userVO.getPassword());
+
         user.setUserDetail(extractUserDetail(userVO));
         user.setRoles(extractRoles(userVO.getRoles()));
         return user;
@@ -80,8 +82,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         UserVO userVO = new UserVO();
         userVO.setId(user.getId());
         userVO.setEmail(user.getEmail());
-        //userVO.setPassword(null);
-        userVO.setPassword("");
+
+        //userVO.setPassword("");
+        userVO.setPassword(user.getPassword());
+
         userVO.setFirstName(user.getUserDetail().getFirstName());
         userVO.setLastName(user.getUserDetail().getLastName());
         userVO.setCellPhone(user.getUserDetail().getCellPhone());
