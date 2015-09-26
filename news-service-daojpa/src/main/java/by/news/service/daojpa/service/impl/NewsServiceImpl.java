@@ -1,7 +1,6 @@
 package by.news.service.daojpa.service.impl;
 
 
-import by.news.service.daojpa.exp.BenchmarkMethods;
 import by.news.service.daojpa.pojos.News;
 import by.news.service.daojpa.pojos.Tag;
 import by.news.service.daojpa.repository.NewsRepository;
@@ -19,7 +18,6 @@ import java.util.List;
 import java.util.Set;
 
 @Service
-@BenchmarkMethods
 public class NewsServiceImpl implements NewsService {
 
     private Logger Log = LogManager.getLogger(NewsServiceImpl.class.getName());

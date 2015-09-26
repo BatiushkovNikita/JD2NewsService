@@ -4,7 +4,7 @@
 <head>
 <title>News feed page</title>
 <title>Bootstrap Case</title>
-<%@ include file="../WEB-INF/jsp/include.jsp"%>
+<%@ include file="../pages/include.jsp"%>
 </head>
 <body>
 	<div class="container">

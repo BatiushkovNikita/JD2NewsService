@@ -3,7 +3,7 @@
 <html>
 <head>
 <title>News feed page</title>
-<%@ include file="../WEB-INF/jsp/include.jsp"%>
+<%@ include file="../pages/include.jsp"%>
 </head>
 <body>
 	<%@ include file="frag-header-admin.jsp"%>

@@ -20,7 +20,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories("by.news.service.daojpa")
+@EnableJpaRepositories( {"by.news.service.daojpa"} )
 @PropertySource( {"classpath:persistence-config.properties"} )
 @Import(Beans.class)
 public class DataConfig {

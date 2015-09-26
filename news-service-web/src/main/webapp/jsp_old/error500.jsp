@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>500</title>
-    <%@ include file="../WEB-INF/jsp/include.jsp"%>
+    <%@ include file="../pages/include.jsp"%>
 </head>
 <body>
 <div class="container">

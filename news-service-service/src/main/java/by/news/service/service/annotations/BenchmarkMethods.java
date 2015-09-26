@@ -1,4 +1,4 @@
-package by.news.service.daojpa.exp;
+package by.news.service.service.annotations;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

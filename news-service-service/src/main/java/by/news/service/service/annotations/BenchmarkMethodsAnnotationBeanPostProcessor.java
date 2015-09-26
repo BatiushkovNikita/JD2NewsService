@@ -1,4 +1,4 @@
-package by.news.service.daojpa.exp;
+package by.news.service.service.annotations;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
