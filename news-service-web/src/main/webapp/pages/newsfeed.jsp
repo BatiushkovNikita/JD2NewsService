@@ -3,16 +3,13 @@
 <html>
 <head>
     <title>News feed</title>
-    <%@ include file="../../pages/include.jsp" %>
+    <%@ include file="include.jsp" %>
 </head>
 <body>
-<%--<%@ include file="../../jsp/frag-header-admin.jsp" %>--%>
-<form action="/news-service/Controller" method="post">
-    <input type=hidden name="command" value="news_feed">
+<%@ include file="frag/header-admin.jsp" %>
 
     <div class="container">
-        <p>userName: ${userName}</p>
-        <p>userRole: ${userRole}</p>
+
 
         <h2>
             <fmt:message key="newsfeed.title"/>
@@ -30,7 +27,7 @@
                     <div class="panel-body">${news.newsText}</div>
                     <div class="panel-body">Autor</div>
                 </div>
-                <%@ include file="../../jsp/frag-news-manage.jsp" %>
+                <%@ include file="frag/news-manage.jsp" %>
             </div>
         </c:forEach>
 

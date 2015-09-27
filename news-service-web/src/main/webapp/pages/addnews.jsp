@@ -3,10 +3,10 @@
 <html>
 <head>
 <title>News feed page</title>
-<%@ include file="../pages/include.jsp"%>
+<%@ include file="include.jsp"%>
 </head>
 <body>
-	<%@ include file="frag-header-admin.jsp"%>
+	<%@ include file="frag/header-admin.jsp"%>
 	<form action="/news-service/Controller" method="post">
 		<%-- <ctg:info-role role="${role}"> --%>
 		<input type=hidden name="command" value="add_news">
@@ -15,7 +15,7 @@
 				<fmt:message key="add.news.title" />
 			</h2>
 			
-			<%@ include file="frag-editnews.jsp"%>
+			<%@ include file="../jsp_old/frag-editnews.jsp"%>
 			
 			<div class="form-group">
 				<div class="col-sm-10">

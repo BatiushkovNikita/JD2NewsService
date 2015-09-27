@@ -3,7 +3,7 @@
 <html>
 <head>
 <title>Fragment</title>
-<%@ include file="../pages/include.jsp"%>
+<%@ include file="../include.jsp"%>
 </head>
 <body>
 	<div class="container">
