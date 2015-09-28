@@ -1,10 +1,10 @@
 <div class="form-group">
     <form:label class="control-label col-sm-2" path="email">
-        <fmt:message key="frag.userdata.email"/></form:label>
+        <spring:message code="frag.userdata.email"/></form:label>
     <div class="controls">
-        <form:errors path="email" cssClass="label label-important"/>
+        <form:errors path="email" cssClass="label label-important" />
         <div class="col-sm-10">
-            <form:input placeholder="dklskdlskdls" type="email" cssClass="form-control" id="firstName" path="email"/>
+            <form:input placeholder="dklskdlskdls" type="email" cssClass="form-control" id="email" path="email"/>
         </div>
     </div>
 </div>

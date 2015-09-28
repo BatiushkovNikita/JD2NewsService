@@ -4,6 +4,8 @@ import by.news.service.web.validator.UserValidator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.validation.Validator;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -14,6 +16,7 @@ import org.springframework.web.servlet.view.UrlBasedViewResolver;
 @Configuration
 @EnableWebMvc
 @ComponentScan( {"by.news.service.web"} )
+@PropertySource( {"classpath:content.properties"} )
 public class WebConfig extends WebMvcConfigurerAdapter {
 
     @Override
@@ -37,5 +40,12 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
 /*    @Bean
     public InternalResourceViewResolver*/
+
+    @Bean(name = "messageSource")
+    public ReloadableResourceBundleMessageSource reloadableResourceBundleMessageSource() {
+        ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+        messageSource.setBasenames("classpath:content");
+        return messageSource;
+    }
 }
 
