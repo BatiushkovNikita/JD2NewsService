@@ -15,7 +15,7 @@
 		<form class="form-horizontal" role="form" action="Controller" method="post">
 			<input type=hidden name="command" value="profile">
 
-			<%@ include file="frag-userdata.jsp"%>
+			<%@ include file="../pages/frag/userdata.jsp"%>
 
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">

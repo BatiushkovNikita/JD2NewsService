@@ -16,40 +16,25 @@
     <h2>
         <fmt:message key="registration.sign.up"/>
     </h2>
-    <c:url value="/registration" var="saveUser" />
-    <form:form modelAttribute="userAttribute" action="${saveUser}" method="post">
-        <table>
-            <tr>
-                <td><form:label path="firstName">First Name:</form:label></td>
-                <td><form:input path="firstName"/></td>
-            </tr>
+    <c:url value="/registration" var="saveUser"/>
+    <form:form cssClass="form-horizontal" modelAttribute="userAttribute" action="${saveUser}" method="post">
 
-            <tr>
-                <td><form:label path="lastName">Last Name</form:label></td>
-                <td><form:input path="lastName"/></td>
-            </tr>
+        <%@ include file="frag/userdata.jsp" %>
 
-            <tr>
-                <td><form:label path="email">Email</form:label></td>
-                <td><form:input path="email"/></td>
-            </tr>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <span style="color: #ff0000;">${errorRegistrationInput}</span>
+            </div>
+        </div>
 
-            <tr>
-                <td><form:label path="password">Pass</form:label></td>
-                <td><form:input path="password"/></td>
-            </tr>
-
-            <tr>
-                <td><form:label path="cellPhone">CellPhone</form:label></td>
-                <td><form:input path="cellPhone"/></td>
-            </tr>
-        </table>
-
-        <input type="submit" value="Save"/>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <fmt:message var="submitButton" key="registration.button"/>
+                <button type="submit" value="save" class="btn btn-success">${submitButton}</button>
+            </div>
+        </div>
 
     </form:form>
 </div>
-
-
 </body>
 </html>

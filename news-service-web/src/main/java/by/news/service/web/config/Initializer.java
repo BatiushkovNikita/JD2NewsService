@@ -12,8 +12,6 @@ import javax.servlet.ServletRegistration.Dynamic;
 
 public class Initializer implements WebApplicationInitializer {
 
-    private static final String DISPATCHER_SERVLET_NAME = "dispatcher";
-
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
         AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
@@ -24,7 +22,7 @@ public class Initializer implements WebApplicationInitializer {
 
         ctx.setServletContext(servletContext);
 
-        Dynamic servlet = servletContext.addServlet(DISPATCHER_SERVLET_NAME, new DispatcherServlet(ctx));
+        Dynamic servlet = servletContext.addServlet("dispatcher", new DispatcherServlet(ctx));
         servlet.addMapping("/");
         servlet.setLoadOnStartup(1);
     }

@@ -7,22 +7,6 @@
 </head>
 <body>
 
-<%--<c:if test="${param.error != null}">
-    <p>Invalid username / password</p>
-</c:if>
-<c:url var="loginUrl" value="/j_spring_security_check"/>
-<form action="${loginUrl}" method="post">
-    <p><label for="username">User:</label></p>
-    <input type="text" id="username" name="j_username"/>
-
-    <p><label for="password">Password:</label></p>
-    <input type="password" id="password" name="j_password">
-
-    <div>
-        <input name="submit" type="submit"/>
-    </div>
-</form>--%>
-
 <div class="container">
     <h1>
         <fmt:message key="login.title"/>
@@ -56,8 +40,7 @@
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <c:if test="${param.error != null}">
-                    <span style="color: #ff0000;">${errorLoginInput}</span>
-                    <span style="color: #ff0000;">Wrong input</span>
+                    <span style="color: #ff0000;"><fmt:message key="error.registration.input.message"/></span>
                 </c:if>
             </div>
         </div>
