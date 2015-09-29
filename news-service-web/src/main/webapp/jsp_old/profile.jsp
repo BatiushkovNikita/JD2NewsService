@@ -6,7 +6,7 @@
 <%@ include file="../pages/include.jsp"%>
 </head>
 <body>
-	<%@ include file="../pages/frag/header-admin.jsp"%>
+	<%@ include file="../pages/frag/header.jsp"%>
 	<%-- <ctg:info-role role="${role}"> --%>
 	<div class="container">
 		<h2>

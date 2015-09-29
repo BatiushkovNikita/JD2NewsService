@@ -6,7 +6,7 @@
 <%@ include file="include.jsp"%>
 </head>
 <body>
-	<%@ include file="frag/header-admin.jsp"%>
+	<%@ include file="frag/header.jsp"%>
 	<form action="/news-service/Controller" method="post">
 		<%-- <ctg:info-role role="${role}"> --%>
 		<input type=hidden name="command" value="add_news">

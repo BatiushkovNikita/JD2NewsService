@@ -52,4 +52,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .defaultSuccessUrl("/newsfeed", false);
     }
+
+
 }

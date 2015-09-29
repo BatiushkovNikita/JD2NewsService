@@ -53,6 +53,11 @@
             <artifactId>spring-security-config</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-taglibs</artifactId>
+        </dependency>
+
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
@@ -97,9 +102,7 @@
             <groupId>org.apache.tomcat</groupId>
             <artifactId>tomcat-catalina</artifactId>
         </dependency>-->
-		
 
-		
 		<dependency>
 			<groupId>by.news.service</groupId>
 			<artifactId>news-service-service</artifactId>

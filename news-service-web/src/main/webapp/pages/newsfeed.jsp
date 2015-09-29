@@ -6,7 +6,7 @@
     <%@ include file="include.jsp" %>
 </head>
 <body>
-<%@ include file="frag/header-admin.jsp" %>
+<%@ include file="frag/header.jsp" %>
 
     <div class="container">
 
