@@ -16,7 +16,6 @@ import org.springframework.web.servlet.view.UrlBasedViewResolver;
 @Configuration
 @EnableWebMvc
 @ComponentScan( {"by.news.service.web"} )
-@PropertySource( {"classpath:content.properties"} )
 public class WebConfig extends WebMvcConfigurerAdapter {
 
     @Override

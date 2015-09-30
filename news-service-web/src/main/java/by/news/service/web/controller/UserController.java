@@ -2,6 +2,8 @@ package by.news.service.web.controller;
 
 import by.news.service.service.interf.UserLocalService;
 import by.news.service.vo.UserVO;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,6 +18,8 @@ import javax.inject.Inject;
 
 @Controller
 public class UserController {
+
+    private Logger Log = LogManager.getLogger(UserController.class.getName());
 
     @Inject
     private UserLocalService userLocalService;

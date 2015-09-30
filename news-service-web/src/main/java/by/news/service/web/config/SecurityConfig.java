@@ -51,7 +51,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .defaultSuccessUrl("/newsfeed", false);
+
     }
+
+/*    <http auto-config="true" use-expressions="true">*/
 
 
 }

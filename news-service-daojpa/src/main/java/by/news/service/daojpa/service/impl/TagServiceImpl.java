@@ -9,6 +9,7 @@ import by.news.service.vo.TagVO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ public class TagServiceImpl implements TagService{
     private TagRepository tagRepository;
 
     @Override
+    @Transactional(readOnly = true)
     public List<NewsVO> getNewsByTag(String tagName) {
         List<News> newses = tagRepository.findByTag(tagName);
         return extractNewses(newses);

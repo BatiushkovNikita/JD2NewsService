@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -29,6 +30,7 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Override
+    @Transactional
     public int createUser(UserVO userVO) {
         User user = extractUser(userVO);
         User user1 = userRepository.save(user);
@@ -36,11 +38,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public UserVO getUserByPK(int key) {
         return extractUser(userRepository.findOne(key));
     }
 
     @Override
+    @Transactional(readOnly = true)
     public UserVO getUserByEmail(String email) {
         User user = userRepository.findByEmail(email);
         if (user == null) {
@@ -50,21 +54,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void updateUser(UserVO userVO) {
         User user = extractUser(userVO);
         userRepository.save(user);
     }
 
-
-
     private User extractUser(UserVO userVO) {
         User user = new User();
         user.setId(userVO.getId());
         user.setEmail(userVO.getEmail());
-
-        //user.setPassword("");
         user.setPassword(userVO.getPassword());
-
         user.setUserDetail(extractUserDetail(userVO));
         user.setRoles(extractRoles(userVO.getRoles()));
         return user;
@@ -82,10 +82,7 @@ public class UserServiceImpl implements UserService {
         UserVO userVO = new UserVO();
         userVO.setId(user.getId());
         userVO.setEmail(user.getEmail());
-
-        //userVO.setPassword("");
         userVO.setPassword(user.getPassword());
-
         userVO.setFirstName(user.getUserDetail().getFirstName());
         userVO.setLastName(user.getUserDetail().getLastName());
         userVO.setCellPhone(user.getUserDetail().getCellPhone());

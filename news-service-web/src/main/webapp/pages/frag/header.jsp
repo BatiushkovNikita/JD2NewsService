@@ -30,33 +30,44 @@
         </div>
     </nav>
 </div>
+<http auto-config="true" use-expressions="true">
+
+    <intercept-url access="hasRole('user')" var="123" >dsdsds</intercept-url>
+
+    <intercept-url access="hasRole('admin')">admindndnndndn</intercept-url>
+
+    <sec:authentication var="principal" property="principal"/>
+
+    <sec:authorize access="hasRole('user')" var="user"/>
+    <p>${user}</p>
 
 
+    <sec:authorize access="hasAnyRole('user')" var="user2"/>
+    <p>${user2}</p>
 
 
-    <sec:authorize access="hasRole('user')">
-        Only User can see it</sec:authorize>
+    <sec:authorize access="hasRole('admin')" var="admin"/>
+    <p>${admin}</p>
 
-    <%--<c:if test="${!acc}">
-        <span>USER see it</span>
-    </c:if>--%>
 
-    <%--    <sec:authorize url="editnews.jsp" access="h">
-            <c:url value="editnews.jsp" var="accountUrl"/>
-    <li><a href="${accountUrl}">My Account</a></li>
-    </sec:authorize>--%>
+    <sec:authorize access="hasAnyRole('admin2')" var="admin2"/>
+    <p>${admin2}</p>
+</http>
+
+
+<%--<c:if test="${!acc}">
+    <span>USER see it</span>
+</c:if>--%>
+
+<%--    <sec:authorize url="editnews.jsp" access="h">
+        <c:url value="editnews.jsp" var="accountUrl"/>
+<li><a href="${accountUrl}">My Account</a></li>
+</sec:authorize>--%>
+
 <%--<sec:authorize access="hasRole('user')" var="isUser" />
 <c:if test="${isUser}">
     <span>Only USER can see it</span>
 </c:if>--%>
-
-<%--<sec:authentication property="principal.roles.roleName" var="role"/>
-<c:if test="${isUser}">
-    <span>Only USER can see it</span>
-</c:if>
-
-
-<span>Current role: ${role}</span>--%>
 
 
 </body>

@@ -10,6 +10,7 @@ import by.news.service.vo.TagVO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ public class NewsServiceImpl implements NewsService {
 
 
     @Override
+    @Transactional
     public int createNews(NewsVO newsVO) {
         News news = extractNews(newsVO);
         News news1 = newsRepository.save(news);
@@ -34,6 +36,7 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public NewsVO getNewsByPK(int key) {
         News news = newsRepository.findOne(key);
         if (news == null) {
@@ -43,17 +46,20 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
+    @Transactional
     public void updateNews(NewsVO newsVO) {
         News news = extractNews(newsVO);
         newsRepository.save(news);
     }
 
     @Override
+    @Transactional
     public void deleteNews(int key) {
         newsRepository.delete(key);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<NewsVO> getAll() {
         List<News> newses = (List<News>) newsRepository.findAll();
         if (newses == null) {
