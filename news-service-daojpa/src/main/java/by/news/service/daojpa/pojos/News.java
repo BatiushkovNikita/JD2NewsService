@@ -8,6 +8,7 @@ import java.util.Set;
 @Entity
 @Table(name = "news")
 public class News implements Serializable {
+
     private static final long serialVersionUID = 1L;
 
     @Id

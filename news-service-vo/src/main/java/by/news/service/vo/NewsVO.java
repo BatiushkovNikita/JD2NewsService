@@ -1,9 +1,13 @@
 package by.news.service.vo;
 
 
+import java.io.Serializable;
 import java.util.Set;
 
-public class NewsVO {
+public class NewsVO implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     private int id;
     private String topic;
     private String publicationDate;

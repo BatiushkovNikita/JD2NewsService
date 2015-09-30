@@ -64,9 +64,11 @@
         </div>
     </div>
     <br>
-    <p>user@user:user:user</p>
+    <p>user@user:user: USER</p>
     <br>
-    <p>root@root:root:admin</p>
+    <p>root@root:root: ADMIN</p>
+    <br>
+    <p>moder@moder:moder MODERATOR</p>
 
 </div>
 

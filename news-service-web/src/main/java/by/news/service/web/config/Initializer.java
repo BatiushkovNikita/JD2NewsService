@@ -15,15 +15,14 @@ public class Initializer implements WebApplicationInitializer {
 
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
-
-        servletContext.setInitParameter("log4jConfigLocation", "WEB-INF/log4j2.xml");
-        servletContext.addListener(new Log4jConfigListener());
-
         AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
         ctx.register(WebConfig.class);
         ctx.register(SecurityConfig.class);
         ctx.register(ServiceConfig.class);
 
+        servletContext.setInitParameter("log4jConfigLocation", "WEB-INF/log4j2.xml");
+
+        servletContext.addListener(new Log4jConfigListener());
         servletContext.addListener(new ContextLoaderListener(ctx));
 
         ctx.setServletContext(servletContext);

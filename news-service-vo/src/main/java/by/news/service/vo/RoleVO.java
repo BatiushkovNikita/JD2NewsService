@@ -1,6 +1,11 @@
 package by.news.service.vo;
 
-public class RoleVO {
+import java.io.Serializable;
+
+public class RoleVO implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     private int id;
     private String roleName;
 

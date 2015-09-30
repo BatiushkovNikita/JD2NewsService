@@ -1,10 +1,10 @@
 package by.news.service.web.config;
 
+import by.news.service.web.custom.DefaultRolesPrefixPostProcessor;
 import by.news.service.web.validator.UserValidator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.validation.Validator;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -45,6 +45,11 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
         messageSource.setBasenames("classpath:content");
         return messageSource;
+    }
+
+    @Bean
+    public DefaultRolesPrefixPostProcessor defaultRolesPrefixPostProcessor() {
+        return new DefaultRolesPrefixPostProcessor();
     }
 }
 
