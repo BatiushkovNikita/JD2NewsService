@@ -1,7 +1,6 @@
 package by.news.service.web.controller;
 
 import by.news.service.service.interf.UserLocalService;
-import by.news.service.vo.NewsVO;
 import by.news.service.vo.UserVO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.inject.Inject;
-import java.security.Principal;
 
 @Controller
 public class UserController {
@@ -38,6 +36,11 @@ public class UserController {
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public ModelAndView registerUser(@ModelAttribute("userAttribute") UserVO userVO,
                                BindingResult result, SessionStatus status) {
+
+/*        if (result.hasErrors()) {
+
+        }*/
+
         Log.debug("Validation form input");
         userValidator.validate(userVO, result);
         if (result.hasErrors()) {

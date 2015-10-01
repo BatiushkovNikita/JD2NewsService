@@ -28,6 +28,12 @@
             <artifactId>spring-security-config</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+        </dependency>
+
+
     </dependencies>
 
 
