@@ -4,6 +4,7 @@ import by.news.service.daojpa.service.interf.UserService;
 import by.news.service.service.interf.UserLocalService;
 import by.news.service.vo.RoleVO;
 import by.news.service.vo.UserVO;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.inject.Inject;
 import java.util.HashSet;
@@ -21,5 +22,10 @@ public class UserLocalServiceImpl implements UserLocalService {
         rolesVO.add(new RoleVO(3, "user"));
         userVO.setRoles(rolesVO);
         return userService.createUser(userVO);
+    }
+
+    @Override
+    public UserVO getUserByEmail(String email) {
+        return userService.getUserByEmail(email);
     }
 }

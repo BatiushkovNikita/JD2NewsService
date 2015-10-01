@@ -1,5 +1,7 @@
 package by.news.service.web.validator;
 
+import by.news.service.daojpa.service.interf.UserService;
+import by.news.service.service.interf.UserLocalService;
 import by.news.service.vo.UserVO;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
@@ -7,8 +9,13 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
+import javax.inject.Inject;
+
 @Component
 public class UserValidator implements Validator {
+
+    @Inject
+    private UserLocalService userLocalService;
 
     @Override
     public boolean supports(Class<?> aClass) {
@@ -27,6 +34,9 @@ public class UserValidator implements Validator {
 
     private void validateEmail(UserVO userVO, Errors errors) {
         String email = userVO.getEmail();
+        if (userLocalService.getUserByEmail(email) != null) {
+            errors.rejectValue("email", "frag.userdata.email.error.alreadyInUse");
+        }
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "frag.userdata.email.error.input");
     }
 

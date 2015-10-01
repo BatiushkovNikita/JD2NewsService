@@ -1,6 +1,7 @@
 package by.news.service.web.config;
 
-import by.news.service.web.custom.DefaultRolesPrefixPostProcessor;
+import by.news.service.web.service.DefaultRolesPrefixPostProcessor;
+import by.news.service.web.validator.NewsValidator;
 import by.news.service.web.validator.UserValidator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -33,8 +34,13 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    public Validator validator() {
+    public Validator userValidator() {
         return new UserValidator();
+    }
+
+    @Bean
+    public Validator newsValidator() {
+        return new NewsValidator();
     }
 
 /*    @Bean

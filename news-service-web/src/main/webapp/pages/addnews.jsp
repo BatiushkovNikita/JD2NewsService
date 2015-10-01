@@ -2,29 +2,29 @@
 
 <html>
 <head>
-<title>News feed page</title>
+<title>Add news page</title>
 <%@ include file="include.jsp"%>
 </head>
 <body>
 	<%@ include file="frag/header.jsp"%>
-	<form action="/news-service/Controller" method="post">
-		<%-- <ctg:info-role role="${role}"> --%>
-		<input type=hidden name="command" value="add_news">
+    <c:url value="/addnews" var="addNews"/>
+    <form:form modelAttribute="newsAttribute" action="${addNews}" method="post">
+
 		<div class="container">
 			<h2>
 				<fmt:message key="add.news.title" />
 			</h2>
 			
-			<%@ include file="../jsp_old/frag-editnews.jsp"%>
+			<%@ include file="frag/newsdata.jsp"%>
 			
 			<div class="form-group">
 				<div class="col-sm-10">
-					<fmt:message var="submitButton" key="add.new.button" />
+					<spring:message code="add.new.button" var="submitButton" />
 					<button type="submit" class="btn btn-primary">${submitButton}</button>
 				</div>
 			</div>
 		</div>
 
-	</form>
+	</form:form>
 </body>
 </html>

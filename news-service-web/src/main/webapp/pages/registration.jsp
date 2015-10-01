@@ -2,7 +2,7 @@
 
 <html>
 <head>
-    <title>Sign up page</title>
+    <title>Registration page</title>
     <%@ include file="include.jsp" %>
 </head>
 <body>
@@ -20,12 +20,6 @@
     <form:form cssClass="form-horizontal" modelAttribute="userAttribute" action="${saveUser}" method="post">
 
         <%@ include file="frag/userdata.jsp" %>
-
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <span style="color: #ff0000;">${errorRegistrationInput}</span>
-            </div>
-        </div>
 
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">

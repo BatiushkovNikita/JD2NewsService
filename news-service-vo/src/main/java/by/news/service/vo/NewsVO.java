@@ -1,6 +1,5 @@
 package by.news.service.vo;
 
-
 import java.io.Serializable;
 import java.util.Set;
 
@@ -14,6 +13,9 @@ public class NewsVO implements Serializable {
     private String newsText;
     private String authorFirsName;
     private String authorLastName;
+    private String authorEmail;
+    private int userId;
+
     private Set<TagVO> tagsVO;
 
     public NewsVO() {
@@ -28,6 +30,22 @@ public class NewsVO implements Serializable {
         this.authorFirsName = authorFirsName;
         this.authorLastName = authorLastName;
         this.tagsVO = tagsVO;
+    }
+
+    public String getAuthorEmail() {
+        return authorEmail;
+    }
+
+    public void setAuthorEmail(String authorEmail) {
+        this.authorEmail = authorEmail;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public int getId() {

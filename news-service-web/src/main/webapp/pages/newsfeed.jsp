@@ -8,30 +8,35 @@
 <body>
 <%@ include file="frag/header.jsp" %>
 
-    <div class="container">
+<div class="container">
 
 
-        <h2>
-            <fmt:message key="newsfeed.title"/>
-        </h2>
+    <h2>
+        <fmt:message key="newsfeed.title"/>
+    </h2>
 
-        <c:forEach items="${newsFeed}" var="news">
-            <div class="panel-group">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <b>${news.topic}</b><br>
-                        <h6>
-                            <i>${news.publicationDate}</i>
-                        </h6>
-                    </div>
-                    <div class="panel-body">${news.newsText}</div>
-                    <div class="panel-body">Autor</div>
+    <c:forEach items="${newsFeed}" var="news">
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <b>${news.topic}</b><br>
+                    <h6>
+                        <i>${news.publicationDate}</i>
+                    </h6>
                 </div>
-                <%@ include file="frag/news-manage.jsp" %>
-            </div>
-        </c:forEach>
 
-    </div>
+                <div class="panel-body">${news.newsText}</div>
+                <div class="panel-body">Autor</div>
+
+                <div class="panel-heading">
+                    <%@ include file="frag/news-actions.jsp" %>
+                </div>
+
+            </div>
+        </div>
+    </c:forEach>
+
+</div>
 
 </form>
 </body>

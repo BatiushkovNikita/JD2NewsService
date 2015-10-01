@@ -6,5 +6,7 @@ import java.util.List;
 
 public interface NewsLocalService {
 
+    int addNews(NewsVO newsVO);
+
     List<NewsVO> getAllNews();
 }

@@ -72,7 +72,8 @@ public class NewsServiceImpl implements NewsService {
         News news = new News();
         news.setTopic(newsVO.getTopic());
         news.setPublicationDate(newsVO.getPublicationDate());
-        news.setTopic(newsVO.getPublicationDate());
+        news.setNewsText(newsVO.getNewsText());
+        news.setUserId(newsVO.getUserId());
         return news;
     }
 
