@@ -1,10 +1,15 @@
 package by.news.service.vo;
 
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
@@ -12,12 +17,20 @@ import java.util.Set;
 
 public class UserVO implements UserDetails, Serializable {
 
+    private Logger Log = LogManager.getLogger(UserVO.class.getName());
+
     private static final long serialVersionUID = 1L;
 
     private int id;
+
+    @NotBlank(message = "{error.email.input}")
     private String email;
+
+    @Size(min = 6, max = 20, message = "${frag.userdata.email.error.input}")
     private String password;
     private String firstName;
+
+    @NotNull(message = "dsdsdssd NOT NULL")
     private String lastName;
     private String cellPhone;
     private Set<RoleVO> roles;

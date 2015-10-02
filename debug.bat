@@ -1,5 +1,6 @@
 rmdir /s /q %CATALINA_HOME%\webapps\news-service-web
 del /s /q %CATALINA_HOME%\webapps\news-service-web.war
+del /s /q %CATALINA_HOME%\logs\*.*
 
 cd %CATALINA_HOME%/bin/
 call shutdown.bat
