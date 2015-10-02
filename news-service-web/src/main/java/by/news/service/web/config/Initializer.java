@@ -19,6 +19,7 @@ public class Initializer implements WebApplicationInitializer {
         ctx.register(WebConfig.class);
         ctx.register(SecurityConfig.class);
         ctx.register(ServiceConfig.class);
+        ctx.register(Beans.class);
 
         servletContext.setInitParameter("log4jConfigLocation", "WEB-INF/log4j2.xml");
 

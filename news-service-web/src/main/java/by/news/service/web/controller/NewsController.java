@@ -5,11 +5,9 @@ import by.news.service.service.interf.NewsLocalService;
 import by.news.service.vo.NewsVO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,9 +25,6 @@ public class NewsController {
     @Inject
     private NewsLocalService newsLocalService;
 
-    @Inject
-    private Validator newsValidator;
-
     @RequestMapping(value = "/newsfeed", method = {RequestMethod.GET, RequestMethod.POST})
     public String viewNewsFeed(Model model) {
         model.addAttribute("newsFeed", newsLocalService.getAllNews());
@@ -45,7 +40,7 @@ public class NewsController {
     @RequestMapping(value = "/addnews", method = RequestMethod.POST)
     public ModelAndView addingNews(@ModelAttribute("newsAttribute") NewsVO newsVO,
                                    BindingResult result, SessionStatus status, Principal principal) {
-        int newsId;
+        /*int newsId;
         Log.debug("Validation form input");
         newsValidator.validate(newsVO, result);
         if (result.hasErrors()) {
@@ -58,7 +53,7 @@ public class NewsController {
             newsVO.setAuthorEmail(principal.getName());
             newsId = newsLocalService.addNews(newsVO);
         }
-        Log.debug("News with id: " + newsId + " was added");
+        Log.debug("News with id: " + newsId + " was added");*/
         return new ModelAndView("redirect:/newsfeed", "newsAttribute", newsVO);
     }
 }

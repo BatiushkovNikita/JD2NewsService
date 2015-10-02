@@ -1,14 +1,10 @@
 package by.news.service.web.config;
 
 import by.news.service.web.service.DefaultRolesPrefixPostProcessor;
-import by.news.service.web.validator.CustomUserValidator;
-import by.news.service.web.validator.NewsValidator;
-import by.news.service.web.validator.UserValidator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
-import org.springframework.validation.Validator;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -33,24 +29,6 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         resolver.setViewClass(JstlView.class);
         return resolver;
     }
-
-    @Bean
-    public Validator userValidator() {
-        return new UserValidator();
-    }
-
-    @Bean
-    public Validator newsValidator() {
-        return new NewsValidator();
-    }
-
-    @Bean
-    public CustomUserValidator customUserValidator() {
-        return new CustomUserValidator();
-    }
-
-/*    @Bean
-    public InternalResourceViewResolver*/
 
     @Bean(name = "messageSource")
     public ReloadableResourceBundleMessageSource reloadableResourceBundleMessageSource() {
