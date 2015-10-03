@@ -8,4 +8,5 @@ call startup.bat
 
 cd /d d:\Projects\JD2NewsService\
 
-call mvn clean tomcat7:redeploy -DskipTests -T 4
+call mvn -T 2 clean install -DskipTests 
+call mvn -T 2 clean tomcat7:redeploy -DskipTests

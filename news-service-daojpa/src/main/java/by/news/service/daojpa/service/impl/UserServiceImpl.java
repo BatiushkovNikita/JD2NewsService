@@ -10,18 +10,16 @@ import by.news.service.vo.RoleVO;
 import by.news.service.vo.UserVO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 import java.util.HashSet;
 import java.util.Set;
 
 @Service
+@EnableTransactionManagement
 public class UserServiceImpl implements UserService {
 
     private Logger Log = LogManager.getLogger(UserServiceImpl.class.getName());

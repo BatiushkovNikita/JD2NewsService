@@ -10,6 +10,7 @@ import by.news.service.vo.TagVO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
@@ -19,6 +20,7 @@ import java.util.List;
 import java.util.Set;
 
 @Service
+@EnableTransactionManagement
 public class NewsServiceImpl implements NewsService {
 
     private Logger Log = LogManager.getLogger(NewsServiceImpl.class.getName());

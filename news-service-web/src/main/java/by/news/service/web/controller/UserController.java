@@ -1,7 +1,7 @@
 package by.news.service.web.controller;
 
 import by.news.service.vo.UserVO;
-import by.news.service.web.validator.UserValidator;
+import by.news.service.web.validator.impl.AbstractValidator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -22,8 +22,7 @@ public class UserController {
     private Logger Log = LogManager.getLogger(UserController.class.getName());
 
     @Inject
-    private UserValidator userValidator;
-
+    private AbstractValidator userValidator;
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String viewRegistration(Model model) {
