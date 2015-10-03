@@ -1,5 +1,6 @@
 package by.news.service.web.config;
 
+import by.news.service.web.service.DefaultRolesPrefixPostProcessor;
 import by.news.service.web.validator.impl.AbstractValidator;
 import by.news.service.web.validator.impl.UserValidator;
 import org.springframework.context.annotation.Bean;
@@ -20,5 +21,10 @@ public class Beans {
     public javax.validation.Validator validator() {
         ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
         return validatorFactory.usingContext().getValidator();
+    }
+
+    @Bean
+    public DefaultRolesPrefixPostProcessor defaultRolesPrefixPostProcessor() {
+        return new DefaultRolesPrefixPostProcessor();
     }
 }

@@ -12,7 +12,7 @@ public class UniqueCheckerConstraintValidator implements ConstraintValidator<Uni
     }
 
     @Override
-    public boolean isValid(String username, ConstraintValidatorContext context) {
-        return false;
+    public boolean isValid(String email, ConstraintValidatorContext context) {
+        return true;
     }
 }

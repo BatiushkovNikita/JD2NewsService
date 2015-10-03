@@ -34,7 +34,7 @@ public class NewsController {
     @RequestMapping(value = "/addnews", method = RequestMethod.GET)
     public String viewAddNews(Model model) {
         model.addAttribute("newsAttribute", new NewsVO());
-        return "addnews";
+        return "addnew";
     }
 
     @RequestMapping(value = "/addnews", method = RequestMethod.POST)
