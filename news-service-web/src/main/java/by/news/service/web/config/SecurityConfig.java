@@ -26,11 +26,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
         http.csrf()
                 .disable()
                 .authorizeRequests()
-                .antMatchers("/resources/**", "/**").permitAll()
+                .antMatchers("/resources*", "*").permitAll()
                 .anyRequest().permitAll()
                 .and();
 
@@ -52,5 +51,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .defaultSuccessUrl("/newsfeed", false);
+
+/*        http.authorizeRequests()
+                .antMatchers("/resources*//**", "/login", "/registration").permitAll()
+                .antMatchers("/addnews*//**").hasAnyRole("admin, moderator")
+                .anyRequest().authenticated()
+                .and();*/
     }
 }

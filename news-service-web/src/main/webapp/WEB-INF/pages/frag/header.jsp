@@ -21,7 +21,15 @@
                     <li><a href='<spring:url value="/logout" htmlEscape="true"/>'><fmt:message
                             key="frag.header.logout"/></a></li>
                 </ul>
+
             </div>
+            <sec:authentication property="principal.roles" var="roles"/>
+            <p align="right"> Email: <sec:authentication property="principal.username"/></p>
+            <p align="right"> Roles:
+            <c:forEach items="${roles}" var="r">
+                ${r.roleName}
+            </c:forEach>
+            </p>
         </div>
     </nav>
 </div>

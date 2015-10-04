@@ -27,7 +27,7 @@ public class UserValidator extends AbstractValidator<UserVO> {
         UserVO userVO = (UserVO) o;
         String email = userVO.getEmail();
         UserDetails userDetails = userDetailsService.loadUserByUsername(email);
-        if (userDetails.getUsername() != null ) {
+        if (userDetails != null ) {
             errors.rejectValue("email", "frag.userdata.email.error.alreadyInUse");
         }
         super.validate(o, errors);

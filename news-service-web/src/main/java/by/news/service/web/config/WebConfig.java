@@ -1,7 +1,6 @@
 package by.news.service.web.config;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import by.news.service.web.exception.MvcException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -28,7 +27,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     @Bean
     public UrlBasedViewResolver setupViewResolver() {
         UrlBasedViewResolver resolver = new UrlBasedViewResolver();
-        resolver.setPrefix("/pages/");
+        resolver.setPrefix("/WEB-INF/pages/");
         resolver.setSuffix(".jsp");
         resolver.setViewClass(JstlView.class);
         return resolver;
@@ -44,24 +43,13 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
     @Bean
     public SimpleMappingExceptionResolver createSimpleMappingExceptionResolver() {
-
-        Logger Log = LogManager.getLogger(SimpleMappingExceptionResolver.class.getName());
-
         SimpleMappingExceptionResolver resolver = new SimpleMappingExceptionResolver();
         Properties errorMaps = new Properties();
-
-        errorMaps.setProperty(NullPointerException.class.getName(), "error");
-
-        Log.error("NullPointerException");
-
-        resolver.addStatusCode("error", 404);
-        resolver.setDefaultErrorView("exception");
+        errorMaps.setProperty(MvcException.class.getName(), "errors/exception");
+        resolver.setDefaultErrorView("errors/exception");
         resolver.setExceptionMappings(errorMaps);
-        resolver.setExceptionAttribute("openException");
+        resolver.setExceptionAttribute("exc");
         resolver.setWarnLogCategory("warn");
-
-
-        //errorMaps.setProperty(HttpStatus.NOT_FOUND.getClass().getName(), "error");
         return resolver;
     }
 }

@@ -15,20 +15,21 @@ public class Initializer implements WebApplicationInitializer {
 
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
-        AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
-        ctx.register(WebConfig.class);
-        ctx.register(SecurityConfig.class);
-        ctx.register(ServiceConfig.class);
-        ctx.register(Beans.class);
+        AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
+        context.register(WebConfig.class);
+        context.register(SecurityConfig.class);
+        context.register(ServiceConfig.class);
+        context.register(Beans.class);
 
-        servletContext.setInitParameter("log4jConfigLocation", "WEB-INF/log4j2.xml");
+        servletContext.setInitParameter("log4jConfigLocation", "classpath:log4j2.xml");
 
         servletContext.addListener(new Log4jConfigListener());
-        servletContext.addListener(new ContextLoaderListener(ctx));
+        servletContext.addListener(new ContextLoaderListener(context));
 
-        ctx.setServletContext(servletContext);
-
-        Dynamic servlet = servletContext.addServlet("dispatcher", new DispatcherServlet(ctx));
+        context.setServletContext(servletContext);
+        DispatcherServlet dispatcherServlet = new DispatcherServlet(context);
+        dispatcherServlet.setThrowExceptionIfNoHandlerFound(false);
+        Dynamic servlet = servletContext.addServlet("dispatcher", dispatcherServlet);
         servlet.addMapping("/");
         servlet.setLoadOnStartup(1);
     }

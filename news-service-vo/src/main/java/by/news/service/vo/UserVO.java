@@ -20,7 +20,6 @@ public class UserVO implements UserDetails, Serializable {
     private int id;
 
     @NotBlank(message = "{NotBlank.email}")
-    @UniqueChecker(message = "{UniqueChecker.email}")
     private String email;
 
     @NotBlank(message = "{NotBlank.password}")
