@@ -41,7 +41,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         return messageSource;
     }
 
-    @Bean
+/*    @Bean
     public SimpleMappingExceptionResolver createSimpleMappingExceptionResolver() {
         SimpleMappingExceptionResolver resolver = new SimpleMappingExceptionResolver();
         Properties errorMaps = new Properties();
@@ -51,6 +51,6 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         resolver.setExceptionAttribute("exc");
         resolver.setWarnLogCategory("warn");
         return resolver;
-    }
+    }*/
 }
 

@@ -9,10 +9,9 @@
 	<%@ include file="frag/header.jsp"%>
     <c:url value="/addnews" var="addNews"/>
     <form:form modelAttribute="newsAttribute" action="${addNews}" method="post">
-
 		<div class="container">
 			<h2>
-				<fmt:message key="add.news.title" />
+                <spring:message code="add.news.title" />
 			</h2>
 			
 			<%@ include file="frag/newsdata.jsp"%>

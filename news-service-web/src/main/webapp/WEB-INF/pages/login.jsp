@@ -68,8 +68,7 @@
     <br>
     <p>root@root:root: ADMIN</p>
     <br>
-    <p>moder@moder:moder MODERATOR</p>
-
+    <p>moder@moder:moder123 MODERATOR</p>
 </div>
 
 

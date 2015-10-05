@@ -23,13 +23,21 @@
                 </ul>
 
             </div>
-            <sec:authentication property="principal.roles" var="roles"/>
-            <p align="right"> Email: <sec:authentication property="principal.username"/></p>
-            <p align="right"> Roles:
-            <c:forEach items="${roles}" var="r">
-                ${r.roleName}
-            </c:forEach>
-            </p>
+
+            <sec:authorize access="isAuthenticated()" var="isAuth"/>
+
+            <c:if test="${isAuth == true}">
+                <sec:authentication property="principal.roles" var="roles"/>
+                <p align="right"> Email:
+                        <sec:authentication property="principal.username"/>
+                <p align="right"> Roles:
+                    <c:if test="${roles != null}">
+                        <c:forEach items="${roles}" var="r">
+                            ${r.roleName}
+                        </c:forEach>
+                    </c:if>
+                </p>
+            </c:if>
         </div>
     </nav>
 </div>

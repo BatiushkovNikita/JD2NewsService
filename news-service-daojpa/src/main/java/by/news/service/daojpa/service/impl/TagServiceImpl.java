@@ -29,6 +29,17 @@ public class TagServiceImpl implements TagService{
 
     @Override
     @Transactional(readOnly = true)
+    public Set<TagVO> getAll() {
+        List<Tag> tagsList = (List<Tag>) tagRepository.findAll();
+        if (tagsList == null) {
+            return null;
+        }
+        Set<Tag> tags = new HashSet<>(tagsList);
+        return extractTags(tags);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
     public List<NewsVO> getNewsByTag(String tagName) {
         List<News> newses = tagRepository.findByTag(tagName);
         return extractNewses(newses);

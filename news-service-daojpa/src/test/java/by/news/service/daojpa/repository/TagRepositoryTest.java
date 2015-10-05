@@ -36,7 +36,6 @@ public class TagRepositoryTest {
         for (Object news : newses1) {
             Log.error(news);
         }
-
     }
 }
 

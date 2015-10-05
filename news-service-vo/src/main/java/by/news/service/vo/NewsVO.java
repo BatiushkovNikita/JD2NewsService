@@ -1,5 +1,7 @@
 package by.news.service.vo;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import java.io.Serializable;
 import java.util.Set;
 
@@ -8,9 +10,15 @@ public class NewsVO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private int id;
+
+    @NotBlank(message = "{NotBlank.topic}")
     private String topic;
+
     private String publicationDate;
+
+    @NotBlank(message = "{NotBlank.newsText}")
     private String newsText;
+    
     private String authorFirsName;
     private String authorLastName;
     private String authorEmail;

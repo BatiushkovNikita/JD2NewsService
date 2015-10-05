@@ -1,13 +1,16 @@
 package by.news.service.web.controller;
 
+import by.news.service.service.interf.UserLocalService;
 import by.news.service.vo.UserVO;
 import by.news.service.web.validator.impl.AbstractValidator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,6 +27,12 @@ public class UserController {
     @Inject
     private AbstractValidator userValidator;
 
+    @Inject
+    private UserLocalService userLocalService;
+
+    @Inject
+    private BCryptPasswordEncoder passwordEncoder;
+
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String viewRegistration(Model model) {
         model.addAttribute("userAttribute", new UserVO());
@@ -36,9 +45,12 @@ public class UserController {
         userValidator.validate(userVO, errors);
         if (result.hasErrors()) {
             return new ModelAndView("registration", "userAttribute", userVO);
+        } else {
+            String encodePassword = passwordEncoder.encode(userVO.getPassword());
+            userVO.setPassword(encodePassword);
+            userLocalService.registerUser(userVO);
+            status.setComplete();
         }
-        status.setComplete();
-        return new ModelAndView("redirect:/newsfeed", "userAttribute", userVO);
-
+        return new ModelAndView("redirect:/login", "userAttribute", userVO);
     }
 }

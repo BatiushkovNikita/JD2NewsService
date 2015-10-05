@@ -9,35 +9,33 @@
 <%@ include file="frag/header.jsp" %>
 
 <div class="container">
-
-
     <h2>
-        <fmt:message key="newsfeed.title"/>
+        <spring:message code="newsfeed.title"/>
     </h2>
-
-    <c:forEach items="${newsFeed}" var="news">
+    <c:forEach items="${newsFeed}" var="newses">
         <div class="panel-group">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <b>${news.topic}</b><br>
+                    <b>${newses.topic}</b><br>
                     <h6>
-                        <i>${news.publicationDate}</i>
+                        <i>${newses.publicationDate}</i>
                     </h6>
                 </div>
-
-                <div class="panel-body">${news.newsText}</div>
-                <div class="panel-body">Autor</div>
-
-                <div class="panel-heading">
+                <div class="panel-body">${newses.newsText}</div>
+                <div class="panel-footer">
+                    <h6>
+                        <spring:message code="newsfeed.author"/>: ${newses.authorFirsName} ${newses.authorLastName}<br>
+                        <spring:message code="newsfeed.tags"/>:
+                        <c:forEach items="${newses.tagsVO}" var="tags">
+                            <u>${tags.tagName}</u>
+                        </c:forEach>
+                    </h6>
                     <%@ include file="frag/news-actions.jsp" %>
                 </div>
-
             </div>
         </div>
     </c:forEach>
-
 </div>
-
 </form>
 </body>
 </html>

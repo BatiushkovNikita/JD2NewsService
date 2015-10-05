@@ -19,14 +19,8 @@ public class NewsLocalServiceImpl implements NewsLocalService {
     @Inject
     private NewsService newsService;
 
-    @Inject
-    private UserService userService;
-
     @Override
     public int addNews(NewsVO newsVO) {
-        String authorEmail = newsVO.getAuthorEmail();
-        int userId = userService.getUserByEmail(authorEmail).getId();
-        newsVO.setUserId(userId);
         newsVO.setPublicationDate(getCurrentDate());
         return newsService.createNews(newsVO);
     }

@@ -13,7 +13,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 
-public class UserVO implements UserDetails, Serializable {
+public class UserVO implements Serializable, UserDetails {
 
     private static final long serialVersionUID = 1L;
 

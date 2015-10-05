@@ -1,12 +1,14 @@
 package by.news.service.daojpa.service;
 
 import by.news.service.daojpa.pojos.News;
+import by.news.service.daojpa.pojos.Tag;
 import by.news.service.daojpa.pojos.User;
 import by.news.service.daojpa.pojos.UserDetail;
 import by.news.service.daojpa.repository.TagRepository;
 import by.news.service.daojpa.service.impl.TagServiceImpl;
 import by.news.service.daojpa.service.interf.TagService;
 import by.news.service.vo.NewsVO;
+import by.news.service.vo.TagVO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
@@ -21,7 +23,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = TagServiceTest.TagServiceTestContextConfiguration.class)
@@ -62,13 +66,22 @@ public class TagServiceTest {
     }
 
     @Test
+    public void testGetAllTags() {
+        Set<Tag> tags = new HashSet<>();
+        tags.add(new Tag(1, "tagName1"));
+        tags.add(new Tag(2, "tagName2"));
+        Mockito.when(tagRepository.findAll()).thenReturn(tags);
+        Set<TagVO> tagsSetVO = tagService.getAll();
+        Assert.assertEquals(tagsSetVO.size(), 2);
+    }
+
+    @Test
     public void testGetNewsByTag() {
         String tagName = "tagName1";
         Mockito.when(tagRepository.findByTag(Mockito.anyString())).thenReturn(newsList);
         List<NewsVO> newsVOs = tagService.getNewsByTag(tagName);
         Assert.assertEquals(newsList.size(), newsVOs.size());
     }
-
 
     @Configuration
     static class TagServiceTestContextConfiguration {
