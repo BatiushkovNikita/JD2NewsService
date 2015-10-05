@@ -2,9 +2,9 @@ package by.news.service.service.interf;
 
 import by.news.service.vo.TagVO;
 
-import java.util.Set;
+import java.util.List;
 
 public interface TagLocalService {
 
-    Set<TagVO> getAllTags();
+    List<TagVO> getAllTags();
 }

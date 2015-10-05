@@ -24,9 +24,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = NewsServiceTest.NewsServiceTestContextConfiguration.class)
@@ -65,7 +63,7 @@ public class NewsServiceTest {
 
         Tag tag1 = new Tag(1, "tag1");
         Tag tag2 = new Tag(2, "tag2");
-        Set<Tag> tags = new HashSet<>();
+        List<Tag> tags = new ArrayList<>();
         tags.add(tag1);
         tags.add(tag2);
 
@@ -74,7 +72,7 @@ public class NewsServiceTest {
 
         TagVO tagVO1 = new TagVO(1, "tag1");
         TagVO tagVO2 = new TagVO(2, "tag2");
-        Set<TagVO> tagsVO = new HashSet<>();
+        List<TagVO> tagsVO = new ArrayList<>();
         tagsVO.add(tagVO1);
         tagsVO.add(tagVO2);
 

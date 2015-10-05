@@ -5,7 +5,7 @@ import by.news.service.service.interf.TagLocalService;
 import by.news.service.vo.TagVO;
 
 import javax.inject.Inject;
-import java.util.Set;
+import java.util.List;
 
 public class TagLocalServiceImpl implements TagLocalService {
 
@@ -13,7 +13,7 @@ public class TagLocalServiceImpl implements TagLocalService {
     private TagService tagService;
 
     @Override
-    public Set<TagVO> getAllTags() {
+    public List<TagVO> getAllTags() {
         return tagService.getAll();
     }
 }

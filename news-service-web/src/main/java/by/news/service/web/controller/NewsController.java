@@ -13,6 +13,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,8 +22,9 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.inject.Inject;
-import java.security.Principal;
-import java.util.Set;
+import java.beans.PropertyEditorSupport;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class NewsController {
@@ -44,25 +47,50 @@ public class NewsController {
     }
 
     @RequestMapping(value = "/addnews", method = RequestMethod.GET)
-    public String viewAddNews(Model model) {
-        model.addAttribute("newsAttribute", new NewsVO());
-        Set<TagVO> allTags = tagLocalService.getAllTags();
-        model.addAttribute("tags", allTags);
-        return "addnews";
+    public ModelAndView viewAddNews(Model model) {
+        NewsVO newsVO = new NewsVO();
+        List<TagVO> tagsVO = tagLocalService.getAllTags();
+        model.addAttribute("newsVOParam", newsVO);
+        model.addAttribute("tagsVOParam", tagsVO);
+        return new ModelAndView("addnews", "newsVO", newsVO);
     }
 
     @RequestMapping(value = "/addnews", method = RequestMethod.POST)
-    public ModelAndView addingNews(@ModelAttribute("newsAttribute") NewsVO newsVO,
-                                   BindingResult result, SessionStatus status, Principal principal,
+    public ModelAndView addingNews(@ModelAttribute("newsVOParam") NewsVO newsVO,
+                                   BindingResult result, SessionStatus status,
                                    @AuthenticationPrincipal UserVO userVO) {
         newsValidator.validate(newsVO, result);
+        Log.error("Tags returned to controller: " + newsVO.getTagsVO());
+
         if (result.hasErrors()) {
-            return new ModelAndView("addnews", "newsAttribute", newsVO);
+            Log.error(result.getAllErrors());
+            return new ModelAndView("addnews", "newsVOParam", newsVO);
         } else {
             status.setComplete();
             newsVO.setUserId(userVO.getId());
             newsLocalService.addNews(newsVO);
         }
-        return new ModelAndView("redirect:/newsfeed", "newsAttribute", newsVO);
+        return new ModelAndView("redirect:/newsfeed", "newsVOParam", newsVO);
+    }
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.registerCustomEditor(List.class, "tagsVO", new PropertyEditorSupport() {
+            @Override
+            public void setAsText(String text) {
+                String[] ids = text.split(",");
+                List<TagVO> tags = null;
+                for (String id : ids) {
+                    if (tags == null)
+                        tags = new ArrayList<TagVO>();
+                    TagVO tag = tagLocalService.getAllTags().get(0);
+                    if (tag != null)
+                        tags.add(tag);
+
+                }
+                if(tags!=null)
+                    setValue(tags);
+            }
+        });
     }
 }

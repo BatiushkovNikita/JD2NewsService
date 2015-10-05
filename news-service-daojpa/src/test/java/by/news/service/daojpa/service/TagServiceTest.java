@@ -23,9 +23,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = TagServiceTest.TagServiceTestContextConfiguration.class)
@@ -67,12 +65,12 @@ public class TagServiceTest {
 
     @Test
     public void testGetAllTags() {
-        Set<Tag> tags = new HashSet<>();
+        List<Tag> tags = new ArrayList<>();
         tags.add(new Tag(1, "tagName1"));
         tags.add(new Tag(2, "tagName2"));
         Mockito.when(tagRepository.findAll()).thenReturn(tags);
-        Set<TagVO> tagsSetVO = tagService.getAll();
-        Assert.assertEquals(tagsSetVO.size(), 2);
+        List<TagVO> tagsListVO = tagService.getAll();
+        Assert.assertEquals(tagsListVO.size(), 2);
     }
 
     @Test

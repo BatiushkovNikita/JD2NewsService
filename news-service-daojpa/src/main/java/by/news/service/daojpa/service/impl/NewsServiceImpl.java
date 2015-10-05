@@ -15,9 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Service
 @EnableTransactionManagement
@@ -86,12 +84,12 @@ public class NewsServiceImpl implements NewsService {
         String newsText = news.getNewsText();
         String authorFirsName = news.getUser().getUserDetail().getFirstName();
         String authorLastName = news.getUser().getUserDetail().getLastName();
-        Set<TagVO> tagsVO = extractTags(news.getTags());
+        List<TagVO> tagsVO = extractTags(news.getTags());
         return new NewsVO(id, topic, publicationDate, newsText, authorFirsName, authorLastName, tagsVO);
     }
 
-    private Set<TagVO> extractTags(Set<Tag> tags) {
-        Set<TagVO> tagsVO = new HashSet<>();
+    private List<TagVO> extractTags(List<Tag> tags) {
+        List<TagVO> tagsVO = new ArrayList<>();
         for (Tag tag : tags) {
             TagVO tagVO = new TagVO();
             tagVO.setId(tag.getId());

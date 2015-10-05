@@ -3,7 +3,7 @@ package by.news.service.vo;
 import org.hibernate.validator.constraints.NotBlank;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
 
 public class NewsVO implements Serializable {
 
@@ -24,13 +24,13 @@ public class NewsVO implements Serializable {
     private String authorEmail;
     private int userId;
 
-    private Set<TagVO> tagsVO;
+    private List<TagVO> tagsVO;
 
     public NewsVO() {
 
     }
 
-    public NewsVO(int id, String topic, String publicationDate, String newsText, String authorFirsName, String authorLastName, Set<TagVO> tagsVO) {
+    public NewsVO(int id, String topic, String publicationDate, String newsText, String authorFirsName, String authorLastName, List<TagVO> tagsVO) {
         this.id = id;
         this.topic = topic;
         this.publicationDate = publicationDate;
@@ -104,11 +104,11 @@ public class NewsVO implements Serializable {
         this.authorLastName = authorLastName;
     }
 
-    public Set<TagVO> getTagsVO() {
+    public List<TagVO> getTagsVO() {
         return tagsVO;
     }
 
-    public void setTagsVO(Set<TagVO> tagsVO) {
+    public void setTagsVO(List<TagVO> tagsVO) {
         this.tagsVO = tagsVO;
     }
 

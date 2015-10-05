@@ -19,11 +19,21 @@
     </div>
 
     <div>
-        <c:forEach items="${tags}" var="t">
+        <%--<c:forEach items="${tags}" var="t">
             <div class="checkbox">
-                <label><input type="checkbox" value="">${t.tagName}</label>
+                <label><input type="checkbox" value="${t.tagName}">${t.tagName}</label>
             </div>
-        </c:forEach>
+        </c:forEach>--%>
+
+        <p>Tag mapping</p>
+        <%--<c:forEach items="${newsVOParam.tagsVO}" var="tagsVO" varStatus="status">
+            <tr>
+                <td>
+                    <form:input type="text" path="tagsVO[${status.index}].tagName" value="${tagsVO.tagName}" />
+                </td>
+            </tr>
+        </c:forEach>--%>
+            <form:checkboxes items="${tagsVOParam}" path="tagsVO" itemLabel="tagName" itemValue="id"/>
     </div>
 
 </div>

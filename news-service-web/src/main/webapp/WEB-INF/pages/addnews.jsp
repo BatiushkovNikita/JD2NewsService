@@ -8,7 +8,7 @@
 <body>
 	<%@ include file="frag/header.jsp"%>
     <c:url value="/addnews" var="addNews"/>
-    <form:form modelAttribute="newsAttribute" action="${addNews}" method="post">
+    <form:form modelAttribute="newsVOParam" action="${addNews}" method="post">
 		<div class="container">
 			<h2>
                 <spring:message code="add.news.title" />
