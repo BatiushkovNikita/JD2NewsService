@@ -8,9 +8,10 @@ public class Main {
         TagLocalService bean = context.getBean(TagLocalService.class);
         Set<TagVO> allTags = bean.getAllTags();
         System.out.println(allTags);*/
+        String text = "";
+        String[] a = text.split(",");
+        System.out.println(a[0]);
 
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        String user = bCryptPasswordEncoder.encode("root");
-        System.out.println(user);
+
     }
 }

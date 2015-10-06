@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface TagService {
 
+    TagVO getTagByPK(int id);
+
     List<TagVO> getAll();
 
     List<NewsVO> getNewsByTag(String tagName);

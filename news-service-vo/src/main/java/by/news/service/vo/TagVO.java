@@ -53,6 +53,26 @@ public class TagVO implements Serializable {
         return result;
     }
 
+    /* @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            TagVO tagVO = (TagVO) o;
+
+            if (id != tagVO.id) return false;
+            if (tagName != null ? !tagName.equals(tagVO.tagName) : tagVO.tagName != null) return false;
+
+            return true;
+        }
+
+        @Override
+        public int hashCode() {
+            int result = id;
+            result = 31 * result + (tagName != null ? tagName.hashCode() : 0);
+            return result;
+        }
+    */
     @Override
     public String toString() {
         return "TagVO{" +

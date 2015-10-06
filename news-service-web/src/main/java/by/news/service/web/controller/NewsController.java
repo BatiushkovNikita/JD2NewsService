@@ -60,11 +60,14 @@ public class NewsController {
                                    BindingResult result, SessionStatus status,
                                    @AuthenticationPrincipal UserVO userVO) {
         newsValidator.validate(newsVO, result);
-        Log.error("Tags returned to controller: " + newsVO.getTagsVO());
-
         if (result.hasErrors()) {
             Log.error(result.getAllErrors());
-            return new ModelAndView("addnews", "newsVOParam", newsVO);
+            List<TagVO> tagsVO = tagLocalService.getAllTags();
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.setViewName("addnews");
+            modelAndView.addObject("newsVOParam", newsVO);
+            modelAndView.addObject("tagsVOParam", tagsVO);
+            return modelAndView;
         } else {
             status.setComplete();
             newsVO.setUserId(userVO.getId());
@@ -77,13 +80,29 @@ public class NewsController {
     public void initBinder(WebDataBinder binder) {
         binder.registerCustomEditor(List.class, "tagsVO", new PropertyEditorSupport() {
             @Override
-            public void setAsText(String text) {
-                String[] ids = text.split(",");
+            public void setAsText(String text) throws IllegalArgumentException {
+                String[] tagsVoIds = text.split(",");
+                List<TagVO> tagsVO = new ArrayList<>();
+                for (String id : tagsVoIds) {
+                    TagVO tag = tagLocalService.getTagById(Integer.valueOf(id));
+                    tagsVO.add(tag);
+                }
+                setValue(tagsVO);
+            }
+        });
+    }
+
+/*    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.registerCustomEditor(List.class, "tagsVO", new PropertyEditorSupport() {
+            @Override
+            public void setAsText(String text) throws IllegalArgumentException {
+                String[] tagsVoIds = text.split(",");
                 List<TagVO> tags = null;
-                for (String id : ids) {
+                for (String id : tagsVoIds) {
                     if (tags == null)
-                        tags = new ArrayList<TagVO>();
-                    TagVO tag = tagLocalService.getAllTags().get(0);
+                        tags = new ArrayList<>();
+                    TagVO tag = tagLocalService.getTagById(Integer.valueOf(id));
                     if (tag != null)
                         tags.add(tag);
 
@@ -92,5 +111,5 @@ public class NewsController {
                     setValue(tags);
             }
         });
-    }
+    }*/
 }

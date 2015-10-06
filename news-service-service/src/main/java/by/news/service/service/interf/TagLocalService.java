@@ -6,5 +6,7 @@ import java.util.List;
 
 public interface TagLocalService {
 
+    TagVO getTagById(int id);
+
     List<TagVO> getAllTags();
 }

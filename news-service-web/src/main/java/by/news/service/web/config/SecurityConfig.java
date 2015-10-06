@@ -59,8 +59,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/newsfeed", false);
 
 /*        http.authorizeRequests()
-                .antMatchers("/resources*//**", "/login", "/registration").permitAll()
-                .antMatchers("/addnews*//**").hasAnyRole("admin, moderator")
+                .antMatchers("/resources*", "/login", "/registration").permitAll()
+                .antMatchers("/addnews*").hasAnyRole("admin, moderator")
                 .anyRequest().authenticated()
                 .and();*/
     }

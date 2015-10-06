@@ -2,6 +2,8 @@ package by.news.service.vo;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.List;
 
@@ -24,6 +26,8 @@ public class NewsVO implements Serializable {
     private String authorEmail;
     private int userId;
 
+    @NotNull(message = "{NotNull.tagsVO}")
+    @Size(min = 1, message = "{NotNull.tagsVO}")
     private List<TagVO> tagsVO;
 
     public NewsVO() {
@@ -110,6 +114,43 @@ public class NewsVO implements Serializable {
 
     public void setTagsVO(List<TagVO> tagsVO) {
         this.tagsVO = tagsVO;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        NewsVO newsVO = (NewsVO) o;
+
+        if (id != newsVO.id) return false;
+        if (userId != newsVO.userId) return false;
+        if (authorEmail != null ? !authorEmail.equals(newsVO.authorEmail) : newsVO.authorEmail != null) return false;
+        if (authorFirsName != null ? !authorFirsName.equals(newsVO.authorFirsName) : newsVO.authorFirsName != null)
+            return false;
+        if (authorLastName != null ? !authorLastName.equals(newsVO.authorLastName) : newsVO.authorLastName != null)
+            return false;
+        if (newsText != null ? !newsText.equals(newsVO.newsText) : newsVO.newsText != null) return false;
+        if (publicationDate != null ? !publicationDate.equals(newsVO.publicationDate) : newsVO.publicationDate != null)
+            return false;
+        if (tagsVO != null ? !tagsVO.equals(newsVO.tagsVO) : newsVO.tagsVO != null) return false;
+        if (topic != null ? !topic.equals(newsVO.topic) : newsVO.topic != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (topic != null ? topic.hashCode() : 0);
+        result = 31 * result + (publicationDate != null ? publicationDate.hashCode() : 0);
+        result = 31 * result + (newsText != null ? newsText.hashCode() : 0);
+        result = 31 * result + (authorFirsName != null ? authorFirsName.hashCode() : 0);
+        result = 31 * result + (authorLastName != null ? authorLastName.hashCode() : 0);
+        result = 31 * result + (authorEmail != null ? authorEmail.hashCode() : 0);
+        result = 31 * result + userId;
+        result = 31 * result + (tagsVO != null ? tagsVO.hashCode() : 0);
+        return result;
     }
 
     @Override

@@ -13,6 +13,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -107,6 +108,7 @@ public class NewsServiceTest {
         newsService.deleteNews(newsVO.getId());
     }
 
+    @Ignore
     @Test
     public void testGetAll() {
         List<News> newses = new ArrayList<>();

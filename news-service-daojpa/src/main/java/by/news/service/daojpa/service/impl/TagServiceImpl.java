@@ -26,13 +26,19 @@ public class TagServiceImpl implements TagService{
     private TagRepository tagRepository;
 
     @Override
+    public TagVO getTagByPK(int id) {
+        Tag tag = tagRepository.findOne(id);
+        return extractTag(tag);
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public List<TagVO> getAll() {
         List<Tag> tags = (List<Tag>) tagRepository.findAll();
         if (tags == null) {
             return null;
         }
-        return extractTags(tags);
+        return extractTagsToTagsVo(tags);
     }
 
     @Override
@@ -42,6 +48,13 @@ public class TagServiceImpl implements TagService{
         return extractNewses(newses);
     }
 
+    private TagVO extractTag(Tag tag) {
+        TagVO tagVO = new TagVO();
+        tagVO.setId(tag.getId());
+        tagVO.setTagName(tag.getTagName());
+        return tagVO;
+    }
+
     private NewsVO extractNews(News news) {
         int id = news.getId();
         String topic = news.getTopic();
@@ -49,11 +62,11 @@ public class TagServiceImpl implements TagService{
         String newsText = news.getNewsText();
         String authorFirsName = news.getUser().getUserDetail().getFirstName();
         String authorLastName = news.getUser().getUserDetail().getLastName();
-        List<TagVO> tagsVO = extractTags(news.getTags());
+        List<TagVO> tagsVO = extractTagsToTagsVo(news.getTags());
         return new NewsVO(id, topic, publicationDate, newsText, authorFirsName, authorLastName, tagsVO);
     }
 
-    private List<TagVO> extractTags(List<Tag> tags) {
+    private List<TagVO> extractTagsToTagsVo(List<Tag> tags) {
         List<TagVO> tagsVO = new ArrayList<>();
         for (Tag tag : tags) {
             TagVO tagVO = new TagVO();
@@ -62,6 +75,17 @@ public class TagServiceImpl implements TagService{
             tagsVO.add(tagVO);
         }
         return tagsVO;
+    }
+
+    private List<Tag> extractTagsVoToTags(List<TagVO> tagsVO) {
+        List<Tag> tags = new ArrayList<>();
+        for (TagVO tagVO : tagsVO) {
+            Tag tag = new Tag();
+            tag.setId(tagVO.getId());
+            tag.setTagName(tagVO.getTagName());
+            tags.add(tag);
+        }
+        return tags;
     }
 
     private List<NewsVO> extractNewses(List<News> newses) {

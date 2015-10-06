@@ -13,6 +13,11 @@ public class TagLocalServiceImpl implements TagLocalService {
     private TagService tagService;
 
     @Override
+    public TagVO getTagById(int id) {
+        return tagService.getTagByPK(id);
+    }
+
+    @Override
     public List<TagVO> getAllTags() {
         return tagService.getAll();
     }

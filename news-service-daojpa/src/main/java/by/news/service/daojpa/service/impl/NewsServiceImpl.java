@@ -9,6 +9,7 @@ import by.news.service.vo.NewsVO;
 import by.news.service.vo.TagVO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
@@ -61,7 +62,7 @@ public class NewsServiceImpl implements NewsService {
     @Override
     @Transactional(readOnly = true)
     public List<NewsVO> getAll() {
-        List<News> newses = (List<News>) newsRepository.findAll();
+        List<News> newses = (List<News>) newsRepository.findAll(new Sort(Sort.Direction.DESC, "publicationDate"));
         if (newses == null) {
             return null;
         }
@@ -74,6 +75,8 @@ public class NewsServiceImpl implements NewsService {
         news.setPublicationDate(newsVO.getPublicationDate());
         news.setNewsText(newsVO.getNewsText());
         news.setUserId(newsVO.getUserId());
+        List<Tag> tags = extractTagsVoToTags(newsVO.getTagsVO());
+        news.setTags(tags);
         return news;
     }
 
@@ -84,11 +87,11 @@ public class NewsServiceImpl implements NewsService {
         String newsText = news.getNewsText();
         String authorFirsName = news.getUser().getUserDetail().getFirstName();
         String authorLastName = news.getUser().getUserDetail().getLastName();
-        List<TagVO> tagsVO = extractTags(news.getTags());
+        List<TagVO> tagsVO = extractTagsToTagsVo(news.getTags());
         return new NewsVO(id, topic, publicationDate, newsText, authorFirsName, authorLastName, tagsVO);
     }
 
-    private List<TagVO> extractTags(List<Tag> tags) {
+    private List<TagVO> extractTagsToTagsVo(List<Tag> tags) {
         List<TagVO> tagsVO = new ArrayList<>();
         for (Tag tag : tags) {
             TagVO tagVO = new TagVO();
@@ -97,6 +100,17 @@ public class NewsServiceImpl implements NewsService {
             tagsVO.add(tagVO);
         }
         return tagsVO;
+    }
+
+    private List<Tag> extractTagsVoToTags(List<TagVO> tagsVO) {
+        List<Tag> tags = new ArrayList<>();
+        for (TagVO tagVO : tagsVO) {
+            Tag tag = new Tag();
+            tag.setId(tagVO.getId());
+            tag.setTagName(tagVO.getTagName());
+            tags.add(tag);
+        }
+        return tags;
     }
 
     private List<NewsVO> extractNewses(List<News> newses) {
