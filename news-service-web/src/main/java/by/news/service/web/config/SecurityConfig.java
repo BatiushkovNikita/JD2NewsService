@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.access.AccessDeniedHandlerImpl;
 
 import javax.inject.Inject;
 
@@ -32,12 +33,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf()
-                .disable()
-                .authorizeRequests()
+        http.authorizeRequests()
                 .antMatchers("/resources*", "*").permitAll()
-                .anyRequest().permitAll()
-                .and();
+                .antMatchers("/", "/login", "/registration").permitAll()
+                .antMatchers("/addnews").hasAnyRole("admin, moderator")
+                .antMatchers("/roles").hasRole("admin")
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .defaultSuccessUrl("/newsfeed", false);
+
+        http.exceptionHandling()
+                .accessDeniedPage("/login");
 
         http.formLogin()
                 .loginPage("/login")
@@ -52,16 +59,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/login?logout")
                 .invalidateHttpSession(true);
-
-        http.authorizeRequests()
-                .and()
-                .formLogin()
-                .defaultSuccessUrl("/newsfeed", false);
-
-/*        http.authorizeRequests()
-                .antMatchers("/resources*", "/login", "/registration").permitAll()
-                .antMatchers("/addnews*").hasAnyRole("admin, moderator")
-                .anyRequest().authenticated()
-                .and();*/
     }
 }

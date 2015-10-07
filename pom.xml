@@ -12,7 +12,6 @@
         <module>news-service-script</module>
         <module>news-service-vo</module>
         <module>news-service-daojpa</module>
-        <module>news-service-helper</module>
     </modules>
 
     <build>

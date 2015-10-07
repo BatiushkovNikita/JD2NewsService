@@ -40,17 +40,5 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         messageSource.setBasenames("classpath:content", "classpath:ValidationMessages");
         return messageSource;
     }
-
-/*    @Bean
-    public SimpleMappingExceptionResolver createSimpleMappingExceptionResolver() {
-        SimpleMappingExceptionResolver resolver = new SimpleMappingExceptionResolver();
-        Properties errorMaps = new Properties();
-        errorMaps.setProperty(MvcException.class.getName(), "errors/exception");
-        resolver.setDefaultErrorView("errors/exception");
-        resolver.setExceptionMappings(errorMaps);
-        resolver.setExceptionAttribute("exc");
-        resolver.setWarnLogCategory("warn");
-        return resolver;
-    }*/
 }
 

@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import java.beans.PropertyEditorSupport;
 import java.util.ArrayList;
@@ -77,7 +78,7 @@ public class NewsController {
     }
 
     @InitBinder
-    public void initBinder(WebDataBinder binder) {
+    protected void initBinder(WebDataBinder binder) {
         binder.registerCustomEditor(List.class, "tagsVO", new PropertyEditorSupport() {
             @Override
             public void setAsText(String text) throws IllegalArgumentException {
@@ -91,25 +92,4 @@ public class NewsController {
             }
         });
     }
-
-/*    @InitBinder
-    public void initBinder(WebDataBinder binder) {
-        binder.registerCustomEditor(List.class, "tagsVO", new PropertyEditorSupport() {
-            @Override
-            public void setAsText(String text) throws IllegalArgumentException {
-                String[] tagsVoIds = text.split(",");
-                List<TagVO> tags = null;
-                for (String id : tagsVoIds) {
-                    if (tags == null)
-                        tags = new ArrayList<>();
-                    TagVO tag = tagLocalService.getTagById(Integer.valueOf(id));
-                    if (tag != null)
-                        tags.add(tag);
-
-                }
-                if(tags!=null)
-                    setValue(tags);
-            }
-        });
-    }*/
 }
