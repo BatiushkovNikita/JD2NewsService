@@ -33,15 +33,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/resources*", "*").permitAll()
-                .antMatchers("/", "/login", "/registration").permitAll()
-                .antMatchers("/addnews").hasAnyRole("admin, moderator")
-                .antMatchers("/roles").hasRole("admin")
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .defaultSuccessUrl("/newsfeed", false);
+        http.csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/resources*", "*", "/login", "/registration").permitAll()
+                .and();
 
         http.exceptionHandling()
                 .accessDeniedPage("/login");
@@ -59,5 +54,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/login?logout")
                 .invalidateHttpSession(true);
+
+        http.authorizeRequests()
+                .antMatchers("/addnews", "/*/delete", "/*/edit").access("hasAnyRole('admin','moderator')")
+                .antMatchers("/roles").access("hasRole('admin')")
+                .and()
+                .formLogin()
+                .defaultSuccessUrl("/newsfeed", false);
     }
 }

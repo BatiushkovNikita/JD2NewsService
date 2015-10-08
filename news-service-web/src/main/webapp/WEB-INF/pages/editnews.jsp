@@ -2,25 +2,24 @@
 
 <html>
 <head>
-    <title>Add news</title>
+    <title>Edit news</title>
     <%@ include file="include.jsp" %>
 </head>
 <body>
 <%@ include file="frag/header.jsp" %>
 <div class="container">
-    <h2><spring:message code="add.news.title"/></h2>
-    <c:url value="/addnews" var="addNews"/>
-    <form:form modelAttribute="newsVOParam" action="${addNews}" method="post">
+    <h2><spring:message code="edit.news.title"/></h2>
+    <c:url value="/editnews" var="editNews"/>
+    <form:form modelAttribute="newsVOParam" action="${editNews}" method="post">
 
         <%@ include file="frag/newsdata.jsp" %>
 
         <div class="form-group">
             <div class="col-sm-10">
-                <spring:message code="add.new.button" var="submitButton"/>
+                <spring:message code="edit.news.button" var="submitButton"/>
                 <button type="submit" class="btn btn-primary">${submitButton}</button>
             </div>
         </div>
-
     </form:form>
 </div>
 </body>

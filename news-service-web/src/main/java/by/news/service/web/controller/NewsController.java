@@ -14,14 +14,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import java.beans.PropertyEditorSupport;
 import java.util.ArrayList;
@@ -56,7 +52,7 @@ public class NewsController {
         return new ModelAndView("addnews", "newsVO", newsVO);
     }
 
-    @RequestMapping(value = "/addnews", method = RequestMethod.POST)
+    @RequestMapping(value = {"/addnews", "/editnews"}, method = RequestMethod.POST)
     public ModelAndView addingNews(@ModelAttribute("newsVOParam") NewsVO newsVO,
                                    BindingResult result, SessionStatus status,
                                    @AuthenticationPrincipal UserVO userVO) {
@@ -75,6 +71,28 @@ public class NewsController {
             newsLocalService.addNews(newsVO);
         }
         return new ModelAndView("redirect:/newsfeed", "newsVOParam", newsVO);
+    }
+
+    @RequestMapping(value = "{newsId}/delete", method = RequestMethod.GET)
+    public String deleteNews(@PathVariable("newsId") int newsId) {
+        newsLocalService.deleteNews(newsId);
+        return "redirect:/newsfeed";
+    }
+
+    @RequestMapping(value = "{newsId}/edit", method = RequestMethod.GET)
+    public ModelAndView viewEditNews(@PathVariable("newsId") int newsId, Model model) {
+        NewsVO newsVO = newsLocalService.getNewsById(newsId);
+        List<TagVO> tagsVO = tagLocalService.getAllTags();
+        model.addAttribute("newsVOParam", newsVO);
+        model.addAttribute("tagsVOParam", tagsVO);
+        return new ModelAndView("editnews", "newsVO", newsVO);
+    }
+
+    @RequestMapping(value = "{tagName}/newsfeed", method = RequestMethod.GET)
+    public String viewNewsesByTagName(@PathVariable("tagName") String tagName, Model model) {
+        List<NewsVO> newsesByTagName = tagLocalService.getNewsesByTagName(tagName);
+        model.addAttribute("newsFeed", newsesByTagName);
+        return "newsfeed";
     }
 
     @InitBinder

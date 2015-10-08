@@ -6,10 +6,7 @@ import by.news.service.web.validator.impl.NewsValidator;
 import by.news.service.web.validator.impl.UserValidator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.validation.Validator;
 
 import javax.validation.Validation;
 import javax.validation.ValidatorFactory;

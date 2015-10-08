@@ -35,22 +35,28 @@ public class UserController {
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String viewRegistration(Model model) {
-        model.addAttribute("userAttribute", new UserVO());
+        model.addAttribute("userVOParam", new UserVO());
         return "registration";
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public ModelAndView registerUser(@ModelAttribute("userAttribute") UserVO userVO,
+    public ModelAndView registerUser(@ModelAttribute("userVOParam") UserVO userVO,
                                BindingResult result, SessionStatus status, Errors errors) {
         userValidator.validate(userVO, errors);
         if (result.hasErrors()) {
-            return new ModelAndView("registration", "userAttribute", userVO);
+            return new ModelAndView("registration", "userVOParam", userVO);
         } else {
             String encodePassword = passwordEncoder.encode(userVO.getPassword());
             userVO.setPassword(encodePassword);
             userLocalService.registerUser(userVO);
             status.setComplete();
         }
-        return new ModelAndView("redirect:/login", "userAttribute", userVO);
+        return new ModelAndView("redirect:/login", "userVOParam", userVO);
+    }
+
+    @RequestMapping(value = "/profile", method = RequestMethod.GET)
+    public String viewUserProfile(Model model) {
+        model.addAttribute("userVOParam", new UserVO());
+        return "profile";
     }
 }

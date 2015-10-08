@@ -15,7 +15,7 @@ public class UserValidator extends AbstractValidator<UserVO> {
 
     @Override
     public String getAttributeParam() {
-        return "userAttribute";
+        return "userVOParam";
     }
 
     @Override

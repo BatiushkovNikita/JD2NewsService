@@ -8,13 +8,8 @@
 <body>
 
 <div class="container">
-    <h1>
-        <fmt:message key="login.title"/>
-    </h1>
-
-    <h2>
-        <fmt:message key="login.sign.in"/>
-    </h2>
+    <h1><fmt:message key="login.title"/></h1>
+    <h2><fmt:message key="login.sign.in"/></h2>
 
     <c:url var="loginUrl" value="/j_spring_security_check"/>
     <form class="form-horizontal" role="form" action="${loginUrl}" method="post">

@@ -2,22 +2,21 @@
 
 <html>
 <head>
-    <title>Registration</title>
+    <title>Profile</title>
     <%@ include file="include.jsp" %>
 </head>
 <body>
-
+<%@ include file="frag/header.jsp" %>
 <div class="container">
-    <h1><fmt:message key="registration.title"/></h1>
-    <h2><fmt:message key="registration.sign.up"/></h2>
-    <c:url value="/registration" var="saveUser"/>
+    <h2><fmt:message key="profile.title"/></h2>
+    <c:url value="/profile" var="saveUser"/>
     <form:form cssClass="form-horizontal" modelAttribute="userVOParam" action="${saveUser}" method="post">
 
         <%@ include file="frag/userdata.jsp" %>
 
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <fmt:message var="submitButton" key="registration.button"/>
+                <fmt:message var="submitButton" key="profile.button.save"/>
                 <button type="submit" value="save" class="btn btn-success">${submitButton}</button>
             </div>
         </div>
