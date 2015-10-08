@@ -6,13 +6,10 @@ import by.news.service.vo.RoleVO;
 import by.news.service.vo.UserVO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.inject.Inject;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -23,8 +20,10 @@ public class UserLocalServiceImpl implements UserLocalService {
     @Inject
     private UserService userService;
 
-/*    @Inject
-    private BCryptPasswordEncoder passwordEncoder;*/
+    @Override
+    public void editUser(UserVO userVO) {
+        userService.updateUser(userVO);
+    }
 
     @Override
     public int registerUser(UserVO userVO) {
@@ -32,14 +31,16 @@ public class UserLocalServiceImpl implements UserLocalService {
         rolesVO.add(new RoleVO(3, "user"));
         Log.error("Set default user role");
         userVO.setRoles(rolesVO);
-        Log.error("Encoding password");
-      /*  String encodePassword = passwordEncoder.encode(userVO.getPassword());
-        userVO.setPassword(encodePassword);*/
         return userService.createUser(userVO);
     }
 
     @Override
     public UserVO getUserByEmail(String email) {
         return userService.getUserByEmail(email);
+    }
+
+    @Override
+    public List<UserVO> getAllUsers() {
+        return userService.getAll();
     }
 }

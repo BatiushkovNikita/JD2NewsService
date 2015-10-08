@@ -88,11 +88,10 @@ public class NewsController {
         return new ModelAndView("editnews", "newsVO", newsVO);
     }
 
-    @RequestMapping(value = "{tagName}/newsfeed", method = RequestMethod.GET)
-    public String viewNewsesByTagName(@PathVariable("tagName") String tagName, Model model) {
+    @RequestMapping("/tagnewsfeed")
+    public ModelAndView viewNewsesByTagName(@RequestParam("tag") String tagName) {
         List<NewsVO> newsesByTagName = tagLocalService.getNewsesByTagName(tagName);
-        model.addAttribute("newsFeed", newsesByTagName);
-        return "newsfeed";
+        return new ModelAndView("newsfeed", "newsFeed", newsesByTagName);
     }
 
     @InitBinder

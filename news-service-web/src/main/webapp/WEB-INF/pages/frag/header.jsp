@@ -13,7 +13,7 @@
                                 key="frag.header.add.news"/></a></li>
                     </sec:authorize>
                     <sec:authorize access="hasAnyRole('admin')">
-                        <li><a href='<spring:url value="/roles" htmlEscape="true"/>'><fmt:message
+                        <li><a href='<spring:url value="/userslist" htmlEscape="true"/>'><fmt:message
                                 key="frag.header.roles"/></a></li>
                     </sec:authorize>
                     <li><a href='<spring:url value="/profile" htmlEscape="true"/>'><fmt:message
@@ -21,11 +21,13 @@
                     <li><a href='<spring:url value="/logout" htmlEscape="true"/>'><fmt:message
                             key="frag.header.logout"/></a></li>
                 </ul>
-
             </div>
 
-            <sec:authorize access="isAuthenticated()" var="isAuth"/>
+            <p align="right">
+                <a href="?mylocale=en">en</a> | <a href="?mylocale=ru">ru</a>
+            </p>
 
+            <sec:authorize access="isAuthenticated()" var="isAuth"/>
             <c:if test="${isAuth == true}">
                 <sec:authentication property="principal.roles" var="roles"/>
                 <p align="right"> Email:

@@ -5,12 +5,12 @@ import by.news.service.vo.UserVO;
 import by.news.service.web.validator.impl.AbstractValidator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
-import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,6 +28,9 @@ public class UserController {
     private AbstractValidator userValidator;
 
     @Inject
+    private AbstractValidator registrationUserValidator;
+
+    @Inject
     private UserLocalService userLocalService;
 
     @Inject
@@ -39,10 +42,10 @@ public class UserController {
         return "registration";
     }
 
-    @RequestMapping(value = "/registration", method = RequestMethod.POST)
+    @RequestMapping(value = {"/registration"}, method = RequestMethod.POST)
     public ModelAndView registerUser(@ModelAttribute("userVOParam") UserVO userVO,
-                               BindingResult result, SessionStatus status, Errors errors) {
-        userValidator.validate(userVO, errors);
+                                     BindingResult result, SessionStatus status, Errors errors) {
+        registrationUserValidator.validate(userVO, errors);
         if (result.hasErrors()) {
             return new ModelAndView("registration", "userVOParam", userVO);
         } else {
@@ -55,8 +58,29 @@ public class UserController {
     }
 
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
-    public String viewUserProfile(Model model) {
-        model.addAttribute("userVOParam", new UserVO());
+    public String viewUserProfile(Model model, @AuthenticationPrincipal UserVO userVO) {
+        model.addAttribute("userVOParam", userVO);
         return "profile";
+    }
+
+    @RequestMapping(value = "/profile", method = RequestMethod.POST)
+    public ModelAndView editUser(@ModelAttribute("userVOParam") UserVO userVO,
+                                     BindingResult result, SessionStatus status, Errors errors) {
+        userValidator.validate(userVO, errors);
+        if (result.hasErrors()) {
+            return new ModelAndView("profile", "userVOParam", userVO);
+        } else {
+            String encodePassword = passwordEncoder.encode(userVO.getPassword());
+            userVO.setPassword(encodePassword);
+            userLocalService.editUser(userVO);
+            status.setComplete();
+        }
+        return new ModelAndView("redirect:/newsfeed", "userVOParam", userVO);
+    }
+
+    @RequestMapping(value = "/userslist", method = RequestMethod.GET)
+    public String viewAllUsers(Model model) {
+        model.addAttribute("usersList", userLocalService.getAllUsers());
+        return "userslist";
     }
 }

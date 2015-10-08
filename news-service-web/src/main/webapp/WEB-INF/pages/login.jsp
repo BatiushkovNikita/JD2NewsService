@@ -6,14 +6,14 @@
     <%@ include file="include.jsp" %>
 </head>
 <body>
-
 <div class="container">
+    <span style="float: right">
+         <a href="?mylocale=en">en</a> | <a href="?mylocale=ru">ru</a>
+    </span>
     <h1><fmt:message key="login.title"/></h1>
     <h2><fmt:message key="login.sign.in"/></h2>
-
     <c:url var="loginUrl" value="/j_spring_security_check"/>
     <form class="form-horizontal" role="form" action="${loginUrl}" method="post">
-
 
         <div class="form-group">
             <label class="control-label col-sm-2" for="username"><fmt:message key="login.email"/></label>
@@ -59,10 +59,13 @@
         </div>
     </div>
     <br>
+
     <p>user@user:user: USER</p>
     <br>
+
     <p>root@root:root: ADMIN</p>
     <br>
+
     <p>moder@moder:moder123 MODERATOR</p>
 </div>
 

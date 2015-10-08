@@ -22,7 +22,7 @@
                         <spring:message code="newsfeed.author"/>: ${newses.authorFirsName} ${newses.authorLastName}<br>
                         <spring:message code="newsfeed.tags"/>:
                         <c:forEach items="${newses.tagsVO}" var="tags">
-                            <spring:url value="{tagName}/newsfeed" var="newsesByTag">
+                            <spring:url value="tagnewsfeed?tag={tagName}" var="newsesByTag">
                                 <spring:param name="tagName" value="${tags.tagName}"/>
                             </spring:url>
                             <a href="${fn:escapeXml(newsesByTag)}">${tags.tagName}</a>

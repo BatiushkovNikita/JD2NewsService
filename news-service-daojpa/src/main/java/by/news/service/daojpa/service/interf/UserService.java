@@ -2,6 +2,8 @@ package by.news.service.daojpa.service.interf;
 
 import by.news.service.vo.UserVO;
 
+import java.util.List;
+
 public interface UserService {
 
     int createUser(UserVO userVO);
@@ -12,6 +14,5 @@ public interface UserService {
 
     void updateUser(UserVO userVO);
 
-    //Collection<UserVO> getAll();
-
+    List<UserVO> getAll();
 }

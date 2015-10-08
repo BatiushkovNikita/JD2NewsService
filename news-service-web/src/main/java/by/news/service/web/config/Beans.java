@@ -3,6 +3,7 @@ package by.news.service.web.config;
 import by.news.service.web.service.DefaultRolesPrefixPostProcessor;
 import by.news.service.web.validator.impl.AbstractValidator;
 import by.news.service.web.validator.impl.NewsValidator;
+import by.news.service.web.validator.impl.RegistrationUserValidator;
 import by.news.service.web.validator.impl.UserValidator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,6 +23,10 @@ public class Beans {
     @Bean
     public AbstractValidator newsValidator() {
         return new NewsValidator();
+    }
+
+    @Bean AbstractValidator registrationUserValidator() {
+        return new RegistrationUserValidator();
     }
 
     @Bean

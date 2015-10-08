@@ -21,6 +21,12 @@ public class Initializer implements WebApplicationInitializer {
         context.register(ServiceConfig.class);
         context.register(Beans.class);
 
+/*        FilterRegistration.Dynamic encodingFilter =
+                servletContext.addFilter("encoding-filter", new CharacterEncodingFilter());
+        encodingFilter.setInitParameter("encoding", "UTF-8");
+        encodingFilter.setInitParameter("forceEncoding", "true");
+        encodingFilter.addMappingForUrlPatterns(null, true, "");*/
+
         servletContext.setInitParameter("log4jConfigLocation", "classpath:log4j2.xml");
 
         servletContext.addListener(new Log4jConfigListener());

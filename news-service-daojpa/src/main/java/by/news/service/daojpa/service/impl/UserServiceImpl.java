@@ -15,7 +15,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -58,13 +60,28 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public List<UserVO> getAll() {
+        Iterable<User> users = userRepository.findAll();
+        List<UserVO> usersVO = new ArrayList<>();
+        for (User user : users) {
+            UserVO userVO = extractUser(user);
+            usersVO.add(userVO);
+        }
+        return usersVO;
+    }
+
     private User extractUser(UserVO userVO) {
         User user = new User();
         user.setId(userVO.getId());
         user.setEmail(userVO.getEmail());
         user.setPassword(userVO.getPassword());
         user.setUserDetail(extractUserDetail(userVO));
-        user.setRoles(extractRoles(userVO.getRoles()));
+        Set<RoleVO> roles = userVO.getRoles();
+        if (roles != null) {
+            user.setRoles(extractRoles(roles));
+        }
         return user;
     }
 

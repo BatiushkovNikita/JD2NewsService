@@ -1,17 +1,12 @@
 package by.news.service.daojpa.pojos;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "user")
-public class User { //implements UserDetails {
+public class User {
     private static final long serialVersionUID = 1L;
 
     @Id

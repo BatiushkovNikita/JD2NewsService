@@ -1,22 +1,24 @@
 package by.news.service.web.config;
 
-import by.news.service.web.exception.MvcException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
+import org.springframework.web.servlet.i18n.CookieLocaleResolver;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
-import java.util.Properties;
+import java.util.Locale;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan( {"by.news.service.web"} )
+@ComponentScan({"by.news.service.web"})
 public class WebConfig extends WebMvcConfigurerAdapter {
 
     @Override
@@ -40,5 +42,22 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         messageSource.setBasenames("classpath:content", "classpath:ValidationMessages");
         return messageSource;
     }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
+        interceptor.setParamName("mylocale");
+        registry.addInterceptor(interceptor);
+    }
+
+    @Bean
+    public LocaleResolver localeResolver(){
+        CookieLocaleResolver resolver = new CookieLocaleResolver();
+        resolver.setDefaultLocale(new Locale("en"));
+        resolver.setCookieName("myLocaleCookie");
+        resolver.setCookieMaxAge(4800);
+        return resolver;
+    }
 }
+
 

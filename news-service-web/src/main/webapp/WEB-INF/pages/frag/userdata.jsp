@@ -1,14 +1,4 @@
 <div class="form-group">
-    <form:label class="control-label col-sm-2" path="email">
-        <spring:message code="frag.userdata.email"/></form:label>
-    <div class="col-sm-10">
-        <span class="text-danger"><form:errors path="email"/></span>
-        <spring:message code="frag.userdata.email.placeholder" var="placeholder"/>
-        <form:input placeholder="${placeholder}" type="email" cssClass="form-control" id="email" path="email"/>
-    </div>
-</div>
-
-<div class="form-group">
     <form:label class="control-label col-sm-2" path="password">
         <spring:message code="frag.userdata.password"/></form:label>
     <div class="col-sm-10">

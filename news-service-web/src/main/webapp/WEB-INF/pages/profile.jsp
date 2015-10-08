@@ -16,8 +16,8 @@
 
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <fmt:message var="submitButton" key="profile.button.save"/>
-                <button type="submit" value="save" class="btn btn-success">${submitButton}</button>
+                <spring:message code="profile.button.save" var="submitButton" />
+                <button type="submit" class="btn btn-success">${submitButton}</button>
             </div>
         </div>
 
