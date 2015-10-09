@@ -11,13 +11,18 @@
     <div class="row">
         <div class="center-block col-md-4">
             <div class="error-template">
-                <h2>Not enough access rights</h2>
+                <h2><spring:message code="access.denied.message" /></h2>
                 <br>
                 <div class="error-actions">
-                    <a href='<spring:url value="/newsfeed" htmlEscape="true"/>' class="btn btn-primary">Back to news</a>
+                    <a href='<spring:url value="/newsfeed" htmlEscape="true"/>' class="btn btn-primary">
+                        <spring:message code="access.denied.to.news" />
+                    </a>
                 </div>
+                <br>
                 <div class="error-actions">
-                    <a href='<spring:url value="/login" htmlEscape="true"/>' class="btn btn-primary">Log in as another user</a>
+                    <a href='<spring:url value="/login" htmlEscape="true"/>' class="btn btn-primary">
+                        <spring:message code="access.denied.to.login" />
+                    </a>
                 </div>
             </div>
         </div>

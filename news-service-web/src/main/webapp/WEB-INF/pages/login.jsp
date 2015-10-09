@@ -8,7 +8,7 @@
 <body>
 <div class="container">
     <span style="float: right">
-         <a href="?mylocale=en">en</a> | <a href="?mylocale=ru">ru</a>
+         <a href="?mylocale=en">EN</a> | <a href="?mylocale=ru">RU</a>
     </span>
     <h1><fmt:message key="login.title"/></h1>
     <h2><fmt:message key="login.sign.in"/></h2>

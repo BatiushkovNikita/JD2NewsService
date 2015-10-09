@@ -1,20 +1,21 @@
 <?xml version="1.0"?>
 <project
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-	<modelVersion>4.0.0</modelVersion>
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+        xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>by.news.service</groupId>
-		<artifactId>news-service</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
-	</parent>
+    <parent>
+        <groupId>by.news.service</groupId>
+        <artifactId>news-service</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
     <artifactId>news-service-web</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
-	<name>news-service-web Maven Webapp</name>
-	<url>http://maven.apache.org</url>
-	<dependencies>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>war</packaging>
+    <name>news-service-web Maven Webapp</name>
+    <url>http://maven.apache.org</url>
+
+    <dependencies>
 
         <!-- SPRING -->
         <dependency>
@@ -60,20 +61,20 @@
 
         <!-- JAVAX -->
 
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-		</dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+        </dependency>
 
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
-		</dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+        </dependency>
 
-		<dependency>
-			<groupId>javax.servlet.jsp</groupId>
-			<artifactId>jsp-api</artifactId>
-		</dependency>
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>jsp-api</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>javax.el</groupId>
@@ -107,10 +108,10 @@
             <artifactId>log4j-1.2-api</artifactId>
         </dependency>
 
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-		</dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>javax.validation</groupId>
@@ -132,17 +133,17 @@
             <artifactId>tomcat-catalina</artifactId>
         </dependency>
 
-		<dependency>
-			<groupId>by.news.service</groupId>
-			<artifactId>news-service-service</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>by.news.service</groupId>
-			<artifactId>news-service-vo</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
+        <dependency>
+            <groupId>by.news.service</groupId>
+            <artifactId>news-service-service</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>by.news.service</groupId>
+            <artifactId>news-service-vo</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
 
-	</dependencies>
+    </dependencies>
 
 </project>

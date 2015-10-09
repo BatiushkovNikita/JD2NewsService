@@ -2,7 +2,9 @@
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">News-service</a>
+                <a class="navbar-brand" href="#">
+                    <spring:message code="frag.header.header" />
+                </a>
             </div>
             <div>
                 <ul class="nav navbar-nav">
@@ -24,15 +26,17 @@
             </div>
 
             <p align="right">
-                <a href="?mylocale=en">en</a> | <a href="?mylocale=ru">ru</a>
+                <a href="?mylocale=en">EN</a> | <a href="?mylocale=ru">RU</a>
             </p>
 
             <sec:authorize access="isAuthenticated()" var="isAuth"/>
             <c:if test="${isAuth == true}">
                 <sec:authentication property="principal.roles" var="roles"/>
-                <p align="right"> Email:
+                <p align="right">
+                    <spring:message code="frag.header.user.email" />:
                         <sec:authentication property="principal.username"/>
-                <p align="right"> Roles:
+                <p align="right">
+                    <spring:message code="frag.header.user.roles" />:
                     <c:if test="${roles != null}">
                         <c:forEach items="${roles}" var="r">
                             ${r.roleName}

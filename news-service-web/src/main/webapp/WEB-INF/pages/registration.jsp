@@ -8,6 +8,9 @@
 <body>
 
 <div class="container">
+    <span style="float: right">
+         <a href="?mylocale=en">EN</a> | <a href="?mylocale=ru">RU</a>
+    </span>
     <h1><fmt:message key="registration.title"/></h1>
     <h2><fmt:message key="registration.sign.up"/></h2>
     <c:url value="/registration" var="saveUser"/>
