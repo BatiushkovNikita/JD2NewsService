@@ -87,6 +87,7 @@ public class UserServiceImpl implements UserService {
 
     private UserDetail extractUserDetail(UserVO userVO) {
         UserDetail userDetail = new UserDetail();
+        userDetail.setId(userVO.getId());
         userDetail.setFirstName(userVO.getFirstName());
         userDetail.setLastName(userVO.getLastName());
         userDetail.setCellPhone(userVO.getCellPhone());

@@ -57,6 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/addnews", "/*/delete", "/*/edit").access("hasAnyRole('admin','moderator')")
                 .antMatchers("/userslist").access("hasRole('admin')")
+                .antMatchers("/newsfeed", "/profile").access("hasAnyRole('admin','moderator','user')")
                 .and()
                 .formLogin()
                 .defaultSuccessUrl("/newsfeed", false);

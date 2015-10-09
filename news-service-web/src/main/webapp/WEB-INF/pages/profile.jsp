@@ -12,7 +12,7 @@
     <c:url value="/profile" var="saveUser"/>
     <form:form cssClass="form-horizontal" modelAttribute="userVOParam" action="${saveUser}" method="post">
 
-<%--        <div class="form-group">
+        <div class="form-group">
             <form:label class="control-label col-sm-2" path="email">
                 <spring:message code="frag.userdata.email"/></form:label>
             <div class="col-sm-10">
@@ -30,7 +30,7 @@
                 <spring:message code="frag.userdata.password.placeholder" var="placeholder"/>
                 <form:input readonly="true" placeholder="${placeholder}" type="password" cssClass="form-control" id="password" path="password"/>
             </div>
-        </div>--%>
+        </div>
 
         <div class="form-group">
             <form:label class="control-label col-sm-2" path="firstName">

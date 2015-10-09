@@ -23,7 +23,7 @@ public class UserVO implements Serializable, UserDetails {
     private String email;
 
     @NotBlank(message = "{NotBlank.password}")
-    @Pattern(regexp = "(?=.*\\d)(?=.*[A-z]).{6,20}", message = "{Pattern.email}", groups = {RegExp.class})
+    @Pattern(regexp = "(?=.*\\d)(?=.*[A-z]).{6,}", message = "{Pattern.email}", groups = {RegExp.class})
     private String password;
 
     @NotBlank(message = "{NotBlank.firstName}")

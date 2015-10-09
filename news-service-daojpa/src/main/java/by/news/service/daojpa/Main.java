@@ -11,6 +11,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(DataConfig.class);
+        context.refresh();
         /*UserRepository bean = context.getBean(UserRepository.class);
         Iterable<User> all = bean.findAll();
         System.out.println(all);*/
